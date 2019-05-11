@@ -16,5 +16,11 @@ namespace ImageProcessing
             A,
             MAX,
         };
+
+        public enum ImgType
+        {
+            EdgeDetection = 0,
+            MAX,
+        }
     }
 }

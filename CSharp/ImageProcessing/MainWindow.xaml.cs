@@ -30,6 +30,7 @@ namespace ImageProcessing
         private EdgeDetection m_edgeDetection;
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
+        private int m_curImgType;
 
         public MainWindow()
         {
@@ -43,6 +44,9 @@ namespace ImageProcessing
             m_bitmap = null;
             m_tokenSource = null;
             m_edgeDetection = null;
+
+            m_curImgType = Properties.Settings.Default.ImgTypeSelect;
+            SelectWIndowTitle(m_curImgType);
         }
 
         ~MainWindow()
@@ -52,12 +56,77 @@ namespace ImageProcessing
             m_edgeDetection = null;
         }
 
+        public bool SelectWIndowTitle(int _imgType)
+        {
+            bool bRst = true;
+
+            switch (_imgType)
+            {
+                case (int)ComInfo.ImgType.EdgeDetection:
+                    Title += " ( " + Properties.Settings.Default.ImgTypeEdgeName + " )";
+                    break;
+                default:
+                    break;
+            }
+
+            return bRst;
+        }
+
+        public bool SelectLoadImage(int _imgType)
+        {
+            bool bRst = true;
+
+            switch (_imgType)
+            {
+                case (int)ComInfo.ImgType.EdgeDetection:
+                    m_edgeDetection = new EdgeDetection(m_bitmap);
+                    break;
+                default:
+                    break;
+            }
+
+            return bRst;
+        }
+
+        public bool SelectGetBitmap(int _imgType)
+        {
+            bool bRst = true;
+
+            switch (_imgType)
+            {
+                case (int)ComInfo.ImgType.EdgeDetection:
+                    pictureBoxAfter.Source = m_edgeDetection.GetBitmap();
+                    break;
+                default:
+                    break;
+            }
+
+            return bRst;
+        }
+
+        public bool SelectGoImg(int _imgType, CancellationToken _token)
+        {
+            bool bRst = true;
+
+            switch (_imgType)
+            {
+                case (int)ComInfo.ImgType.EdgeDetection:
+                    m_edgeDetection.GoEdgeDetection(_token);
+                    break;
+                default:
+                    break;
+            }
+
+            return bRst;
+        }
+
         public void SetButtonEnable()
         {
             btnFileSelect.IsEnabled = true;
             btnAllClear.IsEnabled = true;
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
+            btnSetting.IsEnabled = true;
 
             return;
         }
@@ -111,7 +180,7 @@ namespace ImageProcessing
             m_bitmap.EndInit();
             m_bitmap.Freeze();
 
-            m_edgeDetection = new EdgeDetection(m_bitmap);
+            SelectLoadImage(m_curImgType);
 
             return;
         }
@@ -140,6 +209,7 @@ namespace ImageProcessing
             btnFileSelect.IsEnabled = false;
             btnAllClear.IsEnabled = false;
             btnStart.IsEnabled = false;
+            btnSetting.IsEnabled = false;
 
             textBoxTime.Text = "";
 
@@ -156,7 +226,7 @@ namespace ImageProcessing
                 bitmap.UriSource = new Uri(m_strOpenFileName);
                 bitmap.EndInit();
                 pictureBoxOriginal.Source = bitmap;
-                pictureBoxAfter.Source = m_edgeDetection.GetBitmap();
+                SelectGetBitmap(m_curImgType);
 
                 stopwatch.Stop();
 
@@ -175,7 +245,7 @@ namespace ImageProcessing
         {
             m_tokenSource = new CancellationTokenSource();
             CancellationToken token = m_tokenSource.Token;
-            bool bRst = await Task.Run(() => m_edgeDetection.GoEdgeDetection(token));
+            bool bRst = await Task.Run(() => SelectGoImg(m_curImgType, token));
             return bRst;
         }
 
@@ -197,6 +267,18 @@ namespace ImageProcessing
             }
 
             return;
+        }
+
+        private void OnClickBtnSetting(object sender, RoutedEventArgs e)
+        {
+            SettingWindow settingWindow = new SettingWindow();
+            bool? dialogResult = settingWindow.ShowDialog();
+
+            if (dialogResult == true)
+            {
+                m_curImgType = settingWindow.cmbBoxImageProcessingType.SelectedIndex;
+                SelectWIndowTitle(m_curImgType);
+            }
         }
     }
 }

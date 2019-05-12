@@ -70,7 +70,6 @@ Namespace ImageProcessing
                     Dim dCalB As Double = 0.0
                     Dim dCalG As Double = 0.0
                     Dim dCalR As Double = 0.0
-                    Dim dCalA As Double = 0.0
 
                     Dim nIdxWidthMask As Integer
                     Dim nIdxHightMask As Integer
@@ -90,7 +89,6 @@ Namespace ImageProcessing
                                     dCalB += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.B) * dMask(nIdxWidthMask, nIdxHightMask)
                                     dCalG += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.G) * dMask(nIdxWidthMask, nIdxHightMask)
                                     dCalR += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.R) * dMask(nIdxWidthMask, nIdxHightMask)
-                                    dCalA += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.A) * dMask(nIdxWidthMask, nIdxHightMask)
                                 End If
                             Next
                         Next
@@ -99,7 +97,6 @@ Namespace ImageProcessing
                     WriteByte(pAdr, nPos + ComInfo.Pixel.B, ComFunc.DoubleToByte(dCalB))
                     WriteByte(pAdr, nPos + ComInfo.Pixel.G, ComFunc.DoubleToByte(dCalG))
                     WriteByte(pAdr, nPos + ComInfo.Pixel.R, ComFunc.DoubleToByte(dCalR))
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.A, ComFunc.DoubleToByte(dCalA))
                 Next
             Next
             m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))

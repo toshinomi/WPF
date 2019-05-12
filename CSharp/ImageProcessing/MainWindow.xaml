@@ -33,7 +33,7 @@
                 </Button>
             </Canvas>
         </GroupBox>
-        <GroupBox x:Name="groupBoxProcessingInfo" Header="Processing Infomation" Width="249" Height="113" Canvas.Left="10" Canvas.Top="455" FontSize="15.75" >
+        <GroupBox x:Name="groupBoxProcessingInfo" Header="Processing Infomation" Width="249" Height="113" Canvas.Left="10" Canvas.Top="453" FontSize="15.75" >
             <Canvas Canvas.Left="35" Canvas.Top="253" Margin="0,0,-2,3">
                 <Label Content="Time" Canvas.Left="40" Canvas.Top="10" RenderTransformOrigin="-0.113,-0.537"/>
                 <TextBox x:Name="textBoxTime" Height="28" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="41" Width="154" IsReadOnly="True" FontSize="15.75" TextAlignment="Right"/>

@@ -2,38 +2,25 @@
 Imports System.Runtime.InteropServices.Marshal
 
 Namespace ImageProcessing
-    Public Class EdgeDetection
+    Public Class EdgeDetection : Inherits ComImgProc
         Private Const m_nMaskSize As Integer = 3
         Private m_nFilterMax As UInt32
-        Private m_bitmap As BitmapImage
-        Private m_wBitmap As WriteableBitmap
 
         Public Sub New(_bitmap As BitmapImage)
+            MyBase.New(_bitmap)
             m_nFilterMax = 1
-            m_bitmap = _bitmap
         End Sub
 
         Public Sub New(_bitmap As BitmapImage, _filterMax As UInt32)
+            MyBase.New(_bitmap)
             m_nFilterMax = _filterMax
-            m_bitmap = _bitmap
         End Sub
 
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
-
-            m_bitmap = Nothing
         End Sub
 
-        Public Function GetBitmap() As WriteableBitmap
-            Return m_wBitmap
-        End Function
-
-
-        Public Sub SetBitmap(_bitmap As WriteableBitmap)
-            m_wBitmap = _bitmap
-        End Sub
-
-        Public Function GoEdgeDetection(_token As CancellationToken) As Boolean
+        Public Overrides Function GoImgProc(_token As CancellationToken) As Boolean
             Dim bRst As Boolean = True
 
             Dim dMask As Double(,) =
@@ -43,12 +30,12 @@ Namespace ImageProcessing
                 {1.0, 1.0, 1.0}
             }
 
-            Dim nWidthSize As Integer = m_bitmap.Width
-            Dim nHeightSize As Integer = m_bitmap.Height
+            Dim nWidthSize As Integer = Bitmap.Width
+            Dim nHeightSize As Integer = Bitmap.Height
             Dim nMasksize As Integer = dMask.GetLength(0)
 
-            m_wBitmap = New WriteableBitmap(m_bitmap)
-            m_wBitmap.Lock()
+            WriteableBitmap = New WriteableBitmap(Bitmap)
+            WriteableBitmap.Lock()
 
             Dim nIdxWidth As Integer
             Dim nIdxHeight As Integer
@@ -60,12 +47,11 @@ Namespace ImageProcessing
                         Exit For
                     End If
 
-                    Dim pAdr As IntPtr = m_wBitmap.BackBuffer
-                    Dim nPos As Integer = nIdxHeight * m_wBitmap.BackBufferStride + nIdxWidth * 4
+                    Dim pAdr As IntPtr = WriteableBitmap.BackBuffer
+                    Dim nPos As Integer = nIdxHeight * WriteableBitmap.BackBufferStride + nIdxWidth * 4
                     Dim bytePixelB As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
                     Dim bytePixelG As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
                     Dim bytePixelR As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
-                    Dim bytePixelA As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.A)
 
                     Dim dCalB As Double = 0.0
                     Dim dCalG As Double = 0.0
@@ -83,8 +69,8 @@ Namespace ImageProcessing
                                     nIdxHeight + nIdxHightMask > 0 And
                                     nIdxHeight + nIdxHightMask < nHeightSize) Then
 
-                                    Dim pAdr2 As IntPtr = m_wBitmap.BackBuffer
-                                    Dim nPos2 As Integer = (nIdxHeight + nIdxHightMask) * m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4
+                                    Dim pAdr2 As IntPtr = WriteableBitmap.BackBuffer
+                                    Dim nPos2 As Integer = (nIdxHeight + nIdxHightMask) * WriteableBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4
 
                                     dCalB += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.B) * dMask(nIdxWidthMask, nIdxHightMask)
                                     dCalG += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.G) * dMask(nIdxWidthMask, nIdxHightMask)
@@ -99,9 +85,9 @@ Namespace ImageProcessing
                     WriteByte(pAdr, nPos + ComInfo.Pixel.R, ComFunc.DoubleToByte(dCalR))
                 Next
             Next
-            m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
-            m_wBitmap.Unlock()
-            m_wBitmap.Freeze()
+            WriteableBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
+            WriteableBitmap.Unlock()
+            WriteableBitmap.Freeze()
 
             Return bRst
         End Function

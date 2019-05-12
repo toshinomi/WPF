@@ -4,9 +4,11 @@ Imports Microsoft.Win32
 
 Class MainWindow
     Private m_bitmap As BitmapImage
-    Private m_edgeDetection As EdgeDetection
+    Private m_imgProc As Object
     Private m_strOpenFileName As String
     Private m_tokenSource As CancellationTokenSource
+    Private m_curImgName As String
+
     Public Sub New()
 
         ' この呼び出しはデザイナーで必要です。
@@ -21,8 +23,10 @@ Class MainWindow
 
         m_bitmap = Nothing
         m_tokenSource = Nothing
-        m_edgeDetection = Nothing
+        m_imgProc = Nothing
 
+        m_curImgName = My.Settings.ImgTypeSelectName
+        Title = "Image Processing ( " + m_curImgName + " )"
     End Sub
 
     Protected Overloads Sub Finalize()
@@ -30,7 +34,51 @@ Class MainWindow
 
         m_bitmap = Nothing
         m_tokenSource = Nothing
+        m_imgProc = Nothing
     End Sub
+
+    Public Function SelectLoadImage(ByVal _imgName As String) As Boolean
+        Dim bRst As Boolean = True
+        Select Case _imgName
+            Case ComInfo.IMG_NAME_EDGE_DETECTION
+                m_imgProc = New EdgeDetection(m_bitmap)
+            Case ComInfo.IMG_NAME_GRAY_SCALE
+                m_imgProc = New GrayScale(m_bitmap)
+            Case Else
+        End Select
+
+        Return bRst
+    End Function
+
+    Public Function SelectGetBitmap(ByVal _imgName As String) As Boolean
+        Dim bRst As Boolean = True
+        Select Case _imgName
+            Case ComInfo.IMG_NAME_EDGE_DETECTION
+                Dim edge As EdgeDetection = m_imgProc
+                pictureBoxAfter.Source = edge.WriteableBitmap
+            Case ComInfo.IMG_NAME_GRAY_SCALE
+                Dim gray As GrayScale = m_imgProc
+                pictureBoxAfter.Source = gray.WriteableBitmap
+            Case Else
+        End Select
+
+        Return bRst
+    End Function
+
+    Public Function SelectGoImgProc(ByVal _imgName As String, ByVal _token As CancellationToken) As Boolean
+        Dim bRst As Boolean = True
+        Select Case _imgName
+            Case ComInfo.IMG_NAME_EDGE_DETECTION
+                Dim edge As EdgeDetection = m_imgProc
+                bRst = edge.GoImgProc(_token)
+            Case ComInfo.IMG_NAME_GRAY_SCALE
+                Dim gray As GrayScale = m_imgProc
+                bRst = gray.GoImgProc(_token)
+            Case Else
+        End Select
+
+        Return bRst
+    End Function
 
     Public Sub SetButtonEnable()
         btnFileSelect.IsEnabled = True
@@ -83,7 +131,7 @@ Class MainWindow
         m_bitmap.EndInit()
         m_bitmap.Freeze()
 
-        m_edgeDetection = New EdgeDetection(m_bitmap)
+        SelectLoadImage(m_curImgName)
 
         Return
     End Sub
@@ -110,6 +158,7 @@ Class MainWindow
         btnFileSelect.IsEnabled = False
         btnAllClear.IsEnabled = False
         btnStart.IsEnabled = False
+        menuMain.IsEnabled = False
 
         textBoxTime.Text = ""
 
@@ -125,13 +174,14 @@ Class MainWindow
             bitmap.UriSource = New Uri(m_strOpenFileName)
             bitmap.EndInit()
             pictureBoxOriginal.Source = bitmap
-            pictureBoxAfter.Source = m_edgeDetection.GetBitmap()
+            SelectGetBitmap(m_curImgName)
 
             Stopwatch.Stop()
 
             Dispatcher.Invoke(New Action(Of Long)(AddressOf SetTextTime), Stopwatch.ElapsedMilliseconds)
         End If
         Dispatcher.Invoke(New Action(AddressOf SetButtonEnable))
+        menuMain.IsEnabled = True
 
         Stopwatch = Nothing
         m_tokenSource = Nothing
@@ -143,7 +193,7 @@ Class MainWindow
     Public Async Function TaskWorkImageProcessing() As Task(Of Boolean)
         m_tokenSource = New CancellationTokenSource()
         Dim token As CancellationToken = m_tokenSource.Token
-        Dim bRst = Await Task.Run(Function() m_edgeDetection.GoEdgeDetection(token))
+        Dim bRst = Await Task.Run(Function() SelectGoImgProc(m_curImgName, token))
         Return bRst
     End Function
 
@@ -158,6 +208,31 @@ Class MainWindow
     Private Sub OnClosingWindow(sender As Object, e As System.ComponentModel.CancelEventArgs)
         If (m_tokenSource IsNot Nothing) Then
             e.Cancel = True
+        End If
+
+        Return
+    End Sub
+
+    Private Sub OnClickMenu(sender As Object, e As RoutedEventArgs)
+        Dim menuItem As MenuItem = sender
+        Dim strHeader As String = menuItem.Header.ToString()
+
+        Select Case strHeader
+            Case ComInfo.MENU_FILE_END
+                Close()
+            Case ComInfo.MENU_SETTING_IMAGE_PROCESSING
+                ShowSettingImageProcessing()
+
+        End Select
+    End Sub
+
+    Public Sub ShowSettingImageProcessing()
+        Dim win As SettingImageProcessing = New SettingImageProcessing()
+        Dim DialogResult As Boolean? = win.ShowDialog()
+
+        If (DialogResult = True) Then
+            m_curImgName = win.cmbBoxImageProcessingType.DataContext
+            Title = "Image Processing ( " + m_curImgName + " )"
         End If
 
         Return

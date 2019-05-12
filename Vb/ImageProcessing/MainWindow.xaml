@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageProcessing"
         mc:Ignorable="d"
-        Title="Image Processing" Height="608" Width="1360" Closing="OnClosingWindow">
+        Title="Image Processing" Height="626" Width="1360"
+        ResizeMode="NoResize"
+        Closing="OnClosingWindow" FontSize="15.75">
     <Canvas Background="LightSteelBlue">
-        <GroupBox x:Name="groupBoxOperation" Header="Operation" Width="249" Height="408" Canvas.Left="10" Canvas.Top="10" FontSize="15.75">
+        <GroupBox x:Name="groupBoxOperation" Header="Operation" Width="249" Height="408" Canvas.Left="10" Canvas.Top="32" FontSize="15.75">
             <Canvas Height="387" VerticalAlignment="Top" Margin="0,0,-2,-1">
                 <Button x:Name="btnFileSelect" Content="File Select..." Canvas.Left="40" Canvas.Top="23" Width="154" Height="68" FontSize="15.75" Background="White" Click="OnClickBtnFileSelect">
                     <ToolTipService.ToolTip>
@@ -31,14 +33,14 @@
                 </Button>
             </Canvas>
         </GroupBox>
-        <GroupBox x:Name="groupBoxProcessingInfo" Header="Processing Infomation" Width="249" Height="113" Canvas.Left="10" Canvas.Top="433" FontSize="15.75" >
+        <GroupBox x:Name="groupBoxProcessingInfo" Header="Processing Infomation" Width="249" Height="113" Canvas.Left="10" Canvas.Top="453" FontSize="15.75" >
             <Canvas Canvas.Left="35" Canvas.Top="253" Margin="0,0,-2,3">
                 <Label Content="Time" Canvas.Left="40" Canvas.Top="10" RenderTransformOrigin="-0.113,-0.537"/>
                 <TextBox x:Name="textBoxTime" Height="28" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="41" Width="154" IsReadOnly="True" FontSize="15.75" TextAlignment="Right"/>
                 <Label Content="ms" Canvas.Left="194" Canvas.Top="41" RenderTransformOrigin="-0.113,-0.537"/>
             </Canvas>
         </GroupBox>
-        <GroupBox x:Name="groupBoxImageOutput" Header="Image Output" Height="535" Canvas.Left="264" Canvas.Top="10" Width="1065" FontSize="15.75">
+        <GroupBox x:Name="groupBoxImageOutput" Header="Image Output" Height="535" Canvas.Left="264" Canvas.Top="32" Width="1065" FontSize="15.75">
             <Canvas Height="514" Margin="0,0,-2,-1" VerticalAlignment="Top">
                 <Border BorderBrush="White" BorderThickness="2" Height="456" Canvas.Left="20" Canvas.Top="39" Width="498" CornerRadius="10">
                     <Image x:Name="pictureBoxOriginal"/>
@@ -50,5 +52,13 @@
                 <Label x:Name="labelAfterImage" Content="After Image" Canvas.Left="535" Canvas.Top="3"/>
             </Canvas>
         </GroupBox>
+        <Menu x:Name="menuMain"  Background="White" FontSize="15.75">
+            <MenuItem Header="File(_F)">
+                <MenuItem Header="End(_X)" Click="OnClickMenu"/>
+            </MenuItem>
+            <MenuItem Header="Setting(_O)">
+                <MenuItem Header="Image Processing" Click="OnClickMenu"/>
+            </MenuItem>
+        </Menu>
     </Canvas>
 </Window>

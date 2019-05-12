@@ -10,41 +10,26 @@ using System.Windows.Media.Imaging;
 
 namespace ImageProcessing
 {
-    public class EdgeDetection
+    public class EdgeDetection : ComImgProc
     {
         private const int m_nMaskSize = 3;
         private uint m_nFilterMax;
-        private BitmapImage m_bitmap;
-        private WriteableBitmap m_wBitmap;
 
-        public EdgeDetection(BitmapImage _bitmap)
+        public EdgeDetection(BitmapImage _bitmap) : base(_bitmap)
         {
             m_nFilterMax = 1;
-            m_bitmap = _bitmap;
         }
 
-        public EdgeDetection(BitmapImage _bitmap, uint _filterMax)
+        public EdgeDetection(BitmapImage _bitmap, uint _filterMax) : base(_bitmap)
         {
             m_nFilterMax = _filterMax;
-            m_bitmap = _bitmap;
         }
 
         ~EdgeDetection()
         {
-            m_bitmap = null;
         }
 
-        public WriteableBitmap GetBitmap()
-        {
-            return m_wBitmap;
-        }
-
-        public void SetBitmap(WriteableBitmap _bitmap)
-        {
-            m_wBitmap = _bitmap;
-        }
-
-        public bool GoEdgeDetection(CancellationToken _token)
+        public override bool GoImgProc(CancellationToken _token)
         {
             bool bRst = true;
 
@@ -54,13 +39,12 @@ namespace ImageProcessing
                 {1.0, -8.0, 1.0},
                 {1.0,  1.0, 1.0}
             };
-
-            int nWidthSize = m_bitmap.PixelWidth;
-            int nHeightSize = m_bitmap.PixelHeight;
+            int nWidthSize = base.Bitmap.PixelWidth;
+            int nHeightSize = base.Bitmap.PixelHeight;
             int nMasksize = dMask.GetLength(0);
 
-            m_wBitmap = new WriteableBitmap(m_bitmap);
-            m_wBitmap.Lock();
+            base.WriteableBitmap = new WriteableBitmap(base.Bitmap);
+            base.WriteableBitmap.Lock();
 
             int nIdxWidth;
             int nIdxHeight;
@@ -77,12 +61,11 @@ namespace ImageProcessing
                             break;
                         }
 
-                        byte* pPixel = (byte*)m_wBitmap.BackBuffer + nIdxHeight * m_wBitmap.BackBufferStride + nIdxWidth * 4;
+                        byte* pPixel = (byte*)base.WriteableBitmap.BackBuffer + nIdxHeight * base.WriteableBitmap.BackBufferStride + nIdxWidth * 4;
 
                         double dCalB = 0.0;
                         double dCalG = 0.0;
                         double dCalR = 0.0;
-                        double dCalA = 0.0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
                         int nFilter = 0;
@@ -98,12 +81,11 @@ namespace ImageProcessing
                                         nIdxHeight + nIdxHightMask > 0 &&
                                         nIdxHeight + nIdxHightMask < nHeightSize)
                                     {
-                                        byte* pPixel2 = (byte*)m_wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                        byte* pPixel2 = (byte*)base.WriteableBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * base.WriteableBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
                                         dCalB += pPixel2[(int)ComInfo.Pixel.B] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalG += pPixel2[(int)ComInfo.Pixel.G] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalR += pPixel2[(int)ComInfo.Pixel.R] * dMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalA += pPixel2[(int)ComInfo.Pixel.A] * dMask[nIdxWidthMask, nIdxHightMask];
                                     }
                                 }
                             }
@@ -112,12 +94,11 @@ namespace ImageProcessing
                         pPixel[(int)ComInfo.Pixel.B] = ComFunc.DoubleToByte(dCalB);
                         pPixel[(int)ComInfo.Pixel.G] = ComFunc.DoubleToByte(dCalG);
                         pPixel[(int)ComInfo.Pixel.R] = ComFunc.DoubleToByte(dCalR);
-                        pPixel[(int)ComInfo.Pixel.A] = ComFunc.DoubleToByte(dCalA);
                     }
                 }
-                m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
-                m_wBitmap.Unlock();
-                m_wBitmap.Freeze();
+                base.WriteableBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
+                base.WriteableBitmap.Unlock();
+                base.WriteableBitmap.Freeze();
             }
 
             return bRst;

@@ -1,15 +1,14 @@
-﻿<Window x:Class="ImageProcessing.SettingWindow"
+﻿<Window x:Class="ImageProcessing.SettingImageProcessing"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageProcessing"
         mc:Ignorable="d"
-        Title="Setting" Height="300" Width="500"
-        ResizeMode="NoResize"
-        Closing="OnClosingWindow">
+        Title="Setting Image Processing" Height="300" Width="500"
+        ResizeMode="NoResize">
     <Canvas Background="LightSteelBlue">
-        <ComboBox x:Name="cmbBoxImageProcessingType" Canvas.Left="195" Canvas.Top="10" Width="275" Height="30" FontSize="15.75" Background="White">
+        <ComboBox x:Name="cmbBoxImageProcessingType" Canvas.Left="195" Canvas.Top="10" Width="275" Height="35" FontSize="15.75" Background="White" SelectionChanged="OnSelectionChangedCmbBoxImageProcessingType">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -20,7 +19,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label x:Name="labelImageProcessingType" Content="Image Processing Type" Canvas.Left="10" Canvas.Top="10" FontSize="15.75"/>
-        <Button x:Name="btnOk" Content="OK" Canvas.Left="305" Canvas.Top="221" Width="75" FontSize="15.75" Background="White" Click="OnClickOk"/>
-        <Button x:Name="btnCancel" Content="Cancel" Canvas.Left="395" Canvas.Top="221" Width="75" FontSize="15.75" Background="White" IsCancel="True" Click="OnClickCancel"/>
+        <Button x:Name="btnOk" IsDefault="True" Content="OK" Canvas.Left="305" Canvas.Top="221" Width="75" FontSize="15.75" Background="White" Click="OnClickOk"/>
+        <Button x:Name="btnCancel" IsCancel="True" Content="Cancel" Canvas.Left="395" Canvas.Top="221" Width="75" FontSize="15.75" Background="White" Click="OnClickCancel"/>
     </Canvas>
 </Window>

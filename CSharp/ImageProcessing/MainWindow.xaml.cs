@@ -27,10 +27,10 @@ namespace ImageProcessing
     public partial class MainWindow : Window
     {
         private BitmapImage m_bitmap;
-        private EdgeDetection m_edgeDetection;
+        private object m_imgProc;
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
-        private int m_curImgType;
+        private string m_curImgName;
 
         public MainWindow()
         {
@@ -43,27 +43,30 @@ namespace ImageProcessing
 
             m_bitmap = null;
             m_tokenSource = null;
-            m_edgeDetection = null;
+            m_imgProc = null;
 
-            m_curImgType = Properties.Settings.Default.ImgTypeSelect;
-            SelectWIndowTitle(m_curImgType);
+            m_curImgName = Properties.Settings.Default.ImgTypeSelectName;
+            Title = "Image Processing ( " + m_curImgName + " )";
         }
 
         ~MainWindow()
         {
             m_bitmap = null;
             m_tokenSource = null;
-            m_edgeDetection = null;
+            m_imgProc = null;
         }
 
-        public bool SelectWIndowTitle(int _imgType)
+        public bool SelectLoadImage(string _imgName)
         {
             bool bRst = true;
 
-            switch (_imgType)
+            switch (_imgName)
             {
-                case (int)ComInfo.ImgType.EdgeDetection:
-                    Title += " ( " + Properties.Settings.Default.ImgTypeEdgeName + " )";
+                case ComInfo.IMG_NAME_EDGE_DETECTION:
+                    m_imgProc = new EdgeDetection(m_bitmap);
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE:
+                    m_imgProc = new GrayScale(m_bitmap);
                     break;
                 default:
                     break;
@@ -72,14 +75,19 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectLoadImage(int _imgType)
+        public bool SelectGetBitmap(string _imgName)
         {
             bool bRst = true;
 
-            switch (_imgType)
+            switch (_imgName)
             {
-                case (int)ComInfo.ImgType.EdgeDetection:
-                    m_edgeDetection = new EdgeDetection(m_bitmap);
+                case ComInfo.IMG_NAME_EDGE_DETECTION:
+                    EdgeDetection edge = (EdgeDetection)m_imgProc;
+                    pictureBoxAfter.Source = edge.WriteableBitmap;
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE:
+                    GrayScale gray = (GrayScale)m_imgProc;
+                    pictureBoxAfter.Source = gray.WriteableBitmap;
                     break;
                 default:
                     break;
@@ -88,30 +96,19 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectGetBitmap(int _imgType)
+        public bool SelectGoImgProc(string _imgName, CancellationToken _token)
         {
             bool bRst = true;
 
-            switch (_imgType)
+            switch (_imgName)
             {
-                case (int)ComInfo.ImgType.EdgeDetection:
-                    pictureBoxAfter.Source = m_edgeDetection.GetBitmap();
+                case ComInfo.IMG_NAME_EDGE_DETECTION:
+                    EdgeDetection edge = (EdgeDetection)m_imgProc;
+                    bRst = edge.GoImgProc(_token);
                     break;
-                default:
-                    break;
-            }
-
-            return bRst;
-        }
-
-        public bool SelectGoImg(int _imgType, CancellationToken _token)
-        {
-            bool bRst = true;
-
-            switch (_imgType)
-            {
-                case (int)ComInfo.ImgType.EdgeDetection:
-                    m_edgeDetection.GoEdgeDetection(_token);
+                case ComInfo.IMG_NAME_GRAY_SCALE:
+                    GrayScale gray = (GrayScale)m_imgProc;
+                    bRst = gray.GoImgProc(_token);
                     break;
                 default:
                     break;
@@ -126,7 +123,6 @@ namespace ImageProcessing
             btnAllClear.IsEnabled = true;
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
-            btnSetting.IsEnabled = true;
 
             return;
         }
@@ -144,7 +140,7 @@ namespace ImageProcessing
 
             openFileDlg.FileName = "default.jpg";
             openFileDlg.InitialDirectory = @"C:\";
-            openFileDlg.Filter = "All Files(*.*)|*.*";
+            openFileDlg.Filter = "JPG|*.jpg|PNG|*.png";
             openFileDlg.FilterIndex = 1;
             openFileDlg.Title = "Please select a file to open";
             openFileDlg.RestoreDirectory = true;
@@ -180,7 +176,7 @@ namespace ImageProcessing
             m_bitmap.EndInit();
             m_bitmap.Freeze();
 
-            SelectLoadImage(m_curImgType);
+            SelectLoadImage(m_curImgName);
 
             return;
         }
@@ -209,7 +205,7 @@ namespace ImageProcessing
             btnFileSelect.IsEnabled = false;
             btnAllClear.IsEnabled = false;
             btnStart.IsEnabled = false;
-            btnSetting.IsEnabled = false;
+            menuMain.IsEnabled = false;
 
             textBoxTime.Text = "";
 
@@ -226,13 +222,14 @@ namespace ImageProcessing
                 bitmap.UriSource = new Uri(m_strOpenFileName);
                 bitmap.EndInit();
                 pictureBoxOriginal.Source = bitmap;
-                SelectGetBitmap(m_curImgType);
+                SelectGetBitmap(m_curImgName);
 
                 stopwatch.Stop();
 
                 Dispatcher.Invoke(new Action<long>(SetTextTime), stopwatch.ElapsedMilliseconds);
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
+            menuMain.IsEnabled = true;
 
             stopwatch = null;
             m_tokenSource = null;
@@ -245,7 +242,7 @@ namespace ImageProcessing
         {
             m_tokenSource = new CancellationTokenSource();
             CancellationToken token = m_tokenSource.Token;
-            bool bRst = await Task.Run(() => SelectGoImg(m_curImgType, token));
+            bool bRst = await Task.Run(() => SelectGoImgProc(m_curImgName, token));
             return bRst;
         }
 
@@ -269,16 +266,36 @@ namespace ImageProcessing
             return;
         }
 
-        private void OnClickBtnSetting(object sender, RoutedEventArgs e)
+        private void OnClickMenu(object sender, RoutedEventArgs e)
         {
-            SettingWindow settingWindow = new SettingWindow();
-            bool? dialogResult = settingWindow.ShowDialog();
+            MenuItem menuItem = (MenuItem)sender;
+            string strHeader = menuItem.Header.ToString();
+
+            switch (strHeader)
+            {
+                case ComInfo.MENU_FILE_END:
+                    Close();
+                    break;
+                case ComInfo.MENU_SETTING_IMAGE_PROCESSING:
+                    ShowSettingImageProcessing();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void ShowSettingImageProcessing()
+        {
+            SettingImageProcessing win = new SettingImageProcessing();
+            bool? dialogResult = win.ShowDialog();
 
             if (dialogResult == true)
             {
-                m_curImgType = settingWindow.cmbBoxImageProcessingType.SelectedIndex;
-                SelectWIndowTitle(m_curImgType);
+                m_curImgName = (string)win.cmbBoxImageProcessingType.DataContext;
+                Title = "Image Processing ( " + m_curImgName + " )";
             }
+
+            return;
         }
     }
 }

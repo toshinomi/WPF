@@ -2,14 +2,23 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ImageProcessing.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ImgTypeSelect" Type="System.Int32" Scope="User">
+    <Setting Name="ImgTypeSelectIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ImgTypeSelectName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EdgeDetection</Value>
     </Setting>
     <Setting Name="ImgTypeEdgeId" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ImgTypeEdgeName" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeDetection</Value>
+    </Setting>
+    <Setting Name="ImgTypeGrayScaleId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="ImgTypeGrayScaleName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GrayScale</Value>
     </Setting>
   </Settings>
 </SettingsFile>

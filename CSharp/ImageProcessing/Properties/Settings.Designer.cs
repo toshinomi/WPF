@@ -26,12 +26,24 @@ namespace ImageProcessing.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int ImgTypeSelect {
+        public int ImgTypeSelectIndex {
             get {
-                return ((int)(this["ImgTypeSelect"]));
+                return ((int)(this["ImgTypeSelectIndex"]));
             }
             set {
-                this["ImgTypeSelect"] = value;
+                this["ImgTypeSelectIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EdgeDetection")]
+        public string ImgTypeSelectName {
+            get {
+                return ((string)(this["ImgTypeSelectName"]));
+            }
+            set {
+                this["ImgTypeSelectName"] = value;
             }
         }
         
@@ -56,6 +68,30 @@ namespace ImageProcessing.Properties {
             }
             set {
                 this["ImgTypeEdgeName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int ImgTypeGrayScaleId {
+            get {
+                return ((int)(this["ImgTypeGrayScaleId"]));
+            }
+            set {
+                this["ImgTypeGrayScaleId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GrayScale")]
+        public string ImgTypeGrayScaleName {
+            get {
+                return ((string)(this["ImgTypeGrayScaleName"]));
+            }
+            set {
+                this["ImgTypeGrayScaleName"] = value;
             }
         }
     }

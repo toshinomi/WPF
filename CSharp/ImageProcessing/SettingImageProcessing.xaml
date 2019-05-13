@@ -8,7 +8,7 @@
         Title="Setting Image Processing" Height="300" Width="500"
         ResizeMode="NoResize">
     <Canvas Background="LightSteelBlue">
-        <ComboBox x:Name="cmbBoxImageProcessingType" Canvas.Left="195" Canvas.Top="10" Width="275" Height="35" FontSize="15.75" Background="White" SelectionChanged="OnSelectionChangedCmbBoxImageProcessingType">
+        <ComboBox x:Name="cmbBoxImageProcessingType" Canvas.Left="195" Canvas.Top="10" Width="275" Height="35" FontSize="15.75" Background="White">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ImageProcessing.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ImgTypeSelectIndex" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="ImgTypeSelectName" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeDetection</Value>
     </Setting>

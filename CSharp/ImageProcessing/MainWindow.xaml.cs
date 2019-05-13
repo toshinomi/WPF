@@ -291,7 +291,8 @@ namespace ImageProcessing
 
             if (dialogResult == true)
             {
-                m_curImgName = (string)win.cmbBoxImageProcessingType.DataContext;
+                ImageProcessingType imgProcType = (ImageProcessingType)win.cmbBoxImageProcessingType.SelectedItem;
+                m_curImgName = imgProcType.Name;
                 Title = "Image Processing ( " + m_curImgName + " )";
             }
 

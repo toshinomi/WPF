@@ -26,8 +26,6 @@ namespace ImageProcessing
             InitializeComponent();
 
             LoadParam();
-
-            cmbBoxImageProcessingType.DataContext = m_items.Find(x => x.Id == cmbBoxImageProcessingType.SelectedIndex + 1)?.Name;
         }
 
         ~SettingImageProcessing()
@@ -37,21 +35,19 @@ namespace ImageProcessing
         public void LoadParam()
         {
             m_items = new List<ImageProcessingType>();
-            m_items.Add(new ImageProcessingType() { Id = Properties.Settings.Default.ImgTypeEdgeId, Name = Properties.Settings.Default.ImgTypeEdgeName });
-            m_items.Add(new ImageProcessingType() { Id = Properties.Settings.Default.ImgTypeGrayScaleId, Name = Properties.Settings.Default.ImgTypeGrayScaleName });
-
+            m_items.Add(new ImageProcessingType(Properties.Settings.Default.ImgTypeEdgeId, Properties.Settings.Default.ImgTypeEdgeName));
+            m_items.Add(new ImageProcessingType(Properties.Settings.Default.ImgTypeGrayScaleId, Properties.Settings.Default.ImgTypeGrayScaleName));
 
             cmbBoxImageProcessingType.ItemsSource = m_items;
-            cmbBoxImageProcessingType.SelectedIndex = Properties.Settings.Default.ImgTypeSelectIndex;
-            cmbBoxImageProcessingType.DataContext = Properties.Settings.Default.ImgTypeSelectName;
+            cmbBoxImageProcessingType.SelectedIndex = (int)m_items.Find(x => x.Name == Properties.Settings.Default.ImgTypeSelectName)?.Id - 1;
 
             return;
         }
 
         public void SaveParam()
         {
-            Properties.Settings.Default.ImgTypeSelectIndex = cmbBoxImageProcessingType.SelectedIndex;
-            Properties.Settings.Default.ImgTypeSelectName = (string)cmbBoxImageProcessingType.DataContext;
+            ImageProcessingType imgProcType = (ImageProcessingType)cmbBoxImageProcessingType.SelectedItem;
+            Properties.Settings.Default.ImgTypeSelectName = imgProcType.Name;
             Properties.Settings.Default.Save();
 
             return;
@@ -67,11 +63,6 @@ namespace ImageProcessing
         private void OnClickCancel(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void OnSelectionChangedCmbBoxImageProcessingType(object sender, SelectionChangedEventArgs e)
-        {
-            cmbBoxImageProcessingType.DataContext = m_items.Find(x => x.Id == cmbBoxImageProcessingType.SelectedIndex + 1)?.Name;
         }
     }
 }

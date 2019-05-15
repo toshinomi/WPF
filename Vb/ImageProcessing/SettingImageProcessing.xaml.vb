@@ -19,15 +19,14 @@
 
 
         cmbBoxImageProcessingType.ItemsSource = m_items
-        cmbBoxImageProcessingType.SelectedIndex = My.Settings.ImgTypeSelectIndex
-        cmbBoxImageProcessingType.DataContext = My.Settings.ImgTypeSelectName
+        cmbBoxImageProcessingType.SelectedIndex = m_items.Find(Function(x) x.Name = My.Settings.ImgTypeSelectName)?.Id - 1
 
         Return
     End Sub
 
     Public Sub SaveParam()
-        My.Settings.ImgTypeSelectIndex = cmbBoxImageProcessingType.SelectedIndex
-        My.Settings.ImgTypeSelectName = cmbBoxImageProcessingType.DataContext
+        Dim imgProcType As ImageProcessingType = cmbBoxImageProcessingType.SelectedItem
+        My.Settings.ImgTypeSelectName = imgProcType.Name
         My.Settings.Save()
 
         Return
@@ -41,9 +40,5 @@
 
     Private Sub OnClickCancel(sender As Object, e As RoutedEventArgs) Handles btnCancel.Click
         Close()
-    End Sub
-
-    Private Sub OnSelectionChangedCmbBoxImageProcessingType(sender As Object, e As SelectionChangedEventArgs) Handles cmbBoxImageProcessingType.SelectionChanged
-        cmbBoxImageProcessingType.DataContext = m_items.Find(Function(x) x.Id = cmbBoxImageProcessingType.SelectedIndex + 1)?.Name
     End Sub
 End Class

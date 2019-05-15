@@ -55,18 +55,6 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-    Public Property ImgTypeSelectIndex() As Integer
-        Get
-            Return CType(Me("ImgTypeSelectIndex"),Integer)
-        End Get
-        Set
-            Me("ImgTypeSelectIndex") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("EdgeDetection")>  _
     Public Property ImgTypeSelectName() As String
         Get

@@ -30,7 +30,7 @@ namespace ImageProcessing
         private object m_imgProc;
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
-        private string m_curImgName;
+        private string m_strCurImgName;
 
         public MainWindow()
         {
@@ -40,13 +40,14 @@ namespace ImageProcessing
             btnAllClear.IsEnabled = true;
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = false;
+            btnSaveImage.IsEnabled = false;
 
             m_bitmap = null;
             m_tokenSource = null;
             m_imgProc = null;
 
-            m_curImgName = Properties.Settings.Default.ImgTypeSelectName;
-            Title = "Image Processing ( " + m_curImgName + " )";
+            m_strCurImgName = Properties.Settings.Default.ImgTypeSelectName;
+            Title = "Image Processing ( " + m_strCurImgName + " )";
         }
 
         ~MainWindow()
@@ -56,11 +57,11 @@ namespace ImageProcessing
             m_imgProc = null;
         }
 
-        public bool SelectLoadImage(string _imgName)
+        public bool SelectLoadImage(string _strImgName)
         {
             bool bRst = true;
 
-            switch (_imgName)
+            switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     m_imgProc = new EdgeDetection(m_bitmap);
@@ -75,11 +76,11 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectGetBitmap(string _imgName)
+        public bool SelectGetBitmap(string _strImgName)
         {
             bool bRst = true;
 
-            switch (_imgName)
+            switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     EdgeDetection edge = (EdgeDetection)m_imgProc;
@@ -96,11 +97,11 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectGoImgProc(string _imgName, CancellationToken _token)
+        public bool SelectGoImgProc(string _strImgName, CancellationToken _token)
         {
             bool bRst = true;
 
-            switch (_imgName)
+            switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     EdgeDetection edge = (EdgeDetection)m_imgProc;
@@ -141,9 +142,8 @@ namespace ImageProcessing
             openFileDlg.FileName = "default.jpg";
             openFileDlg.InitialDirectory = @"C:\";
             openFileDlg.Filter = "JPG|*.jpg|PNG|*.png";
-            openFileDlg.FilterIndex = 1;
-            openFileDlg.Title = "Please select a file to open";
-            openFileDlg.RestoreDirectory = true;
+            openFileDlg.FilterIndex = (int)ComInfo.ImgDataType.Jpg + 1;
+            openFileDlg.Title = "Open the file";
             openFileDlg.CheckFileExists = true;
             openFileDlg.CheckPathExists = true;
 
@@ -176,7 +176,7 @@ namespace ImageProcessing
             m_bitmap.EndInit();
             m_bitmap.Freeze();
 
-            SelectLoadImage(m_curImgName);
+            SelectLoadImage(m_strCurImgName);
 
             return;
         }
@@ -194,6 +194,7 @@ namespace ImageProcessing
             btnFileSelect.IsEnabled = true;
             btnAllClear.IsEnabled = true;
             btnStart.IsEnabled = false;
+            btnSaveImage.IsEnabled = false;
 
             return;
         }
@@ -214,6 +215,7 @@ namespace ImageProcessing
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             btnStop.IsEnabled = true;
+            btnSaveImage.IsEnabled = false;
             bool bResult = await TaskWorkImageProcessing();
             if (bResult)
             {
@@ -222,11 +224,12 @@ namespace ImageProcessing
                 bitmap.UriSource = new Uri(m_strOpenFileName);
                 bitmap.EndInit();
                 pictureBoxOriginal.Source = bitmap;
-                SelectGetBitmap(m_curImgName);
+                SelectGetBitmap(m_strCurImgName);
 
                 stopwatch.Stop();
 
                 Dispatcher.Invoke(new Action<long>(SetTextTime), stopwatch.ElapsedMilliseconds);
+                btnSaveImage.IsEnabled = true;
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
             menuMain.IsEnabled = true;
@@ -242,7 +245,7 @@ namespace ImageProcessing
         {
             m_tokenSource = new CancellationTokenSource();
             CancellationToken token = m_tokenSource.Token;
-            bool bRst = await Task.Run(() => SelectGoImgProc(m_curImgName, token));
+            bool bRst = await Task.Run(() => SelectGoImgProc(m_strCurImgName, token));
             return bRst;
         }
 
@@ -292,8 +295,63 @@ namespace ImageProcessing
             if (dialogResult == true)
             {
                 ImageProcessingType imgProcType = (ImageProcessingType)win.cmbBoxImageProcessingType.SelectedItem;
-                m_curImgName = imgProcType.Name;
-                Title = "Image Processing ( " + m_curImgName + " )";
+                m_strCurImgName = imgProcType.Name;
+                Title = "Image Processing ( " + m_strCurImgName + " )";
+            }
+
+            return;
+        }
+
+        public WriteableBitmap GetImage(string _strImgName)
+        {
+            WriteableBitmap bitmap = null;
+            switch (m_strCurImgName)
+            {
+                case ComInfo.IMG_NAME_EDGE_DETECTION:
+                    EdgeDetection edge = (EdgeDetection)m_imgProc;
+                    if (edge != null)
+                    {
+                        bitmap = edge.WriteableBitmap;
+                    }
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE:
+                    GrayScale gray = (GrayScale)m_imgProc;
+                    if (gray != null)
+                    {
+                        bitmap = gray.WriteableBitmap;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return bitmap;
+        }
+
+        private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.FileName = "default.jpg";
+            saveDialog.InitialDirectory = @"C:\";
+            saveDialog.Filter = "PNG|*.png";
+            saveDialog.FilterIndex = (int)ComInfo.ImgDataType.Jpg + 1;
+            saveDialog.Title = "Save the file";
+            saveDialog.CheckFileExists = false;
+            saveDialog.CheckPathExists = true;
+
+            if (saveDialog.ShowDialog() == true)
+            {
+                string strFileName = saveDialog.FileName;
+                using (FileStream stream = new FileStream(strFileName, FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    WriteableBitmap bitmap = GetImage(m_strCurImgName);
+                    if (bitmap != null)
+                    {
+                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                        encoder.Save(stream);
+                    }
+                }
             }
 
             return;

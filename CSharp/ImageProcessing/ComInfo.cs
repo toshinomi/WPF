@@ -23,6 +23,13 @@ namespace ImageProcessing
             MAX,
         }
 
+        public enum ImgDataType
+        {
+            Jpg = 0,
+            Png,
+            MAX,
+        }
+
         public const string MENU_SETTING_IMAGE_PROCESSING = "Image Processing";
         public const string MENU_FILE_END = "End(_X)";
         public const string BTN_OK = "btnOk";

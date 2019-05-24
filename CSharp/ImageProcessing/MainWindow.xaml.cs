@@ -137,21 +137,14 @@ namespace ImageProcessing
 
         private void OnClickBtnFileSelect(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDlg = new OpenFileDialog();
-
-            openFileDlg.FileName = "default.jpg";
-            openFileDlg.InitialDirectory = @"C:\";
+            ComOpenFileDialog openFileDlg = new ComOpenFileDialog();
             openFileDlg.Filter = "JPG|*.jpg|PNG|*.png";
-            openFileDlg.FilterIndex = (int)ComInfo.ImgDataType.Jpg + 1;
             openFileDlg.Title = "Open the file";
-            openFileDlg.CheckFileExists = true;
-            openFileDlg.CheckPathExists = true;
-
             if (openFileDlg.ShowDialog() == true)
             {
                 pictureBoxOriginal.Source = null;
                 pictureBoxAfter.Source = null;
-                m_strOpenFileName = openFileDlg.FileName;
+                m_strOpenFileName = openFileDlg.FilePass;
                 try
                 {
                     LoadImage();
@@ -330,18 +323,12 @@ namespace ImageProcessing
 
         private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.FileName = "default.jpg";
-            saveDialog.InitialDirectory = @"C:\";
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
             saveDialog.Filter = "PNG|*.png";
-            saveDialog.FilterIndex = (int)ComInfo.ImgDataType.Jpg + 1;
             saveDialog.Title = "Save the file";
-            saveDialog.CheckFileExists = false;
-            saveDialog.CheckPathExists = true;
-
             if (saveDialog.ShowDialog() == true)
             {
-                string strFileName = saveDialog.FileName;
+                string strFileName = saveDialog.FilePass;
                 using (FileStream stream = new FileStream(strFileName, FileMode.Create))
                 {
                     PngBitmapEncoder encoder = new PngBitmapEncoder();

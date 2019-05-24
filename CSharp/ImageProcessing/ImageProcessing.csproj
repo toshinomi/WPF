@@ -62,6 +62,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ComImgProc.cs" />
+    <Compile Include="ComOpenFileDialog.cs" />
+    <Compile Include="ComFileDialog.cs" />
+    <Compile Include="ComSaveFileDialog.cs" />
     <Compile Include="GrayScale.cs" />
     <Compile Include="ImageProcessingType.cs" />
     <Compile Include="SettingImageProcessing.xaml.cs">

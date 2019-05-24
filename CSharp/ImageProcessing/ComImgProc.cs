@@ -10,8 +10,8 @@ namespace ImageProcessing
 {
     abstract public class ComImgProc
     {
-        private BitmapImage m_bitmap;
-        private WriteableBitmap m_wBitmap;
+        protected BitmapImage m_bitmap;
+        protected WriteableBitmap m_wBitmap;
 
         public ComImgProc(BitmapImage _bitmap)
         {

@@ -39,12 +39,12 @@ namespace ImageProcessing
                 {1.0, -8.0, 1.0},
                 {1.0,  1.0, 1.0}
             };
-            int nWidthSize = base.Bitmap.PixelWidth;
-            int nHeightSize = base.Bitmap.PixelHeight;
+            int nWidthSize = base.m_bitmap.PixelWidth;
+            int nHeightSize = base.m_bitmap.PixelHeight;
             int nMasksize = dMask.GetLength(0);
 
-            base.WriteableBitmap = new WriteableBitmap(base.Bitmap);
-            base.WriteableBitmap.Lock();
+            base.m_wBitmap = new WriteableBitmap(base.m_bitmap);
+            base.m_wBitmap.Lock();
 
             int nIdxWidth;
             int nIdxHeight;
@@ -61,7 +61,7 @@ namespace ImageProcessing
                             break;
                         }
 
-                        byte* pPixel = (byte*)base.WriteableBitmap.BackBuffer + nIdxHeight * base.WriteableBitmap.BackBufferStride + nIdxWidth * 4;
+                        byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
 
                         double dCalB = 0.0;
                         double dCalG = 0.0;
@@ -81,7 +81,7 @@ namespace ImageProcessing
                                         nIdxHeight + nIdxHightMask > 0 &&
                                         nIdxHeight + nIdxHightMask < nHeightSize)
                                     {
-                                        byte* pPixel2 = (byte*)base.WriteableBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * base.WriteableBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                        byte* pPixel2 = (byte*)base.m_wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * base.m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
                                         dCalB += pPixel2[(int)ComInfo.Pixel.B] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalG += pPixel2[(int)ComInfo.Pixel.G] * dMask[nIdxWidthMask, nIdxHightMask];
@@ -96,9 +96,9 @@ namespace ImageProcessing
                         pPixel[(int)ComInfo.Pixel.R] = ComFunc.DoubleToByte(dCalR);
                     }
                 }
-                base.WriteableBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
-                base.WriteableBitmap.Unlock();
-                base.WriteableBitmap.Freeze();
+                base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
+                base.m_wBitmap.Unlock();
+                base.m_wBitmap.Freeze();
             }
 
             return bRst;

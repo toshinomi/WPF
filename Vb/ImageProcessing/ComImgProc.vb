@@ -2,8 +2,8 @@
 
 Namespace ImageProcessing
     Public MustInherit Class ComImgProc
-        Private m_bitmap As BitmapImage
-        Private m_wBitmap As WriteableBitmap
+        Protected m_bitmap As BitmapImage
+        Protected m_wBitmap As WriteableBitmap
 
         Public Sub New(ByVal _bitmap As BitmapImage)
             m_bitmap = _bitmap

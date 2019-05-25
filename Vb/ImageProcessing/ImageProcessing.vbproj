@@ -71,7 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComFileDialog.vb" />
     <Compile Include="ComImgProc.vb" />
+    <Compile Include="ComOpenFileDialog.vb" />
+    <Compile Include="ComSaveFileDialog.vb" />
     <Compile Include="GrayScale.vb" />
     <Compile Include="ImageProcessingType.vb" />
     <Compile Include="SettingImageProcessing.xaml.vb">

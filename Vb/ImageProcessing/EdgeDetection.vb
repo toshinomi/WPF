@@ -30,12 +30,12 @@ Namespace ImageProcessing
                 {1.0, 1.0, 1.0}
             }
 
-            Dim nWidthSize As Integer = Bitmap.Width
-            Dim nHeightSize As Integer = Bitmap.Height
+            Dim nWidthSize As Integer = Me.m_bitmap.Width
+            Dim nHeightSize As Integer = Me.m_bitmap.Height
             Dim nMasksize As Integer = dMask.GetLength(0)
 
-            WriteableBitmap = New WriteableBitmap(Bitmap)
-            WriteableBitmap.Lock()
+            Me.m_wBitmap = New WriteableBitmap(Me.m_bitmap)
+            Me.m_wBitmap.Lock()
 
             Dim nIdxWidth As Integer
             Dim nIdxHeight As Integer
@@ -47,8 +47,8 @@ Namespace ImageProcessing
                         Exit For
                     End If
 
-                    Dim pAdr As IntPtr = WriteableBitmap.BackBuffer
-                    Dim nPos As Integer = nIdxHeight * WriteableBitmap.BackBufferStride + nIdxWidth * 4
+                    Dim pAdr As IntPtr = Me.m_wBitmap.BackBuffer
+                    Dim nPos As Integer = nIdxHeight * Me.m_wBitmap.BackBufferStride + nIdxWidth * 4
                     Dim bytePixelB As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
                     Dim bytePixelG As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
                     Dim bytePixelR As Byte = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
@@ -69,8 +69,8 @@ Namespace ImageProcessing
                                     nIdxHeight + nIdxHightMask > 0 And
                                     nIdxHeight + nIdxHightMask < nHeightSize) Then
 
-                                    Dim pAdr2 As IntPtr = WriteableBitmap.BackBuffer
-                                    Dim nPos2 As Integer = (nIdxHeight + nIdxHightMask) * WriteableBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4
+                                    Dim pAdr2 As IntPtr = Me.m_wBitmap.BackBuffer
+                                    Dim nPos2 As Integer = (nIdxHeight + nIdxHightMask) * Me.m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4
 
                                     dCalB += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.B) * dMask(nIdxWidthMask, nIdxHightMask)
                                     dCalG += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.G) * dMask(nIdxWidthMask, nIdxHightMask)
@@ -85,9 +85,9 @@ Namespace ImageProcessing
                     WriteByte(pAdr, nPos + ComInfo.Pixel.R, ComFunc.DoubleToByte(dCalR))
                 Next
             Next
-            WriteableBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
-            WriteableBitmap.Unlock()
-            WriteableBitmap.Freeze()
+            Me.m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
+            Me.m_wBitmap.Unlock()
+            Me.m_wBitmap.Freeze()
 
             Return bRst
         End Function

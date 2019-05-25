@@ -14,11 +14,11 @@ Namespace ImageProcessing
         Public Overrides Function GoImgProc(_token As CancellationToken) As Boolean
             Dim bRst As Boolean = True
 
-            Dim nWidthSize As Integer = Bitmap.Width
-            Dim nHeightSize As Integer = Bitmap.Height
+            Dim nWidthSize As Integer = Me.m_bitmap.Width
+            Dim nHeightSize As Integer = Me.m_bitmap.Height
 
-            WriteableBitmap = New WriteableBitmap(Bitmap)
-            WriteableBitmap.Lock()
+            Me.m_wBitmap = New WriteableBitmap(Me.m_bitmap)
+            Me.m_wBitmap.Lock()
 
             Dim nIdxWidth As Integer
             Dim nIdxHeight As Integer
@@ -30,8 +30,8 @@ Namespace ImageProcessing
                         Exit For
                     End If
 
-                    Dim pAdr As IntPtr = WriteableBitmap.BackBuffer
-                    Dim nPos As Integer = nIdxHeight * WriteableBitmap.BackBufferStride + nIdxWidth * 4
+                    Dim pAdr As IntPtr = Me.m_wBitmap.BackBuffer
+                    Dim nPos As Integer = nIdxHeight * Me.m_wBitmap.BackBufferStride + nIdxWidth * 4
                     Dim bytePixelB As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
                     Dim bytePixelG As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
                     Dim bytePixelR As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
@@ -42,9 +42,9 @@ Namespace ImageProcessing
                     WriteByte(pAdr, nPos + ComInfo.Pixel.R, CByte(byteGrayScale))
                 Next
             Next
-            WriteableBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
-            WriteableBitmap.Unlock()
-            WriteableBitmap.Freeze()
+            Me.m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))
+            Me.m_wBitmap.Unlock()
+            Me.m_wBitmap.Freeze()
 
             Return bRst
         End Function

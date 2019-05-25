@@ -11,24 +11,29 @@
     <Canvas Background="LightSteelBlue">
         <GroupBox x:Name="groupBoxOperation" Header="Operation" Width="249" Height="408" Canvas.Left="10" Canvas.Top="32" FontSize="15.75">
             <Canvas Height="387" VerticalAlignment="Top" Margin="0,0,-2,-1">
-                <Button x:Name="btnFileSelect" Content="File Select..." Canvas.Left="40" Canvas.Top="23" Width="154" Height="68" FontSize="15.75" Background="White" Click="OnClickBtnFileSelect">
+                <Button x:Name="btnFileSelect" Content="File Select..." Canvas.Left="40" Canvas.Top="23" Width="154" Height="50" FontSize="15.75" Background="White" Click="OnClickBtnFileSelect">
                     <ToolTipService.ToolTip>
                         <TextBlock>Please select a file to open.\nDisplay the image on the original image.</TextBlock>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="btnAllClear" Content="All Clear" Canvas.Left="40" Canvas.Top="108" Width="154" Height="68" FontSize="15.75" Background="White" Click="OnClickBtnAllClear">
+                <Button x:Name="btnAllClear" Content="All Clear" Canvas.Left="40" Canvas.Top="91" Width="154" Height="50" FontSize="15.75" Background="White" Click="OnClickBtnAllClear">
                     <ToolTipService.ToolTip>
                         <TextBlock>Clear the display.</TextBlock>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="btnStart" Content="Start" Canvas.Left="40" Canvas.Top="190" Width="154" Height="68" FontSize="15.75" Background="White" Click="OnClickBtnStart">
+                <Button x:Name="btnStart" Content="Start" Canvas.Left="40" Canvas.Top="161" Width="154" Height="50" FontSize="15.75" Background="White" Click="OnClickBtnStart">
                     <ToolTipService.ToolTip>
                         <TextBlock>Perform unstable filter processing.</TextBlock>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="btnStop" Content="Stop" Canvas.Left="40" Canvas.Top="274" Width="154" Height="68" FontSize="15.75" Background="White" Click="OnClickBtnStop">
+                <Button x:Name="btnStop" Content="Stop" Canvas.Left="40" Canvas.Top="231" Width="154" Height="50" FontSize="15.75" Background="White" Click="OnClickBtnStop">
                     <ToolTipService.ToolTip>
                         <TextBlock>Processing stop.</TextBlock>
+                    </ToolTipService.ToolTip>
+                </Button>
+                <Button x:Name="btnSaveImage" Content="Save Image..." Canvas.Left="40" Canvas.Top="306" Width="154" Height="50" FontSize="15.75" Background="White" Click="OnClickBtnSaveImage">
+                    <ToolTipService.ToolTip>
+                        <TextBlock>Saving image.</TextBlock>
                     </ToolTipService.ToolTip>
                 </Button>
             </Canvas>

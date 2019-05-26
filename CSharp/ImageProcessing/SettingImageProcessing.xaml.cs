@@ -37,6 +37,7 @@ namespace ImageProcessing
             m_items = new List<ImageProcessingType>();
             m_items.Add(new ImageProcessingType(Properties.Settings.Default.ImgTypeEdgeId, Properties.Settings.Default.ImgTypeEdgeName));
             m_items.Add(new ImageProcessingType(Properties.Settings.Default.ImgTypeGrayScaleId, Properties.Settings.Default.ImgTypeGrayScaleName));
+            m_items.Add(new ImageProcessingType(Properties.Settings.Default.ImgTypeBinarizationId, Properties.Settings.Default.ImgTypeBinarizationName));
 
             cmbBoxImageProcessingType.ItemsSource = m_items;
             cmbBoxImageProcessingType.SelectedIndex = (int)m_items.Find(x => x.Name == Properties.Settings.Default.ImgTypeSelectName)?.Id - 1;

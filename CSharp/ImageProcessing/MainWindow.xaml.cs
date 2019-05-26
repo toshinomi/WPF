@@ -48,6 +48,8 @@ namespace ImageProcessing
 
             m_strCurImgName = Properties.Settings.Default.ImgTypeSelectName;
             Title = "Image Processing ( " + m_strCurImgName + " )";
+
+            canvasBinarization.IsEnabled = m_strCurImgName == ComInfo.IMG_NAME_BINARIZATION ? true : false;
         }
 
         ~MainWindow()
@@ -68,6 +70,9 @@ namespace ImageProcessing
                     break;
                 case ComInfo.IMG_NAME_GRAY_SCALE:
                     m_imgProc = new GrayScale(m_bitmap);
+                    break;
+                case ComInfo.IMG_NAME_BINARIZATION:
+                    m_imgProc = new Binarization(m_bitmap);
                     break;
                 default:
                     break;
@@ -90,6 +95,10 @@ namespace ImageProcessing
                     GrayScale gray = (GrayScale)m_imgProc;
                     pictureBoxAfter.Source = gray.WriteableBitmap;
                     break;
+                case ComInfo.IMG_NAME_BINARIZATION:
+                    Binarization binarization = (Binarization)m_imgProc;
+                    pictureBoxAfter.Source = binarization.WriteableBitmap;
+                    break;
                 default:
                     break;
             }
@@ -97,11 +106,11 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectGoImgProc(string _strImgName, CancellationToken _token)
+        public bool SelectGoImgProc(ComImgInfo _comImgInfo, CancellationToken _token)
         {
             bool bRst = true;
 
-            switch (_strImgName)
+            switch (_comImgInfo.CurImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     EdgeDetection edge = (EdgeDetection)m_imgProc;
@@ -110,6 +119,11 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_GRAY_SCALE:
                     GrayScale gray = (GrayScale)m_imgProc;
                     bRst = gray.GoImgProc(_token);
+                    break;
+                case ComInfo.IMG_NAME_BINARIZATION:
+                    Binarization binarization = (Binarization)m_imgProc;
+                    binarization.Thresh = _comImgInfo.BinarizationInfo.Thresh;
+                    bRst = binarization.GoImgProc(_token);
                     break;
                 default:
                     break;
@@ -238,7 +252,12 @@ namespace ImageProcessing
         {
             m_tokenSource = new CancellationTokenSource();
             CancellationToken token = m_tokenSource.Token;
-            bool bRst = await Task.Run(() => SelectGoImgProc(m_strCurImgName, token));
+            ComImgInfo imgInfo = new ComImgInfo();
+            ComBinarizationInfo binarizationInfo = new ComBinarizationInfo();
+            binarizationInfo.Thresh = (byte)sliderThresh.Value;
+            imgInfo.CurImgName = m_strCurImgName;
+            imgInfo.BinarizationInfo = binarizationInfo;
+            bool bRst = await Task.Run(() => SelectGoImgProc(imgInfo, token));
             return bRst;
         }
 
@@ -290,6 +309,8 @@ namespace ImageProcessing
                 ImageProcessingType imgProcType = (ImageProcessingType)win.cmbBoxImageProcessingType.SelectedItem;
                 m_strCurImgName = imgProcType.Name;
                 Title = "Image Processing ( " + m_strCurImgName + " )";
+
+                canvasBinarization.IsEnabled = m_strCurImgName == ComInfo.IMG_NAME_BINARIZATION ? true : false;
             }
 
             return;
@@ -312,6 +333,13 @@ namespace ImageProcessing
                     if (gray != null)
                     {
                         bitmap = gray.WriteableBitmap;
+                    }
+                    break;
+                case ComInfo.IMG_NAME_BINARIZATION:
+                    Binarization binarization = (Binarization)m_imgProc;
+                    if (binarization != null)
+                    {
+                        bitmap = binarization.WriteableBitmap;
                     }
                     break;
                 default:

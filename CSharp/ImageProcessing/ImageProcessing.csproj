@@ -61,6 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Binarization.cs" />
+    <Compile Include="ComImgInfo.cs" />
     <Compile Include="ComImgProc.cs" />
     <Compile Include="ComOpenFileDialog.cs" />
     <Compile Include="ComFileDialog.cs" />

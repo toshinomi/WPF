@@ -82,5 +82,29 @@ namespace ImageProcessing.Properties {
                 this["ImgTypeGrayScaleName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ImgTypeBinarizationId {
+            get {
+                return ((int)(this["ImgTypeBinarizationId"]));
+            }
+            set {
+                this["ImgTypeBinarizationId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Binarization")]
+        public string ImgTypeBinarizationName {
+            get {
+                return ((string)(this["ImgTypeBinarizationName"]));
+            }
+            set {
+                this["ImgTypeBinarizationName"] = value;
+            }
+        }
     }
 }

@@ -17,5 +17,11 @@
     <Setting Name="ImgTypeGrayScaleName" Type="System.String" Scope="User">
       <Value Profile="(Default)">GrayScale</Value>
     </Setting>
+    <Setting Name="ImgTypeBinarizationId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ImgTypeBinarizationName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Binarization</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

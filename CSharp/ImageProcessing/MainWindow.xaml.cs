@@ -381,6 +381,14 @@ namespace ImageProcessing
             }
         }
 
+        private void OnSliderPreviewKeyUp(object sender, KeyboardEventArgs e)
+        {
+            if (pictureBoxAfter.Source != null)
+            {
+                ParamAjust();
+            }
+        }
+
         private async void ParamAjust()
         {
             pictureBoxAfter.Source = null;

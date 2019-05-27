@@ -9,7 +9,9 @@ namespace ImageProcessing
     public class ComImgInfo
     {
         private string m_strCurImgName;
-        private ComBinarizationInfo m_BinarizationInfo;
+        private ComEdgeDetectionInfo m_edgeDetectoinInfo;
+        private ComGrayScaleInfo m_grayScaleInfo;
+        private ComBinarizationInfo m_binarizationInfo;
 
         public string CurImgName
         {
@@ -17,20 +19,58 @@ namespace ImageProcessing
             get { return m_strCurImgName; }
         }
 
+        public ComEdgeDetectionInfo EdgeDetectoinInfo
+        {
+            set { m_edgeDetectoinInfo = value; }
+            get { return m_edgeDetectoinInfo; }
+        }
+
+        public ComGrayScaleInfo GrayScaleInfo
+        {
+            set { m_grayScaleInfo = value; }
+            get { return m_grayScaleInfo; }
+        }
+
         public ComBinarizationInfo BinarizationInfo
         {
-            set { m_BinarizationInfo = value; }
-            get { return m_BinarizationInfo; }
+            set { m_binarizationInfo = value; }
+            get { return m_binarizationInfo; }
         }
 
         public ComImgInfo()
         {
+            m_edgeDetectoinInfo = new ComEdgeDetectionInfo();
+            m_grayScaleInfo = new ComGrayScaleInfo();
+            m_binarizationInfo = new ComBinarizationInfo();
         }
 
         ~ComImgInfo()
         {
         }
     }
+
+    public class ComEdgeDetectionInfo
+    {
+        public ComEdgeDetectionInfo()
+        {
+        }
+
+        ~ComEdgeDetectionInfo()
+        {
+        }
+    }
+
+    public class ComGrayScaleInfo
+    {
+        public ComGrayScaleInfo()
+        {
+        }
+
+        ~ComGrayScaleInfo()
+        {
+        }
+    }
+
     public class ComBinarizationInfo
     {
         private byte m_byteThresh;

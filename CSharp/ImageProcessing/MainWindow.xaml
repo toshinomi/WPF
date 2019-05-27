@@ -56,7 +56,7 @@
                 <Label x:Name="labelOriginalImage" Content="Original Image" Canvas.Left="20" Canvas.Top="3"/>
                 <Label x:Name="labelAfterImage" Content="After Image" Canvas.Left="535" Canvas.Top="3"/>
                 <Canvas x:Name="canvasBinarization" Height="39" Canvas.Left="650" Width="383">
-                    <Slider x:Name="sliderThresh" Canvas.Left="151" Canvas.Top="10" Height="28" Width="160" Minimum="0" Maximum="255" IsSnapToTickEnabled="True"/>
+                    <Slider x:Name="sliderThresh" Canvas.Left="151" Canvas.Top="10" Height="28" Width="160" Minimum="0" Maximum="255" IsSnapToTickEnabled="True" PreviewMouseUp="OnSliderPreviewMouseUp"/>
                     <Label x:Name="labelThresh" Content="Threshold( 0 - 255 )" Canvas.Top="3"/>
                     <Label x:Name="labelValue" Content="{Binding Value, ElementName=sliderThresh}" Canvas.Top="5" Canvas.Left="316" Width="57"/>
                 </Canvas>

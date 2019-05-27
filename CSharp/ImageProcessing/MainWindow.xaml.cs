@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -368,6 +369,44 @@ namespace ImageProcessing
                     }
                 }
             }
+
+            return;
+        }
+
+        private void OnSliderPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (pictureBoxAfter.Source != null)
+            {
+                ParamAjust();
+            }
+        }
+
+        private async void ParamAjust()
+        {
+            pictureBoxAfter.Source = null;
+
+            btnFileSelect.IsEnabled = false;
+            btnAllClear.IsEnabled = false;
+            btnStart.IsEnabled = false;
+            menuMain.IsEnabled = false;
+
+            btnStop.IsEnabled = true;
+            btnSaveImage.IsEnabled = false;
+            bool bResult = await TaskWorkImageProcessing();
+            if (bResult)
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(m_strOpenFileName);
+                bitmap.EndInit();
+                SelectGetBitmap(m_strCurImgName);
+
+                btnSaveImage.IsEnabled = true;
+            }
+            Dispatcher.Invoke(new Action(SetButtonEnable));
+            menuMain.IsEnabled = true;
+
+            m_tokenSource = null;
 
             return;
         }

@@ -68,6 +68,7 @@
     <Compile Include="ComFileDialog.cs" />
     <Compile Include="ComSaveFileDialog.cs" />
     <Compile Include="GrayScale.cs" />
+    <Compile Include="GrayScale2Diff.cs" />
     <Compile Include="ImageProcessingType.cs" />
     <Compile Include="SettingImageProcessing.xaml.cs">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>

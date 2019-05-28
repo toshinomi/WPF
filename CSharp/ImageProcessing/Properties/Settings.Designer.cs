@@ -106,5 +106,29 @@ namespace ImageProcessing.Properties {
                 this["ImgTypeBinarizationName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int ImgTypeGrayScale2DiffId {
+            get {
+                return ((int)(this["ImgTypeGrayScale2DiffId"]));
+            }
+            set {
+                this["ImgTypeGrayScale2DiffId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GrayScale 2Diff")]
+        public string ImgTypeGrayScale2DiffName {
+            get {
+                return ((string)(this["ImgTypeGrayScale2DiffName"]));
+            }
+            set {
+                this["ImgTypeGrayScale2DiffName"] = value;
+            }
+        }
     }
 }

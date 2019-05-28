@@ -23,5 +23,11 @@
     <Setting Name="ImgTypeBinarizationName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Binarization</Value>
     </Setting>
+    <Setting Name="ImgTypeGrayScale2DiffId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="ImgTypeGrayScale2DiffName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GrayScale 2Diff</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

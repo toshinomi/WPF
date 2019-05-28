@@ -75,6 +75,9 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_BINARIZATION:
                     m_imgProc = new Binarization(m_bitmap);
                     break;
+                case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
+                    m_imgProc = new GrayScale2Diff(m_bitmap);
+                    break;
                 default:
                     break;
             }
@@ -99,6 +102,10 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_BINARIZATION:
                     Binarization binarization = (Binarization)m_imgProc;
                     pictureBoxAfter.Source = binarization.WriteableBitmap;
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
+                    GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
+                    pictureBoxAfter.Source = gray2Diff.WriteableBitmap;
                     break;
                 default:
                     break;
@@ -125,6 +132,10 @@ namespace ImageProcessing
                     Binarization binarization = (Binarization)m_imgProc;
                     binarization.Thresh = _comImgInfo.BinarizationInfo.Thresh;
                     bRst = binarization.GoImgProc(_token);
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
+                    GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
+                    bRst = gray2Diff.GoImgProc(_token);
                     break;
                 default:
                     break;
@@ -341,6 +352,13 @@ namespace ImageProcessing
                     if (binarization != null)
                     {
                         bitmap = binarization.WriteableBitmap;
+                    }
+                    break;
+                case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
+                    GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
+                    if (gray2Diff != null)
+                    {
+                        bitmap = gray2Diff.WriteableBitmap;
                     }
                     break;
                 default:

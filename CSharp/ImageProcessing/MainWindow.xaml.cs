@@ -416,6 +416,8 @@ namespace ImageProcessing
             btnStart.IsEnabled = false;
             menuMain.IsEnabled = false;
 
+            LoadImage();
+
             btnStop.IsEnabled = true;
             btnSaveImage.IsEnabled = false;
             bool bResult = await TaskWorkImageProcessing();

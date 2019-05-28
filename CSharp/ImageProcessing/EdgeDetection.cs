@@ -12,13 +12,7 @@ namespace ImageProcessing
 {
     public class EdgeDetection : ComImgProc
     {
-        private const int m_nMaskSize = 3;
         private uint m_nFilterMax;
-
-        public int MaskSize
-        {
-            get { return m_nMaskSize; }
-        }
 
         public uint FilterMax
         {

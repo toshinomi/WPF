@@ -50,6 +50,8 @@ namespace ImageProcessing
 
             base.m_wBitmap = new WriteableBitmap(base.m_bitmap);
             base.m_wBitmap.Lock();
+            WriteableBitmap wBitmap = new WriteableBitmap(base.m_bitmap);
+            wBitmap.Lock();
 
             int nIdxWidth;
             int nIdxHeight;
@@ -86,7 +88,7 @@ namespace ImageProcessing
                                         nIdxHeight + nIdxHightMask > 0 &&
                                         nIdxHeight + nIdxHightMask < nHeightSize)
                                     {
-                                        byte* pPixel2 = (byte*)base.m_wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * base.m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                        byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
                                         dCalB += pPixel2[(int)ComInfo.Pixel.B] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalG += pPixel2[(int)ComInfo.Pixel.G] * dMask[nIdxWidthMask, nIdxHightMask];
@@ -104,6 +106,8 @@ namespace ImageProcessing
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
                 base.m_wBitmap.Unlock();
                 base.m_wBitmap.Freeze();
+                wBitmap.Unlock();
+                wBitmap.Freeze();
             }
 
             return bRst;

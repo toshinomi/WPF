@@ -44,6 +44,8 @@ namespace ImageProcessing
 
             base.m_wBitmap = new WriteableBitmap(base.m_bitmap);
             base.m_wBitmap.Lock();
+            WriteableBitmap wBitmap = new WriteableBitmap(base.m_bitmap);
+            wBitmap.Lock();
 
             int nIdxWidth;
             int nIdxHeight;
@@ -65,7 +67,7 @@ namespace ImageProcessing
                         double dCalB = 0.0;
                         double dCalG = 0.0;
                         double dCalR = 0.0;
-                        double dCalAve = 0;
+                        double dCalAve = 0.0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
                         int nFilter = 0;
@@ -81,13 +83,14 @@ namespace ImageProcessing
                                         nIdxHeight + nIdxHightMask > 0 &&
                                         nIdxHeight + nIdxHightMask < nHeightSize)
                                     {
-                                        byte* pPixel2 = (byte*)base.m_wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * base.m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                        byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
                                         dCalB = pPixel2[(int)ComInfo.Pixel.B] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalG = pPixel2[(int)ComInfo.Pixel.G] * dMask[nIdxWidthMask, nIdxHightMask];
                                         dCalR = pPixel2[(int)ComInfo.Pixel.R] * dMask[nIdxWidthMask, nIdxHightMask];
 
-                                        dCalAve = (dCalAve + (dCalB + dCalG + dCalR) / 3) / 2;
+                                        double dcalGray = (dCalB + dCalG + dCalR) / 3;
+                                        dCalAve = (dCalAve + dcalGray) / 2;
                                     }
                                 }
                             }
@@ -103,6 +106,8 @@ namespace ImageProcessing
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
                 base.m_wBitmap.Unlock();
                 base.m_wBitmap.Freeze();
+                wBitmap.Unlock();
+                wBitmap.Freeze();
             }
 
             return bRst;

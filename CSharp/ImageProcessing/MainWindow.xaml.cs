@@ -32,6 +32,7 @@ namespace ImageProcessing
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
         private string m_strCurImgName;
+        private Histgram m_histgram;
 
         public MainWindow()
         {
@@ -183,6 +184,14 @@ namespace ImageProcessing
                 pictureBoxOriginal.Source = m_bitmap;
                 btnStart.IsEnabled = true;
                 textBoxTime.Text = "";
+
+                if (m_histgram == null)
+                {
+                    m_histgram = new Histgram();
+                }
+
+                m_histgram.Bitmap = m_bitmap;
+                m_histgram.DrawHistgram();
             }
             return;
         }
@@ -255,7 +264,7 @@ namespace ImageProcessing
 
             stopwatch = null;
             m_tokenSource = null;
-            m_bitmap = null;
+            //m_bitmap = null;
 
             return;
         }
@@ -288,6 +297,15 @@ namespace ImageProcessing
             if (m_tokenSource != null)
             {
                 e.Cancel = true;
+            }
+
+            if (m_histgram != null)
+            {
+                if (m_histgram.IsOpen == true)
+                {
+                    m_histgram.Close();
+                }
+                m_histgram = null;
             }
 
             return;
@@ -437,6 +455,27 @@ namespace ImageProcessing
             m_tokenSource = null;
 
             return;
+        }
+
+        private void OnClickBtnShowHistgram(object sender, RoutedEventArgs e)
+        {
+            if (m_bitmap == null)
+            {
+                return;
+            }
+
+            if (m_histgram != null)
+            {
+                m_histgram.Close();
+                m_histgram = null;
+                m_histgram = new Histgram();
+
+            }
+
+            m_histgram.Bitmap = m_bitmap;
+            m_histgram.DrawHistgram();
+            m_histgram.IsOpen = true;
+            m_histgram.Show();
         }
     }
 }

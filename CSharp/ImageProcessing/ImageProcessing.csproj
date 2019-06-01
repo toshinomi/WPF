@@ -79,7 +79,6 @@
       <DependentUpon>Histgram.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageProcessingType.cs" />
-    <Compile Include="List.cs" />
     <Compile Include="SettingImageProcessing.xaml.cs">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>

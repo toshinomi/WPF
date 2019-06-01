@@ -224,6 +224,14 @@ namespace ImageProcessing
             btnStart.IsEnabled = false;
             btnSaveImage.IsEnabled = false;
 
+            if (m_histgram != null)
+            {
+                if (m_histgram.IsOpen == true)
+                {
+                    m_histgram.Close();
+                }
+            }
+
             return;
         }
 

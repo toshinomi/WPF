@@ -24,6 +24,7 @@ namespace ImageProcessing
     public partial class Histgram : Window
     {
         private BitmapImage m_bitmap;
+        private WriteableBitmap m_wbitmap;
         private bool m_bIsOpen;
 
         public BitmapImage Bitmap
@@ -32,13 +33,19 @@ namespace ImageProcessing
             get { return m_bitmap; }
         }
 
+        public WriteableBitmap WBitmap
+        {
+            set { m_wbitmap = value; }
+            get { return m_wbitmap; }
+        }
+
         public bool IsOpen
         {
             set { m_bIsOpen = value; }
             get { return m_bIsOpen; }
         }
 
-        private int[] m_byteHistgram;
+        private int[,] m_byteHistgram;
 
         public Histgram()
         {
@@ -51,17 +58,32 @@ namespace ImageProcessing
 
             CalHistgram();
 
-            var chartValue = new ChartValues<int>();
+            var chartValue1 = new ChartValues<int>();
+            var chartValue2 = new ChartValues<int>();
             for (int nIdx = 0; nIdx < 256; nIdx++)
             {
-                chartValue.Add(m_byteHistgram[nIdx]);
+                chartValue1.Add(m_byteHistgram[0, nIdx]);
+                if (m_wbitmap == null)
+                {
+                    chartValue2.Add(0);
+                }
+                else
+                {
+                    chartValue2.Add(m_byteHistgram[1, nIdx]);
+                }
             }
 
             var seriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values = chartValue
+                    Values = chartValue1,
+                    Title = "Original Image",
+                },
+                new LineSeries
+                {
+                    Values = chartValue2,
+                    Title = "After Image",
                 }
             };
 
@@ -87,12 +109,11 @@ namespace ImageProcessing
             int nHeightSize = m_bitmap.PixelHeight;
 
             WriteableBitmap wBitmap = new WriteableBitmap(m_bitmap);
-            wBitmap.Lock();
 
             int nIdxWidth;
             int nIdxHeight;
 
-            m_byteHistgram = new int[256];
+            m_byteHistgram = new int[2, 256];
 
             unsafe
             {
@@ -103,12 +124,17 @@ namespace ImageProcessing
                         byte* pPixel = (byte*)wBitmap.BackBuffer + nIdxHeight * wBitmap.BackBufferStride + nIdxWidth * 4;
                         byte byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                        m_byteHistgram[byteGrayScale] += 1;
+                        m_byteHistgram[0, byteGrayScale] += 1;
+
+                        if (m_wbitmap != null)
+                        {
+                            pPixel = (byte*)m_wbitmap.BackBuffer + nIdxHeight * m_wbitmap.BackBufferStride + nIdxWidth * 4;
+                            byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
+
+                            m_byteHistgram[1, byteGrayScale] += 1;
+                        }
                     }
                 }
-                wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));
-                wBitmap.Unlock();
-                wBitmap.Freeze();
             }
         }
 

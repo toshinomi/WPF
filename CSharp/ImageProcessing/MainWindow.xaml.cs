@@ -86,33 +86,33 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public bool SelectGetBitmap(string _strImgName)
+        public WriteableBitmap SelectGetBitmap(string _strImgName)
         {
-            bool bRst = true;
+            WriteableBitmap wBitmap = null;
 
             switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     EdgeDetection edge = (EdgeDetection)m_imgProc;
-                    pictureBoxAfter.Source = edge.WriteableBitmap;
+                    wBitmap = edge.WriteableBitmap;
                     break;
                 case ComInfo.IMG_NAME_GRAY_SCALE:
                     GrayScale gray = (GrayScale)m_imgProc;
-                    pictureBoxAfter.Source = gray.WriteableBitmap;
+                    wBitmap = gray.WriteableBitmap;
                     break;
                 case ComInfo.IMG_NAME_BINARIZATION:
                     Binarization binarization = (Binarization)m_imgProc;
-                    pictureBoxAfter.Source = binarization.WriteableBitmap;
+                    wBitmap = binarization.WriteableBitmap;
                     break;
                 case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
                     GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
-                    pictureBoxAfter.Source = gray2Diff.WriteableBitmap;
+                    wBitmap = gray2Diff.WriteableBitmap;
                     break;
                 default:
                     break;
             }
 
-            return bRst;
+            return wBitmap;
         }
 
         public bool SelectGoImgProc(ComImgInfo _comImgInfo, CancellationToken _token)
@@ -191,6 +191,7 @@ namespace ImageProcessing
                 }
 
                 m_histgram.Bitmap = m_bitmap;
+                m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
                 m_histgram.DrawHistgram();
             }
             return;
@@ -260,19 +261,22 @@ namespace ImageProcessing
                 bitmap.UriSource = new Uri(m_strOpenFileName);
                 bitmap.EndInit();
                 pictureBoxOriginal.Source = bitmap;
-                SelectGetBitmap(m_strCurImgName);
+                pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName);
 
                 stopwatch.Stop();
 
                 Dispatcher.Invoke(new Action<long>(SetTextTime), stopwatch.ElapsedMilliseconds);
                 btnSaveImage.IsEnabled = true;
+
+                m_histgram.Bitmap = m_bitmap;
+                m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
+                m_histgram.DrawHistgram();
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
             menuMain.IsEnabled = true;
 
             stopwatch = null;
             m_tokenSource = null;
-            //m_bitmap = null;
 
             return;
         }
@@ -453,7 +457,7 @@ namespace ImageProcessing
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(m_strOpenFileName);
                 bitmap.EndInit();
-                SelectGetBitmap(m_strCurImgName);
+                pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName);
 
                 btnSaveImage.IsEnabled = true;
             }
@@ -477,10 +481,10 @@ namespace ImageProcessing
                 m_histgram.Close();
                 m_histgram = null;
                 m_histgram = new Histgram();
-
             }
 
             m_histgram.Bitmap = m_bitmap;
+            m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
             m_histgram.DrawHistgram();
             m_histgram.IsOpen = true;
             m_histgram.Show();

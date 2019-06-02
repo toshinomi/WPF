@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Histgram" Height="450" Width="800"
         Closing="OnClosingWindow" FontSize="15.75">
-    <Grid Background="WhiteSmoke">
+    <Grid Background="LightSteelBlue">
         <lvc:CartesianChart Series="{Binding seriesCollection}" Margin="10,10,10,10"/>
     </Grid>
 </Window>

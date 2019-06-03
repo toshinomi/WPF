@@ -11,22 +11,22 @@ namespace ImageProcessing
 {
     class Binarization : ComImgProc
     {
-        private byte m_byteThresh;
+        private byte m_nThresh;
 
         public byte Thresh
         {
-            set { m_byteThresh = value; }
-            get { return m_byteThresh; }
+            set { m_nThresh = value; }
+            get { return m_nThresh; }
         }
 
         public Binarization(BitmapImage _bitmap) : base(_bitmap)
         {
-            m_byteThresh = 0;
+            m_nThresh = 0;
         }
 
-        public Binarization(BitmapImage _bitmap, byte _byteThresh) : base(_bitmap)
+        public Binarization(BitmapImage _bitmap, byte _nThresh) : base(_bitmap)
         {
-            m_byteThresh = _byteThresh;
+            m_nThresh = _nThresh;
         }
 
         public override bool GoImgProc(CancellationToken _token)
@@ -55,12 +55,12 @@ namespace ImageProcessing
                         }
 
                         byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
-                        byte byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
+                        byte nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                        byte byteBinarization = byteGrayScale >= m_byteThresh ? (byte)255 : (byte)0;
-                        pPixel[(int)ComInfo.Pixel.B] = byteBinarization;
-                        pPixel[(int)ComInfo.Pixel.G] = byteBinarization;
-                        pPixel[(int)ComInfo.Pixel.R] = byteBinarization;
+                        byte nBinarization = nGrayScale >= m_nThresh ? (byte)255 : (byte)0;
+                        pPixel[(int)ComInfo.Pixel.B] = nBinarization;
+                        pPixel[(int)ComInfo.Pixel.G] = nBinarization;
+                        pPixel[(int)ComInfo.Pixel.R] = nBinarization;
                     }
                 }
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));

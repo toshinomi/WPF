@@ -73,11 +73,11 @@ namespace ImageProcessing
 
     public class ComBinarizationInfo
     {
-        private byte m_byteThresh;
+        private byte m_nThresh;
         public byte Thresh
         {
-            set { m_byteThresh = value; }
-            get { return m_byteThresh; }
+            set { m_nThresh = value; }
+            get { return m_nThresh; }
         }
 
         public ComBinarizationInfo()

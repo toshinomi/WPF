@@ -45,11 +45,11 @@ namespace ImageProcessing
                         }
 
                         byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
-                        byte byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
+                        byte nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                        pPixel[(int)ComInfo.Pixel.B] = byteGrayScale;
-                        pPixel[(int)ComInfo.Pixel.G] = byteGrayScale;
-                        pPixel[(int)ComInfo.Pixel.R] = byteGrayScale;
+                        pPixel[(int)ComInfo.Pixel.B] = nGrayScale;
+                        pPixel[(int)ComInfo.Pixel.G] = nGrayScale;
+                        pPixel[(int)ComInfo.Pixel.R] = nGrayScale;
                     }
                 }
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));

@@ -45,7 +45,7 @@ namespace ImageProcessing
             get { return m_bIsOpen; }
         }
 
-        private int[,] m_byteHistgram;
+        private int[,] m_nHistgram;
 
         public Histgram()
         {
@@ -62,14 +62,14 @@ namespace ImageProcessing
             var chartValue2 = new ChartValues<int>();
             for (int nIdx = 0; nIdx < 256; nIdx++)
             {
-                chartValue1.Add(m_byteHistgram[0, nIdx]);
+                chartValue1.Add(m_nHistgram[0, nIdx]);
                 if (m_wbitmap == null)
                 {
                     chartValue2.Add(0);
                 }
                 else
                 {
-                    chartValue2.Add(m_byteHistgram[1, nIdx]);
+                    chartValue2.Add(m_nHistgram[1, nIdx]);
                 }
             }
 
@@ -108,7 +108,7 @@ namespace ImageProcessing
             int nIdxWidth;
             int nIdxHeight;
 
-            m_byteHistgram = new int[2, 256];
+            m_nHistgram = new int[2, 256];
 
             unsafe
             {
@@ -117,16 +117,16 @@ namespace ImageProcessing
                     for (nIdxWidth = 0; nIdxWidth < nWidthSize; nIdxWidth++)
                     {
                         byte* pPixel = (byte*)wBitmap.BackBuffer + nIdxHeight * wBitmap.BackBufferStride + nIdxWidth * 4;
-                        byte byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
+                        byte nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                        m_byteHistgram[0, byteGrayScale] += 1;
+                        m_nHistgram[0, nGrayScale] += 1;
 
                         if (m_wbitmap != null)
                         {
                             pPixel = (byte*)m_wbitmap.BackBuffer + nIdxHeight * m_wbitmap.BackBufferStride + nIdxWidth * 4;
-                            byteGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
+                            nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                            m_byteHistgram[1, byteGrayScale] += 1;
+                            m_nHistgram[1, nGrayScale] += 1;
                         }
                     }
                 }

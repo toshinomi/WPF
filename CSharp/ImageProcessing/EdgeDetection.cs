@@ -38,15 +38,15 @@ namespace ImageProcessing
         {
             bool bRst = true;
 
-            double[,] dMask =
+            short[,] nMask =
             {
-                {1.0,  1.0, 1.0},
-                {1.0, -8.0, 1.0},
-                {1.0,  1.0, 1.0}
+                {1,  1, 1},
+                {1, -8, 1},
+                {1,  1, 1}
             };
             int nWidthSize = base.m_bitmap.PixelWidth;
             int nHeightSize = base.m_bitmap.PixelHeight;
-            int nMasksize = dMask.GetLength(0);
+            int nMasksize = nMask.GetLength(0);
 
             base.m_wBitmap = new WriteableBitmap(base.m_bitmap);
             base.m_wBitmap.Lock();
@@ -70,9 +70,9 @@ namespace ImageProcessing
 
                         byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
 
-                        double dCalB = 0.0;
-                        double dCalG = 0.0;
-                        double dCalR = 0.0;
+                        long dCalB = 0;
+                        long dCalG = 0;
+                        long dCalR = 0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
                         int nFilter = 0;
@@ -90,17 +90,17 @@ namespace ImageProcessing
                                     {
                                         byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
-                                        dCalB += pPixel2[(int)ComInfo.Pixel.B] * dMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalG += pPixel2[(int)ComInfo.Pixel.G] * dMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalR += pPixel2[(int)ComInfo.Pixel.R] * dMask[nIdxWidthMask, nIdxHightMask];
+                                        dCalB += pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        dCalG += pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        dCalR += pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
                                     }
                                 }
                             }
                             nFilter++;
                         }
-                        pPixel[(int)ComInfo.Pixel.B] = ComFunc.DoubleToByte(dCalB);
-                        pPixel[(int)ComInfo.Pixel.G] = ComFunc.DoubleToByte(dCalG);
-                        pPixel[(int)ComInfo.Pixel.R] = ComFunc.DoubleToByte(dCalR);
+                        pPixel[(int)ComInfo.Pixel.B] = ComFunc.LongToByte(dCalB);
+                        pPixel[(int)ComInfo.Pixel.G] = ComFunc.LongToByte(dCalG);
+                        pPixel[(int)ComInfo.Pixel.R] = ComFunc.LongToByte(dCalR);
                     }
                 }
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));

@@ -91,11 +91,6 @@ namespace ImageProcessing
             this.DataContext = graphData;
         }
 
-        private void OnClickDraw(object sender, RoutedEventArgs e)
-        {
-            DrawHistgram();
-        }
-
         private void OnClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_bIsOpen = false;

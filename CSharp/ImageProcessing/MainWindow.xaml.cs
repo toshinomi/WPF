@@ -192,7 +192,10 @@ namespace ImageProcessing
 
                 m_histgram.Bitmap = m_bitmap;
                 m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
-                m_histgram.DrawHistgram();
+                if (m_histgram.IsOpen == true)
+                {
+                    m_histgram.DrawHistgram();
+                }
             }
             return;
         }
@@ -227,10 +230,7 @@ namespace ImageProcessing
 
             if (m_histgram != null)
             {
-                if (m_histgram.IsOpen == true)
-                {
-                    m_histgram.Close();
-                }
+                m_histgram.Close();
             }
 
             return;
@@ -270,7 +270,10 @@ namespace ImageProcessing
 
                 m_histgram.Bitmap = m_bitmap;
                 m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
-                m_histgram.DrawHistgram();
+                if (m_histgram.IsOpen == true)
+                {
+                    m_histgram.DrawHistgram();
+                }
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
             menuMain.IsEnabled = true;
@@ -313,10 +316,7 @@ namespace ImageProcessing
 
             if (m_histgram != null)
             {
-                if (m_histgram.IsOpen == true)
-                {
-                    m_histgram.Close();
-                }
+                m_histgram.Close();
                 m_histgram = null;
             }
 
@@ -460,6 +460,13 @@ namespace ImageProcessing
                 pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName);
 
                 btnSaveImage.IsEnabled = true;
+
+                m_histgram.Bitmap = m_bitmap;
+                m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName);
+                if (m_histgram.IsOpen == true)
+                {
+                    m_histgram.DrawHistgram();
+                }
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
             menuMain.IsEnabled = true;

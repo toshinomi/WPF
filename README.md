@@ -11,4 +11,11 @@
  ・画像処理のアルゴリズム追加  
  ・Webアプリケーション版を作成予定
 
+メイン画面  
 ![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/ImageProcessing.png)
+
+画像処理設定画面  
+![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/SettingImageProcessing.png)
+
+ヒストグラム表示画面  
+![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/Histgram.png)

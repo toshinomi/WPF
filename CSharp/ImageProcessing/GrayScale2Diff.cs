@@ -11,17 +11,8 @@ namespace ImageProcessing
 {
     class GrayScale2Diff : ComImgProc
     {
-        private uint m_nFilterMax;
-
-        public uint FilterMax
-        {
-            set { m_nFilterMax = value; }
-            get { return m_nFilterMax; }
-        }
-
         public GrayScale2Diff(BitmapImage _bitmap) : base(_bitmap)
         {
-            m_nFilterMax = 1;
         }
 
         ~GrayScale2Diff()
@@ -70,31 +61,27 @@ namespace ImageProcessing
                         double dCalAve = 0.0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
-                        int nFilter = 0;
 
-                        while (nFilter < m_nFilterMax)
+
+                        for (nIdxHightMask = 0; nIdxHightMask < nMasksize; nIdxHightMask++)
                         {
-                            for (nIdxHightMask = 0; nIdxHightMask < nMasksize; nIdxHightMask++)
+                            for (nIdxWidthMask = 0; nIdxWidthMask < nMasksize; nIdxWidthMask++)
                             {
-                                for (nIdxWidthMask = 0; nIdxWidthMask < nMasksize; nIdxWidthMask++)
+                                if (nIdxWidth + nIdxWidthMask > 0 &&
+                                    nIdxWidth + nIdxWidthMask < nWidthSize &&
+                                    nIdxHeight + nIdxHightMask > 0 &&
+                                    nIdxHeight + nIdxHightMask < nHeightSize)
                                 {
-                                    if (nIdxWidth + nIdxWidthMask > 0 &&
-                                        nIdxWidth + nIdxWidthMask < nWidthSize &&
-                                        nIdxHeight + nIdxHightMask > 0 &&
-                                        nIdxHeight + nIdxHightMask < nHeightSize)
-                                    {
-                                        byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                    byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
-                                        lCalB = pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        lCalG = pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        lCalR = pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
+                                    lCalB = pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
+                                    lCalG = pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
+                                    lCalR = pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
 
-                                        double dcalGray = (lCalB + lCalG + lCalR) / 3;
-                                        dCalAve = (dCalAve + dcalGray) / 2;
-                                    }
+                                    double dcalGray = (lCalB + lCalG + lCalR) / 3;
+                                    dCalAve = (dCalAve + dcalGray) / 2;
                                 }
                             }
-                            nFilter++;
                         }
                         byte nGrayScale = ComFunc.DoubleToByte(dCalAve);
 

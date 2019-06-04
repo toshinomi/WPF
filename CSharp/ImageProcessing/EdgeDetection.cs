@@ -12,22 +12,8 @@ namespace ImageProcessing
 {
     public class EdgeDetection : ComImgProc
     {
-        private uint m_nFilterMax;
-
-        public uint FilterMax
-        {
-            set { m_nFilterMax = value; }
-            get { return m_nFilterMax; }
-        }
-
         public EdgeDetection(BitmapImage _bitmap) : base(_bitmap)
         {
-            m_nFilterMax = 1;
-        }
-
-        public EdgeDetection(BitmapImage _bitmap, uint _filterMax) : base(_bitmap)
-        {
-            m_nFilterMax = _filterMax;
         }
 
         ~EdgeDetection()
@@ -75,28 +61,23 @@ namespace ImageProcessing
                         long lCalR = 0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
-                        int nFilter = 0;
 
-                        while (nFilter < m_nFilterMax)
+                        for (nIdxHightMask = 0; nIdxHightMask < nMasksize; nIdxHightMask++)
                         {
-                            for (nIdxHightMask = 0; nIdxHightMask < nMasksize; nIdxHightMask++)
+                            for (nIdxWidthMask = 0; nIdxWidthMask < nMasksize; nIdxWidthMask++)
                             {
-                                for (nIdxWidthMask = 0; nIdxWidthMask < nMasksize; nIdxWidthMask++)
+                                if (nIdxWidth + nIdxWidthMask > 0 &&
+                                    nIdxWidth + nIdxWidthMask < nWidthSize &&
+                                    nIdxHeight + nIdxHightMask > 0 &&
+                                    nIdxHeight + nIdxHightMask < nHeightSize)
                                 {
-                                    if (nIdxWidth + nIdxWidthMask > 0 &&
-                                        nIdxWidth + nIdxWidthMask < nWidthSize &&
-                                        nIdxHeight + nIdxHightMask > 0 &&
-                                        nIdxHeight + nIdxHightMask < nHeightSize)
-                                    {
-                                        byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
+                                    byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
-                                        lCalB += pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        lCalG += pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        lCalR += pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
-                                    }
+                                    lCalB += pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
+                                    lCalG += pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
+                                    lCalR += pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
                                 }
                             }
-                            nFilter++;
                         }
                         pPixel[(int)ComInfo.Pixel.B] = ComFunc.LongToByte(lCalB);
                         pPixel[(int)ComInfo.Pixel.G] = ComFunc.LongToByte(lCalG);

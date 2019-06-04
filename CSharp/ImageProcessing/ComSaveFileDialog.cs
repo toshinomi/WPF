@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,12 @@ namespace ImageProcessing
 {
     class ComSaveFileDialog : ComFileDialog
     {
+        private Stream m_stream;
+        public Stream Stream
+        {
+            get { return m_stream; }
+        }
+
         public ComSaveFileDialog() : base()
         {
         }
@@ -32,6 +39,15 @@ namespace ImageProcessing
             if (saveDialog.ShowDialog() == true)
             {
                 base.m_strFilePass = saveDialog.FileName;
+                try
+                {
+                    m_stream = saveDialog.OpenFile();
+                }
+                catch(Exception)
+                {
+                    bRst = false;
+                    return bRst;
+                }
                 bRst = true;
             }
 

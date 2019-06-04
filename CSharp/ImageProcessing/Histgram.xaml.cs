@@ -1,8 +1,10 @@
 ﻿using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -141,6 +143,49 @@ namespace ImageProcessing
                 set { m_seriesCollection = value; }
                 get { return m_seriesCollection; }
             }
+        }
+
+        private void OnClickMenu(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = (MenuItem)sender;
+            string strHeader = menuItem.Header.ToString();
+
+            switch (strHeader)
+            {
+                case ComInfo.MENU_SAVE_CSV:
+                    SaveCsv();
+                    break;
+                default:
+                    break;
+            }
+
+            return;
+        }
+
+        public void SaveCsv()
+        {
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
+            saveDialog.Filter = "CSV|*.csv";
+            saveDialog.Title = "Save the csv file";
+            saveDialog.FileName = "default.csv";
+            if (saveDialog.ShowDialog() == true)
+            {
+                String strDelmiter = ",";
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int nIdx = 0; nIdx < 256; nIdx++)
+                {
+                    stringBuilder.Append(nIdx).Append(strDelmiter);
+                    stringBuilder.Append(m_nHistgram[0, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(m_nHistgram[1, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(Environment.NewLine);
+                }
+                StreamWriter streamWriter = new StreamWriter(saveDialog.Stream, Encoding.GetEncoding("UTF-8"));
+                streamWriter.Write(stringBuilder.ToString());
+                streamWriter.Close();
+                saveDialog.Stream.Close();
+            }
+
+            return;
         }
     }
 }

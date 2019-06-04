@@ -11,4 +11,9 @@
     <Grid Background="LightSteelBlue">
         <lvc:CartesianChart Series="{Binding seriesCollection}" Margin="10,10,10,10"/>
     </Grid>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Save Csv..." Click="OnClickMenu"/>
+        </ContextMenu>
+    </Window.ContextMenu>
 </Window>

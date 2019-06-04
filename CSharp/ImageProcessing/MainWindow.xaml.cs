@@ -339,6 +339,8 @@ namespace ImageProcessing
                 default:
                     break;
             }
+
+            return;
         }
 
         public void ShowSettingImageProcessing()
@@ -495,6 +497,8 @@ namespace ImageProcessing
             m_histgram.DrawHistgram();
             m_histgram.IsOpen = true;
             m_histgram.Show();
+
+            return;
         }
     }
 }

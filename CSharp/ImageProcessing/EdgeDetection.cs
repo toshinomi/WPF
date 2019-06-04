@@ -70,9 +70,9 @@ namespace ImageProcessing
 
                         byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
 
-                        long dCalB = 0;
-                        long dCalG = 0;
-                        long dCalR = 0;
+                        long lCalB = 0;
+                        long lCalG = 0;
+                        long lCalR = 0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
                         int nFilter = 0;
@@ -90,17 +90,17 @@ namespace ImageProcessing
                                     {
                                         byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
-                                        dCalB += pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalG += pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalR += pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalB += pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalG += pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalR += pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
                                     }
                                 }
                             }
                             nFilter++;
                         }
-                        pPixel[(int)ComInfo.Pixel.B] = ComFunc.LongToByte(dCalB);
-                        pPixel[(int)ComInfo.Pixel.G] = ComFunc.LongToByte(dCalG);
-                        pPixel[(int)ComInfo.Pixel.R] = ComFunc.LongToByte(dCalR);
+                        pPixel[(int)ComInfo.Pixel.B] = ComFunc.LongToByte(lCalB);
+                        pPixel[(int)ComInfo.Pixel.G] = ComFunc.LongToByte(lCalG);
+                        pPixel[(int)ComInfo.Pixel.R] = ComFunc.LongToByte(lCalR);
                     }
                 }
                 base.m_wBitmap.AddDirtyRect(new Int32Rect(0, 0, nWidthSize, nHeightSize));

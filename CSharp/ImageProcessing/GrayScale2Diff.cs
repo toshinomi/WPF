@@ -64,9 +64,9 @@ namespace ImageProcessing
 
                         byte* pPixel = (byte*)base.m_wBitmap.BackBuffer + nIdxHeight * base.m_wBitmap.BackBufferStride + nIdxWidth * 4;
 
-                        long dCalB = 0;
-                        long dCalG = 0;
-                        long dCalR = 0;
+                        long lCalB = 0;
+                        long lCalG = 0;
+                        long lCalR = 0;
                         double dCalAve = 0.0;
                         int nIdxWidthMask;
                         int nIdxHightMask;
@@ -85,11 +85,11 @@ namespace ImageProcessing
                                     {
                                         byte* pPixel2 = (byte*)wBitmap.BackBuffer + (nIdxHeight + nIdxHightMask) * wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4;
 
-                                        dCalB = pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalG = pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
-                                        dCalR = pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalB = pPixel2[(int)ComInfo.Pixel.B] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalG = pPixel2[(int)ComInfo.Pixel.G] * nMask[nIdxWidthMask, nIdxHightMask];
+                                        lCalR = pPixel2[(int)ComInfo.Pixel.R] * nMask[nIdxWidthMask, nIdxHightMask];
 
-                                        double dcalGray = (dCalB + dCalG + dCalR) / 3;
+                                        double dcalGray = (lCalB + lCalG + lCalR) / 3;
                                         dCalAve = (dCalAve + dcalGray) / 2;
                                     }
                                 }

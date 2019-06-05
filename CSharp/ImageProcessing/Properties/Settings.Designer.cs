@@ -130,5 +130,29 @@ namespace ImageProcessing.Properties {
                 this["ImgTypeGrayScale2DiffName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ImgTypeColorReversalId {
+            get {
+                return ((int)(this["ImgTypeColorReversalId"]));
+            }
+            set {
+                this["ImgTypeColorReversalId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ColorReversal")]
+        public string ImgTypeColorReversalName {
+            get {
+                return ((string)(this["ImgTypeColorReversalName"]));
+            }
+            set {
+                this["ImgTypeColorReversalName"] = value;
+            }
+        }
     }
 }

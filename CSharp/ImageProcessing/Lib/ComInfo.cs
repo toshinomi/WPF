@@ -39,5 +39,6 @@ namespace ImageProcessing
         public const string IMG_NAME_GRAY_SCALE = "GrayScale";
         public const string IMG_NAME_BINARIZATION = "Binarization";
         public const string IMG_NAME_GRAY_SCALE_2DIFF = "GrayScale 2Diff";
+        public const string IMG_NAME_COLOR_REVERSAL = "ColorReversal";
     }
 }

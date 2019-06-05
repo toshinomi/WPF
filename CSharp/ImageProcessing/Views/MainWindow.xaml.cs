@@ -79,6 +79,9 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
                     m_imgProc = new GrayScale2Diff(m_bitmap);
                     break;
+                case ComInfo.IMG_NAME_COLOR_REVERSAL:
+                    m_imgProc = new ColorReversal(m_bitmap);
+                    break;
                 default:
                     break;
             }
@@ -107,6 +110,10 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
                     GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
                     wBitmap = gray2Diff.WriteableBitmap;
+                    break;
+                case ComInfo.IMG_NAME_COLOR_REVERSAL:
+                    ColorReversal colorReversal = (ColorReversal)m_imgProc;
+                    wBitmap = colorReversal.WriteableBitmap;
                     break;
                 default:
                     break;
@@ -137,6 +144,10 @@ namespace ImageProcessing
                 case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF:
                     GrayScale2Diff gray2Diff = (GrayScale2Diff)m_imgProc;
                     bRst = gray2Diff.GoImgProc(_token);
+                    break;
+                case ComInfo.IMG_NAME_COLOR_REVERSAL:
+                    ColorReversal colorReversal = (ColorReversal)m_imgProc;
+                    bRst = colorReversal.GoImgProc(_token);
                     break;
                 default:
                     break;
@@ -391,6 +402,13 @@ namespace ImageProcessing
                     if (gray2Diff != null)
                     {
                         bitmap = gray2Diff.WriteableBitmap;
+                    }
+                    break;
+                case ComInfo.IMG_NAME_COLOR_REVERSAL:
+                    ColorReversal colorReversal = (ColorReversal)m_imgProc;
+                    if (colorReversal != null)
+                    {
+                        bitmap = colorReversal.WriteableBitmap;
                     }
                     break;
                 default:

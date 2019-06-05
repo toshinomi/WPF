@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ImageProcessing\Binarization.cs" />
+    <Compile Include="ImageProcessing\ColorReversal.cs" />
     <Compile Include="Lib\ComImgInfo.cs" />
     <Compile Include="Lib\ComImgProc.cs" />
     <Compile Include="Lib\ComOpenFileDialog.cs" />

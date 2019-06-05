@@ -402,7 +402,8 @@ namespace ImageProcessing
 
         private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
         {
-            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
+            bool bCreateStream = false;
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog(bCreateStream);
             saveDialog.Filter = "PNG|*.png";
             saveDialog.Title = "Save the file";
             if (saveDialog.ShowDialog() == true)

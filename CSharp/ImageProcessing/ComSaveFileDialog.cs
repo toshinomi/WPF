@@ -11,13 +11,22 @@ namespace ImageProcessing
     class ComSaveFileDialog : ComFileDialog
     {
         private Stream m_stream;
+        private bool m_bCreateStream;
+
         public Stream Stream
         {
             get { return m_stream; }
         }
 
-        public ComSaveFileDialog() : base()
+        public bool CreateStream
         {
+            set { m_bCreateStream = value; }
+            get { return m_bCreateStream; }
+        }
+
+        public ComSaveFileDialog(bool _bCreateStream = false) : base()
+        {
+            m_bCreateStream = _bCreateStream;
         }
 
         ~ComSaveFileDialog()
@@ -41,7 +50,10 @@ namespace ImageProcessing
                 base.m_strFilePass = saveDialog.FileName;
                 try
                 {
-                    m_stream = saveDialog.OpenFile();
+                    if (m_bCreateStream)
+                    {
+                        m_stream = saveDialog.OpenFile();
+                    }
                 }
                 catch(Exception)
                 {

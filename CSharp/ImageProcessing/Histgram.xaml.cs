@@ -164,7 +164,8 @@ namespace ImageProcessing
 
         public void SaveCsv()
         {
-            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
+            bool bCreateStream = true;
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog(bCreateStream);
             saveDialog.Filter = "CSV|*.csv";
             saveDialog.Title = "Save the csv file";
             saveDialog.FileName = "default.csv";

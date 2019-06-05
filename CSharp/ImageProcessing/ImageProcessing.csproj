@@ -37,7 +37,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
@@ -67,25 +67,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Binarization.cs" />
-    <Compile Include="ComImgInfo.cs" />
-    <Compile Include="ComImgProc.cs" />
-    <Compile Include="ComOpenFileDialog.cs" />
-    <Compile Include="ComSaveFileDialog.cs" />
-    <Compile Include="GrayScale.cs" />
-    <Compile Include="GrayScale2Diff.cs" />
-    <Compile Include="Histgram.xaml.cs">
+    <Compile Include="ImageProcessing\Binarization.cs" />
+    <Compile Include="Lib\ComImgInfo.cs" />
+    <Compile Include="Lib\ComImgProc.cs" />
+    <Compile Include="Lib\ComOpenFileDialog.cs" />
+    <Compile Include="Lib\ComSaveFileDialog.cs" />
+    <Compile Include="ImageProcessing\GrayScale.cs" />
+    <Compile Include="ImageProcessing\GrayScale2Diff.cs" />
+    <Compile Include="Views\Histgram.xaml.cs">
       <DependentUpon>Histgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageProcessingType.cs" />
-    <Compile Include="SettingImageProcessing.xaml.cs">
+    <Compile Include="Lib\ComImageProcessingType.cs" />
+    <Compile Include="Views\SettingImageProcessing.xaml.cs">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>
-    <Page Include="Histgram.xaml">
+    <Page Include="Views\Histgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -93,14 +93,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ComFunc.cs" />
-    <Compile Include="ComInfo.cs" />
-    <Compile Include="EdgeDetection.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Lib\ComFunc.cs" />
+    <Compile Include="Lib\ComInfo.cs" />
+    <Compile Include="ImageProcessing\EdgeDetection.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingImageProcessing.xaml">
+    <Page Include="Views\SettingImageProcessing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,7 +133,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
+    <Resource Include="Icon\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

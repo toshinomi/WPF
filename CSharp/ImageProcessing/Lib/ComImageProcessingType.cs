@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing
 {
-    class ImageProcessingType : ICloneable
+    class ComImageProcessingType : ICloneable
     {
         private int m_Id;
         private string m_Name;
@@ -23,24 +23,24 @@ namespace ImageProcessing
             get { return m_Name; }
         }
 
-        public ImageProcessingType()
+        public ComImageProcessingType()
         {
 
         }
 
-        public ImageProcessingType(int _Id, string _Nmae)
+        public ComImageProcessingType(int _Id, string _Nmae)
         {
             m_Id = _Id;
             m_Name = _Nmae;
         }
 
-        ~ImageProcessingType()
+        ~ComImageProcessingType()
         {
         }
 
         public object Clone()
         {
-            return (ImageProcessingType)MemberwiseClone();
+            return (ComImageProcessingType)MemberwiseClone();
         }
     }
 }

@@ -67,14 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ImageProcessing\Binarization.cs" />
-    <Compile Include="ImageProcessing\ColorReversal.cs" />
+    <Compile Include="ImgProc\Binarization.cs" />
+    <Compile Include="ImgProc\ColorReversal.cs" />
     <Compile Include="Lib\ComImgInfo.cs" />
     <Compile Include="Lib\ComImgProc.cs" />
     <Compile Include="Lib\ComOpenFileDialog.cs" />
     <Compile Include="Lib\ComSaveFileDialog.cs" />
-    <Compile Include="ImageProcessing\GrayScale.cs" />
-    <Compile Include="ImageProcessing\GrayScale2Diff.cs" />
+    <Compile Include="ImgProc\GrayScale.cs" />
+    <Compile Include="ImgProc\GrayScale2Diff.cs" />
     <Compile Include="Views\Histgram.xaml.cs">
       <DependentUpon>Histgram.xaml</DependentUpon>
     </Compile>
@@ -96,7 +96,7 @@
     </Compile>
     <Compile Include="Lib\ComFunc.cs" />
     <Compile Include="Lib\ComInfo.cs" />
-    <Compile Include="ImageProcessing\EdgeDetection.cs" />
+    <Compile Include="ImgProc\EdgeDetection.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

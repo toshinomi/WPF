@@ -171,7 +171,7 @@ namespace ImageProcessing
             {
                 pictureBoxOriginal.Source = null;
                 pictureBoxAfter.Source = null;
-                m_strOpenFileName = openFileDlg.FilePass;
+                m_strOpenFileName = openFileDlg.FileName;
                 try
                 {
                     LoadImage();
@@ -402,13 +402,12 @@ namespace ImageProcessing
 
         private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
         {
-            bool bCreateStream = false;
-            ComSaveFileDialog saveDialog = new ComSaveFileDialog(bCreateStream);
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
             saveDialog.Filter = "PNG|*.png";
             saveDialog.Title = "Save the file";
             if (saveDialog.ShowDialog() == true)
             {
-                string strFileName = saveDialog.FilePass;
+                string strFileName = saveDialog.FileName;
                 using (FileStream stream = new FileStream(strFileName, FileMode.Create))
                 {
                     PngBitmapEncoder encoder = new PngBitmapEncoder();

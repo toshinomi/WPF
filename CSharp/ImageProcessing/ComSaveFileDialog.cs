@@ -8,62 +8,81 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing
 {
-    class ComSaveFileDialog : ComFileDialog
+    class ComSaveFileDialog
     {
-        private Stream m_stream;
-        private bool m_bCreateStream;
+        protected SaveFileDialog m_saveFileDialog;
 
-        public Stream Stream
+        public String FileName
         {
-            get { return m_stream; }
+            set { m_saveFileDialog.FileName = value; }
+            get { return m_saveFileDialog.FileName; }
+        }
+        public String InitialDirectory
+        {
+            set { m_saveFileDialog.InitialDirectory = value; }
+            get { return m_saveFileDialog.InitialDirectory; }
         }
 
-        public bool CreateStream
+        public String Filter
         {
-            set { m_bCreateStream = value; }
-            get { return m_bCreateStream; }
+            set { m_saveFileDialog.Filter = value; }
+            get { return m_saveFileDialog.Filter; }
         }
 
-        public ComSaveFileDialog(bool _bCreateStream = false) : base()
+        public int FilterIndex
         {
-            m_bCreateStream = _bCreateStream;
+            set { m_saveFileDialog.FilterIndex = value; }
+            get { return m_saveFileDialog.FilterIndex; }
+        }
+
+        public String Title
+        {
+            set { m_saveFileDialog.Title = value; }
+            get { return m_saveFileDialog.Title; }
+        }
+
+        public bool CheckFileExists
+        {
+            set { m_saveFileDialog.CheckFileExists = value; }
+            get { return m_saveFileDialog.CheckFileExists; }
+        }
+
+        public bool CheckPathExists
+        {
+            set { m_saveFileDialog.CheckPathExists = value; }
+            get { return m_saveFileDialog.CheckPathExists; }
+        }
+
+        public ComSaveFileDialog() : base()
+        {
+            m_saveFileDialog = new SaveFileDialog();
         }
 
         ~ComSaveFileDialog()
         {
         }
 
-        public override bool ShowDialog()
+        public bool ShowDialog()
         {
             bool bRst = false;
 
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.FileName = base.FileName;
-            saveDialog.InitialDirectory = base.InitialDirectory;
-            saveDialog.Filter = base.Filter;
-            saveDialog.FilterIndex = base.FilterIndex;
-            saveDialog.Title = base.Title;
-            saveDialog.CheckFileExists = base.CheckFileExists;
-            saveDialog.CheckPathExists = base.CheckPathExists;
-            if (saveDialog.ShowDialog() == true)
+            if (m_saveFileDialog.ShowDialog() == true)
             {
-                base.m_strFilePass = saveDialog.FileName;
-                try
-                {
-                    if (m_bCreateStream)
-                    {
-                        m_stream = saveDialog.OpenFile();
-                    }
-                }
-                catch(Exception)
-                {
-                    bRst = false;
-                    return bRst;
-                }
                 bRst = true;
             }
 
             return bRst;
+        }
+
+        public void StreamWrite(string _str)
+        {
+            Stream stream = m_saveFileDialog.OpenFile();
+            StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("UTF-8"));
+            streamWriter.Write(_str);
+            streamWriter.Close();
+            stream.Close();
+
+            return;
         }
     }
 }

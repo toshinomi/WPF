@@ -71,7 +71,6 @@
     <Compile Include="ComImgInfo.cs" />
     <Compile Include="ComImgProc.cs" />
     <Compile Include="ComOpenFileDialog.cs" />
-    <Compile Include="ComFileDialog.cs" />
     <Compile Include="ComSaveFileDialog.cs" />
     <Compile Include="GrayScale.cs" />
     <Compile Include="GrayScale2Diff.cs" />

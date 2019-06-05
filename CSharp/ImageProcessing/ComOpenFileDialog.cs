@@ -7,31 +7,66 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing
 {
-    public class ComOpenFileDialog : ComFileDialog
+    public class ComOpenFileDialog
     {
-        public ComOpenFileDialog() : base()
+        protected OpenFileDialog m_openFileDialog;
+
+        public String FileName
         {
+            set { m_openFileDialog.FileName = value; }
+            get { return m_openFileDialog.FileName; }
+        }
+        public String InitialDirectory
+        {
+            set { m_openFileDialog.InitialDirectory = value; }
+            get { return m_openFileDialog.InitialDirectory; }
+        }
+
+        public String Filter
+        {
+            set { m_openFileDialog.Filter = value; }
+            get { return m_openFileDialog.Filter; }
+        }
+
+        public int FilterIndex
+        {
+            set { m_openFileDialog.FilterIndex = value; }
+            get { return m_openFileDialog.FilterIndex; }
+        }
+
+        public String Title
+        {
+            set { m_openFileDialog.Title = value; }
+            get { return m_openFileDialog.Title; }
+        }
+
+        public bool CheckFileExists
+        {
+            set { m_openFileDialog.CheckFileExists = value; }
+            get { return m_openFileDialog.CheckFileExists; }
+        }
+
+        public bool CheckPathExists
+        {
+            set { m_openFileDialog.CheckPathExists = value; }
+            get { return m_openFileDialog.CheckPathExists; }
+        }
+
+        public ComOpenFileDialog()
+        {
+            m_openFileDialog = new OpenFileDialog();
         }
 
         ~ComOpenFileDialog()
         {
         }
 
-        public override bool ShowDialog()
+        public bool ShowDialog()
         {
             bool bRst = false;
 
-            OpenFileDialog openFileDlg = new OpenFileDialog();
-            openFileDlg.FileName = base.FileName;
-            openFileDlg.InitialDirectory = base.InitialDirectory;
-            openFileDlg.Filter = base.Filter;
-            openFileDlg.FilterIndex = base.FilterIndex;
-            openFileDlg.Title = base.Title;
-            openFileDlg.CheckFileExists = base.CheckFileExists;
-            openFileDlg.CheckPathExists = base.CheckPathExists;
-            if (openFileDlg.ShowDialog() == true)
+            if (m_openFileDialog.ShowDialog() == true)
             {
-                base.m_strFilePass = openFileDlg.FileName;
                 bRst = true;
             }
 

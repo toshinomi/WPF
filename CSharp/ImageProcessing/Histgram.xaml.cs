@@ -164,8 +164,7 @@ namespace ImageProcessing
 
         public void SaveCsv()
         {
-            bool bCreateStream = true;
-            ComSaveFileDialog saveDialog = new ComSaveFileDialog(bCreateStream);
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
             saveDialog.Filter = "CSV|*.csv";
             saveDialog.Title = "Save the csv file";
             saveDialog.FileName = "default.csv";
@@ -180,10 +179,7 @@ namespace ImageProcessing
                     stringBuilder.Append(m_nHistgram[1, nIdx]).Append(strDelmiter);
                     stringBuilder.Append(Environment.NewLine);
                 }
-                StreamWriter streamWriter = new StreamWriter(saveDialog.Stream, Encoding.GetEncoding("UTF-8"));
-                streamWriter.Write(stringBuilder.ToString());
-                streamWriter.Close();
-                saveDialog.Stream.Close();
+                saveDialog.StreamWrite(stringBuilder.ToString());
             }
 
             return;

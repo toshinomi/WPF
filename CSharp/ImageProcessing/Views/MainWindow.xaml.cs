@@ -65,6 +65,11 @@ namespace ImageProcessing
         {
             bool bRst = true;
 
+            if (m_imgProc != null)
+            {
+                m_imgProc = null;
+            }
+
             switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
@@ -366,6 +371,13 @@ namespace ImageProcessing
                 Title = "Image Processing ( " + m_strCurImgName + " )";
 
                 canvasBinarization.IsEnabled = m_strCurImgName == ComInfo.IMG_NAME_BINARIZATION ? true : false;
+               
+                pictureBoxAfter.Source = null;
+                SelectLoadImage(m_strCurImgName);
+                if (m_histgram.IsOpen == true)
+                {
+                    OnClickBtnShowHistgram(this, null);
+                }
             }
 
             return;

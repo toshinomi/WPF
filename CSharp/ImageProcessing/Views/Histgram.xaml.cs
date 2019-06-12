@@ -82,7 +82,17 @@ namespace ImageProcessing
                     Values = chartValue1,
                     Title = "Original Image",
                 },
+                new ColumnSeries
+                {
+                    Values = chartValue1,
+                    Title = "Original Image",
+                },
                 new LineSeries
+                {
+                    Values = chartValue2,
+                    Title = "After Image",
+                },
+                new ColumnSeries
                 {
                     Values = chartValue2,
                     Title = "After Image",

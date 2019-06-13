@@ -75,29 +75,35 @@ namespace ImageProcessing
                 }
             }
 
-            var seriesCollection = new SeriesCollection
+            var seriesCollection = new SeriesCollection();
+
+            var lineSeriesChart1 = new LineSeries()
             {
-                new LineSeries
-                {
-                    Values = chartValue1,
-                    Title = "Original Image",
-                },
-                new ColumnSeries
-                {
-                    Values = chartValue1,
-                    Title = "Original Image",
-                },
-                new LineSeries
-                {
-                    Values = chartValue2,
-                    Title = "After Image",
-                },
-                new ColumnSeries
-                {
-                    Values = chartValue2,
-                    Title = "After Image",
-                }
+                Values = chartValue1,
+                Title = "Original Image"
             };
+            seriesCollection.Add(lineSeriesChart1);
+
+            //var columnSeries1 = new ColumnSeries()
+            //{
+            //    Values = chartValue1,
+            //    Title = "Original Image"
+            //};
+            //seriesCollection.Add(columnSeries1);
+
+            var lineSeriesChart2 = new LineSeries()
+            {
+                Values = chartValue2,
+                Title = "Original Image"
+            };
+            seriesCollection.Add(lineSeriesChart2);
+
+            //var columnSeries2 = new ColumnSeries()
+            //{
+            //    Values = chartValue2,
+            //    Title = "Original Image"
+            //};
+            //seriesCollection.Add(columnSeries2);
 
             graphData.seriesCollection = seriesCollection;
             this.DataContext = graphData;

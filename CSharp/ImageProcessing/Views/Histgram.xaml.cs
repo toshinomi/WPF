@@ -84,26 +84,12 @@ namespace ImageProcessing
             };
             seriesCollection.Add(lineSeriesChart1);
 
-            //var columnSeries1 = new ColumnSeries()
-            //{
-            //    Values = chartValue1,
-            //    Title = "Original Image"
-            //};
-            //seriesCollection.Add(columnSeries1);
-
             var lineSeriesChart2 = new LineSeries()
             {
                 Values = chartValue2,
                 Title = "Original Image"
             };
             seriesCollection.Add(lineSeriesChart2);
-
-            //var columnSeries2 = new ColumnSeries()
-            //{
-            //    Values = chartValue2,
-            //    Title = "Original Image"
-            //};
-            //seriesCollection.Add(columnSeries2);
 
             graphData.seriesCollection = seriesCollection;
             this.DataContext = graphData;

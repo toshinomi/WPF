@@ -258,7 +258,7 @@ Class MainWindow
         saveDialog.Filter = "PNG|*.png"
         saveDialog.Title = "Save the file"
         If (saveDialog.ShowDialog() = True) Then
-            Dim strFileName = saveDialog.FilePass
+            Dim strFileName = saveDialog.FileName
             Using stream As FileStream = New FileStream(strFileName, FileMode.Create)
                 Dim encoder As PngBitmapEncoder = New PngBitmapEncoder()
                 Dim bitmap As WriteableBitmap = GetImage(m_strCurImgName)

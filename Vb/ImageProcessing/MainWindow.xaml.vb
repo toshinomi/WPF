@@ -104,7 +104,7 @@ Class MainWindow
         If (openFileDlg.ShowDialog() = True) Then
             pictureBoxOriginal.Source = Nothing
             pictureBoxAfter.Source = Nothing
-            m_strOpenFileName = openFileDlg.FilePass
+            m_strOpenFileName = openFileDlg.FileName
             Try
                 LoadImage()
             Catch ex As Exception

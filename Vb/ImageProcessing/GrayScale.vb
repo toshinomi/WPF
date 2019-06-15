@@ -32,14 +32,14 @@ Namespace ImageProcessing
 
                     Dim pAdr As IntPtr = Me.m_wBitmap.BackBuffer
                     Dim nPos As Integer = nIdxHeight * Me.m_wBitmap.BackBufferStride + nIdxWidth * 4
-                    Dim bytePixelB As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
-                    Dim bytePixelG As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
-                    Dim bytePixelR As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
+                    Dim nPixelB As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
+                    Dim nPixelG As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
+                    Dim nPixelR As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
 
-                    Dim byteGrayScale As Integer = (bytePixelB + bytePixelG + bytePixelR) / 3
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.B, CByte(byteGrayScale))
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.G, CByte(byteGrayScale))
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.R, CByte(byteGrayScale))
+                    Dim nGrayScale As Integer = (nPixelB + nPixelG + nPixelR) / 3
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.B, CByte(nGrayScale))
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.G, CByte(nGrayScale))
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.R, CByte(nGrayScale))
                 Next
             Next
             Me.m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))

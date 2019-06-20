@@ -16,7 +16,7 @@
         m_items = New List(Of ImageProcessingType)
         m_items.Add(New ImageProcessingType(My.Settings.ImgTypeEdgeId, My.Settings.ImgTypeEdgeName))
         m_items.Add(New ImageProcessingType(My.Settings.ImgTypeGrayScaleId, My.Settings.ImgTypeGrayScaleName))
-
+        m_items.Add(New ImageProcessingType(My.Settings.ImgTypeBinarizationId, My.Settings.ImgTypeBinarizationName))
 
         cmbBoxImageProcessingType.ItemsSource = m_items
         cmbBoxImageProcessingType.SelectedIndex = m_items.Find(Function(x) x.Name = My.Settings.ImgTypeSelectName)?.Id - 1

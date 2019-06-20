@@ -46,6 +46,8 @@ Class MainWindow
                 m_imgProc = New EdgeDetection(m_bitmap)
             Case ComInfo.IMG_NAME_GRAY_SCALE
                 m_imgProc = New GrayScale(m_bitmap)
+            Case ComInfo.IMG_NAME_BINARIZATION
+                m_imgProc = New Binarization(m_bitmap)
             Case Else
         End Select
 
@@ -61,6 +63,9 @@ Class MainWindow
             Case ComInfo.IMG_NAME_GRAY_SCALE
                 Dim gray As GrayScale = DirectCast(m_imgProc, GrayScale)
                 pictureBoxAfter.Source = gray.WriteableBitmap
+            Case ComInfo.IMG_NAME_BINARIZATION
+                Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
+                pictureBoxAfter.Source = binarization.WriteableBitmap
             Case Else
         End Select
 
@@ -76,6 +81,10 @@ Class MainWindow
             Case ComInfo.IMG_NAME_GRAY_SCALE
                 Dim gray As GrayScale = DirectCast(m_imgProc, GrayScale)
                 bRst = gray.GoImgProc(_token)
+            Case ComInfo.IMG_NAME_BINARIZATION
+                Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
+                binarization.Thresh = 127
+                bRst = binarization.GoImgProc(_token)
             Case Else
         End Select
 
@@ -247,6 +256,11 @@ Class MainWindow
                 Dim gray As GrayScale = DirectCast(m_imgProc, GrayScale)
                 If gray IsNot Nothing Then
                     bitmap = gray.WriteableBitmap
+                End If
+            Case ComInfo.IMG_NAME_BINARIZATION
+                Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
+                If binarization IsNot Nothing Then
+                    bitmap = binarization.WriteableBitmap
                 End If
         End Select
 

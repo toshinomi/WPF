@@ -18,5 +18,6 @@
         Public Const BTN_CANCEL As String = "btnCancel"
         Public Const IMG_NAME_EDGE_DETECTION As String = "EdgeDetection"
         Public Const IMG_NAME_GRAY_SCALE As String = "GrayScale"
+        Public Const IMG_NAME_BINARIZATION As String = "Binarization"
     End Class
 End Namespace

@@ -54,27 +54,28 @@ Class MainWindow
         Return bRst
     End Function
 
-    Public Function SelectGetBitmap(_strImgName As String) As Boolean
-        Dim bRst As Boolean = True
+    Public Function SelectGetBitmap(_strImgName As String) As WriteableBitmap
+        Dim wBitmap As WriteableBitmap = Nothing
+
         Select Case _strImgName
             Case ComInfo.IMG_NAME_EDGE_DETECTION
                 Dim edge As EdgeDetection = DirectCast(m_imgProc, EdgeDetection)
-                pictureBoxAfter.Source = edge.WriteableBitmap
+                wBitmap = edge.WriteableBitmap
             Case ComInfo.IMG_NAME_GRAY_SCALE
                 Dim gray As GrayScale = DirectCast(m_imgProc, GrayScale)
-                pictureBoxAfter.Source = gray.WriteableBitmap
+                wBitmap = gray.WriteableBitmap
             Case ComInfo.IMG_NAME_BINARIZATION
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
-                pictureBoxAfter.Source = binarization.WriteableBitmap
+                wBitmap = binarization.WriteableBitmap
             Case Else
         End Select
 
-        Return bRst
+        Return wBitmap
     End Function
 
-    Public Function SelectGoImgProc(_strImgName As String, _token As CancellationToken) As Boolean
+    Public Function SelectGoImgProc(_comImgInfo As ComImgInfo, _token As CancellationToken) As Boolean
         Dim bRst As Boolean = True
-        Select Case _strImgName
+        Select Case _comImgInfo.CurImgName
             Case ComInfo.IMG_NAME_EDGE_DETECTION
                 Dim edge As EdgeDetection = DirectCast(m_imgProc, EdgeDetection)
                 bRst = edge.GoImgProc(_token)
@@ -83,7 +84,7 @@ Class MainWindow
                 bRst = gray.GoImgProc(_token)
             Case ComInfo.IMG_NAME_BINARIZATION
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
-                binarization.Thresh = 127
+                binarization.Thresh = _comImgInfo.ComBinarizationInfo.Thresh
                 bRst = binarization.GoImgProc(_token)
             Case Else
         End Select
@@ -178,7 +179,7 @@ Class MainWindow
             bitmap.UriSource = New Uri(m_strOpenFileName)
             bitmap.EndInit()
             pictureBoxOriginal.Source = bitmap
-            SelectGetBitmap(m_strCurImgName)
+            pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName)
 
             Stopwatch.Stop()
 
@@ -198,7 +199,12 @@ Class MainWindow
     Public Async Function TaskWorkImageProcessing() As Task(Of Boolean)
         m_tokenSource = New CancellationTokenSource()
         Dim token As CancellationToken = m_tokenSource.Token
-        Dim bRst = Await Task.Run(Function() SelectGoImgProc(m_strCurImgName, token))
+        Dim imgInfo As ComImgInfo = New ComImgInfo()
+        Dim binarizationInfo As ComBinarizationInfo = New ComBinarizationInfo()
+        binarizationInfo.Thresh = CByte(sliderThresh.Value)
+        imgInfo.CurImgName = m_strCurImgName
+        imgInfo.ComBinarizationInfo = binarizationInfo
+        Dim bRst = Await Task.Run(Function() SelectGoImgProc(imgInfo, token))
         Return bRst
     End Function
 
@@ -282,6 +288,48 @@ Class MainWindow
                 End If
             End Using
         End If
+        Return
+    End Sub
+
+    Private Sub OnSliderPreviewMouseUp(sender As Object, e As MouseButtonEventArgs)
+        If (pictureBoxAfter.Source IsNot Nothing) Then
+            ParamAjust()
+        End If
+    End Sub
+
+    Private Sub OnSliderPreviewKeyUp(sender As Object, e As KeyboardEventArgs)
+        If (pictureBoxAfter.Source IsNot Nothing) Then
+            ParamAjust()
+        End If
+    End Sub
+
+    Private Async Sub ParamAjust()
+        pictureBoxAfter.Source = Nothing
+
+        btnFileSelect.IsEnabled = False
+        btnAllClear.IsEnabled = False
+        btnStart.IsEnabled = False
+        menuMain.IsEnabled = False
+
+        LoadImage()
+
+        btnStop.IsEnabled = True
+        btnSaveImage.IsEnabled = False
+        Dim bResult As Boolean = Await TaskWorkImageProcessing()
+        If (bResult = True) Then
+            Dim bitmap As BitmapImage = New BitmapImage()
+            bitmap.BeginInit()
+            bitmap.UriSource = New Uri(m_strOpenFileName)
+            bitmap.EndInit()
+            pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName)
+
+            btnSaveImage.IsEnabled = True
+        End If
+        Dispatcher.Invoke(New Action(AddressOf SetButtonEnable))
+        menuMain.IsEnabled = True
+
+        m_tokenSource = Nothing
+
         Return
     End Sub
 End Class

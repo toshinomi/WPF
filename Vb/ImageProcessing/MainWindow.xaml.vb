@@ -29,6 +29,8 @@ Class MainWindow
 
         m_strCurImgName = My.Settings.ImgTypeSelectName
         Title = "Image Processing ( " + m_strCurImgName + " )"
+
+        canvasBinarization.IsEnabled = If(m_strCurImgName = ComInfo.IMG_NAME_BINARIZATION, True, False)
     End Sub
 
     Protected Overloads Sub Finalize()
@@ -253,6 +255,8 @@ Class MainWindow
             Dim imgProcType As ImageProcessingType = win.cmbBoxImageProcessingType.SelectedItem
             m_strCurImgName = imgProcType.Name
             Title = "Image Processing ( " + m_strCurImgName + " )"
+
+            canvasBinarization.IsEnabled = If(m_strCurImgName = ComInfo.IMG_NAME_BINARIZATION, True, False)
         End If
 
         Return

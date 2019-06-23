@@ -374,7 +374,7 @@ namespace ImageProcessing
                
                 pictureBoxAfter.Source = null;
                 SelectLoadImage(m_strCurImgName);
-                if (m_histgram.IsOpen == true)
+                if (m_histgram != null && m_histgram.IsOpen == true)
                 {
                     OnClickBtnShowHistgram(this, null);
                 }

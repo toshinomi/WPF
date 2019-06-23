@@ -290,6 +290,14 @@ Class MainWindow
             Title = "Image Processing ( " + m_strCurImgName + " )"
 
             canvasBinarization.IsEnabled = If(m_strCurImgName = ComInfo.IMG_NAME_BINARIZATION, True, False)
+
+            pictureBoxAfter.Source = Nothing
+            SelectLoadImage(m_strCurImgName)
+            If (m_histgram IsNot Nothing) Then
+                If (m_histgram.IsOpen = True) Then
+                    OnClickBtnShowHistgram(Me, Nothing)
+                End If
+            End If
         End If
 
         Return
@@ -379,6 +387,12 @@ Class MainWindow
             pictureBoxAfter.Source = SelectGetBitmap(m_strCurImgName)
 
             btnSaveImage.IsEnabled = True
+
+            m_histgram.Bitmap = m_bitmap
+            m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName)
+            If (m_histgram.IsOpen = True) Then
+                m_histgram.DrawHistgram()
+            End If
         End If
         Dispatcher.Invoke(New Action(AddressOf SetButtonEnable))
         menuMain.IsEnabled = True

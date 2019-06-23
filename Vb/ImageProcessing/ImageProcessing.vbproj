@@ -49,7 +49,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
@@ -77,26 +77,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Binarization.vb" />
-    <Compile Include="ColorReversal.vb" />
-    <Compile Include="ComImgInfo.vb" />
-    <Compile Include="ComImgProc.vb" />
-    <Compile Include="ComOpenFileDialog.vb" />
-    <Compile Include="ComSaveFileDialog.vb" />
-    <Compile Include="GrayScale.vb" />
-    <Compile Include="GrayScale2Diff.vb" />
-    <Compile Include="Histgram.xaml.vb">
+    <Compile Include="ImgProc\Binarization.vb" />
+    <Compile Include="ImgProc\ColorReversal.vb" />
+    <Compile Include="Lib\ComImgInfo.vb" />
+    <Compile Include="Lib\ComImgProc.vb" />
+    <Compile Include="Lib\ComOpenFileDialog.vb" />
+    <Compile Include="Lib\ComSaveFileDialog.vb" />
+    <Compile Include="ImgProc\GrayScale.vb" />
+    <Compile Include="ImgProc\GrayScale2Diff.vb" />
+    <Compile Include="Views\Histgram.xaml.vb">
       <DependentUpon>Histgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageProcessingType.vb" />
-    <Compile Include="SettingImageProcessing.xaml.vb">
+    <Compile Include="Lib\ImageProcessingType.vb" />
+    <Compile Include="Views\SettingImageProcessing.xaml.vb">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>
-    <Page Include="Histgram.xaml">
+    <Page Include="Views\Histgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,14 +104,14 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ComFunc.vb" />
-    <Compile Include="ComInfo.vb" />
-    <Compile Include="EdgeDetection.vb" />
-    <Compile Include="MainWindow.xaml.vb">
+    <Compile Include="Lib\ComFunc.vb" />
+    <Compile Include="Lib\ComInfo.vb" />
+    <Compile Include="ImgProc\EdgeDetection.vb" />
+    <Compile Include="Views\MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingImageProcessing.xaml">
+    <Page Include="Views\SettingImageProcessing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,7 +168,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
+    <Resource Include="Icon\icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

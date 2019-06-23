@@ -285,7 +285,7 @@ Class MainWindow
         Dim DialogResult As Boolean? = win.ShowDialog()
 
         If (DialogResult = True) Then
-            Dim imgProcType As ImageProcessingType = win.cmbBoxImageProcessingType.SelectedItem
+            Dim imgProcType As ComImageProcessingType = win.cmbBoxImageProcessingType.SelectedItem
             m_strCurImgName = imgProcType.Name
             Title = "Image Processing ( " + m_strCurImgName + " )"
 

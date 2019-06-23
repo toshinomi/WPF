@@ -1,4 +1,4 @@
-﻿Public Class ImageProcessingType
+﻿Public Class ComImageProcessingType
     Private m_Id As Integer
     Private m_Name As String
 

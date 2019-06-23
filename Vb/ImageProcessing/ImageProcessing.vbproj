@@ -88,7 +88,7 @@
     <Compile Include="Views\Histgram.xaml.vb">
       <DependentUpon>Histgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lib\ImageProcessingType.vb" />
+    <Compile Include="Lib\ComImageProcessingType.vb" />
     <Compile Include="Views\SettingImageProcessing.xaml.vb">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>

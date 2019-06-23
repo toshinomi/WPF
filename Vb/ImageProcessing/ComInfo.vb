@@ -20,5 +20,6 @@
         Public Const IMG_NAME_GRAY_SCALE As String = "GrayScale"
         Public Const IMG_NAME_BINARIZATION As String = "Binarization"
         Public Const IMG_NAME_GRAY_SCALE_2DIFF As String = "GrayScale 2Diff"
+        Public Const IMG_NAME_COLOR_REVERSAL = "ColorReversal"
     End Class
 End Namespace

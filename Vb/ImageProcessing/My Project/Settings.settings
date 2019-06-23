@@ -29,5 +29,11 @@
     <Setting Name="ImgTypeGrayScale2DiffName" Type="System.String" Scope="User">
       <Value Profile="(Default)">GrayScale 2Diff</Value>
     </Setting>
+    <Setting Name="ImgTypeColorReversalId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ImgTypeColorReversalName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ColorReversal</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

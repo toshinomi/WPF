@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Binarization.vb" />
+    <Compile Include="ColorReversal.vb" />
     <Compile Include="ComImgInfo.vb" />
     <Compile Include="ComImgProc.vb" />
     <Compile Include="ComOpenFileDialog.vb" />

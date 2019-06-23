@@ -39,18 +39,18 @@ Namespace ImageProcessing
             Me.m_wBitmap = New WriteableBitmap(Me.m_bitmap)
             Me.m_wBitmap.Lock()
 
-            Dim nIdxWidht As Integer
+            Dim nIdxWidth As Integer
             Dim nIdxHeight As Integer
 
             For nIdxHeight = 0 To nHeightSize - 1 Step 1
-                For nIdxWidht = 0 To nWidthSize - 1 Step 1
+                For nIdxWidth = 0 To nWidthSize - 1 Step 1
                     If (_token.IsCancellationRequested = True) Then
                         bRst = False
                         Exit For
                     End If
 
                     Dim pAdr As IntPtr = Me.m_wBitmap.BackBuffer
-                    Dim nPos As Integer = nIdxHeight * Me.m_wBitmap.BackBufferStride + nIdxWidht * 4
+                    Dim nPos As Integer = nIdxHeight * Me.m_wBitmap.BackBufferStride + nIdxWidth * 4
                     Dim nPixelB As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
                     Dim nPixelG As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
                     Dim nPixelR As Integer = ReadByte(pAdr, nPos + ComInfo.Pixel.R)

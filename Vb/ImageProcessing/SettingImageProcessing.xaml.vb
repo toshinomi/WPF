@@ -18,6 +18,7 @@
         m_items.Add(New ImageProcessingType(My.Settings.ImgTypeGrayScaleId, My.Settings.ImgTypeGrayScaleName))
         m_items.Add(New ImageProcessingType(My.Settings.ImgTypeBinarizationId, My.Settings.ImgTypeBinarizationName))
         m_items.Add(New ImageProcessingType(My.Settings.ImgTypeGrayScale2DiffId, My.Settings.ImgTypeGrayScale2DiffName))
+        m_items.Add(New ImageProcessingType(My.Settings.ImgTypeColorReversalId, My.Settings.ImgTypeColorReversalName))
 
         cmbBoxImageProcessingType.ItemsSource = m_items
         cmbBoxImageProcessingType.SelectedIndex = m_items.Find(Function(x) x.Name = My.Settings.ImgTypeSelectName)?.Id - 1

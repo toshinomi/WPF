@@ -52,6 +52,8 @@ Class MainWindow
                 m_imgProc = New Binarization(m_bitmap)
             Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
                 m_imgProc = New GrayScale2Diff(m_bitmap)
+            Case ComInfo.IMG_NAME_COLOR_REVERSAL
+                m_imgProc = New ColorReversal(m_bitmap)
             Case Else
         End Select
 
@@ -74,6 +76,9 @@ Class MainWindow
             Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
                 Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
                 wBitmap = gray2Diff.WriteableBitmap
+            Case ComInfo.IMG_NAME_COLOR_REVERSAL
+                Dim colorReversal As ColorReversal = DirectCast(m_imgProc, ColorReversal)
+                wBitmap = colorReversal.WriteableBitmap
             Case Else
         End Select
 
@@ -96,6 +101,9 @@ Class MainWindow
             Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
                 Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
                 bRst = gray2Diff.GoImgProc(_token)
+            Case ComInfo.IMG_NAME_COLOR_REVERSAL
+                Dim colorReversal As ColorReversal = DirectCast(m_imgProc, ColorReversal)
+                bRst = colorReversal.GoImgProc(_token)
             Case Else
         End Select
 
@@ -284,6 +292,11 @@ Class MainWindow
                 Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
                 If gray2Diff IsNot Nothing Then
                     bitmap = gray2Diff.WriteableBitmap
+                End If
+            Case ComInfo.IMG_NAME_COLOR_REVERSAL
+                Dim colorReversal As ColorReversal = DirectCast(m_imgProc, ColorReversal)
+                If colorReversal IsNot Nothing Then
+                    bitmap = colorReversal.WriteableBitmap
                 End If
         End Select
 

@@ -160,6 +160,30 @@ Partial Friend NotInheritable Class MySettings
             Me("ImgTypeGrayScale2DiffName") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+    Public Property ImgTypeColorReversalId() As Integer
+        Get
+            Return CType(Me("ImgTypeColorReversalId"),Integer)
+        End Get
+        Set
+            Me("ImgTypeColorReversalId") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("ColorReversal")>  _
+    Public Property ImgTypeColorReversalName() As String
+        Get
+            Return CType(Me("ImgTypeColorReversalName"),String)
+        End Get
+        Set
+            Me("ImgTypeColorReversalName") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

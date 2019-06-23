@@ -182,6 +182,10 @@ Class MainWindow
         btnAllClear.IsEnabled = True
         btnStart.IsEnabled = False
 
+        If (m_histgram IsNot Nothing) Then
+            m_histgram.Close()
+        End If
+
         Return
     End Sub
 
@@ -214,13 +218,18 @@ Class MainWindow
 
             Dispatcher.Invoke(New Action(Of Long)(AddressOf SetTextTime), Stopwatch.ElapsedMilliseconds)
             btnSaveImage.IsEnabled = True
+
+            m_histgram.Bitmap = m_bitmap
+            m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName)
+            If (m_histgram.IsOpen = True) Then
+                m_histgram.DrawHistgram()
+            End If
         End If
         Dispatcher.Invoke(New Action(AddressOf SetButtonEnable))
         menuMain.IsEnabled = True
 
         Stopwatch = Nothing
         m_tokenSource = Nothing
-        'm_bitmap = Nothing
 
         Return
     End Sub

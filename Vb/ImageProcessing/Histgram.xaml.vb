@@ -55,6 +55,11 @@ Public Class Histgram
         Dim chartValue2 = New ChartValues(Of Integer)()
         For nIdx As Integer = 0 To 256 - 1 Step 1
             chartValue1.Add(m_nHistgram(0, nIdx))
+            If (m_wbitmap Is Nothing) Then
+                chartValue2.Add(0)
+            Else
+                chartValue2.Add(m_nHistgram(1, nIdx))
+            End If
         Next
 
         Dim seriesCollection = New SeriesCollection()
@@ -64,6 +69,13 @@ Public Class Histgram
             .Title = "Original Image"
         }
         seriesCollection.Add(lineSeriesChart1)
+
+        Dim lineSeriesChart2 = New LineSeries() With
+        {
+            .Values = chartValue2,
+            .Title = "After Image"
+        }
+        seriesCollection.Add(lineSeriesChart2)
 
         graphData.seriesCollection = seriesCollection
         Me.DataContext = graphData
@@ -98,6 +110,19 @@ Public Class Histgram
                 Dim nGrayScale As Integer = (nPixelB + nPixelG + nPixelR) / 3
 
                 m_nHistgram(0, nGrayScale) += 1
+
+                If (m_wbitmap IsNot Nothing) Then
+                    pAdr = m_wbitmap.BackBuffer
+                    nPos = nIdxHeight * m_wbitmap.BackBufferStride + nIdxWidth * 4
+
+                    nPixelB = ReadByte(pAdr, nPos + ComInfo.Pixel.B)
+                    nPixelG = ReadByte(pAdr, nPos + ComInfo.Pixel.G)
+                    nPixelR = ReadByte(pAdr, nPos + ComInfo.Pixel.R)
+
+                    nGrayScale = (nPixelB + nPixelG + nPixelR) / 3
+
+                    m_nHistgram(1, nGrayScale) += 1
+                End If
             Next
         Next
     End Sub

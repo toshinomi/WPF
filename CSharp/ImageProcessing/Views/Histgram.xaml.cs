@@ -87,7 +87,7 @@ namespace ImageProcessing
             var lineSeriesChart2 = new LineSeries()
             {
                 Values = chartValue2,
-                Title = "Original Image"
+                Title = "After Image"
             };
             seriesCollection.Add(lineSeriesChart2);
 

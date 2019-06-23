@@ -9,6 +9,7 @@ Class MainWindow
     Private m_strOpenFileName As String
     Private m_tokenSource As CancellationTokenSource
     Private m_strCurImgName As String
+    Private m_histgram As Histgram
 
     Public Sub New()
 
@@ -142,8 +143,18 @@ Class MainWindow
             pictureBoxOriginal.Source = m_bitmap
             btnStart.IsEnabled = True
             textBoxTime.Text = ""
+
+            If (m_histgram Is Nothing) Then
+                m_histgram = New Histgram()
+            End If
+
+            m_histgram.Bitmap = m_bitmap
+            m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName)
+            If (m_histgram.IsOpen = True) Then
+                m_histgram.DrawHistgram()
+            End If
         End If
-        Return
+            Return
     End Sub
 
     Public Sub LoadImage()
@@ -209,7 +220,7 @@ Class MainWindow
 
         Stopwatch = Nothing
         m_tokenSource = Nothing
-        m_bitmap = Nothing
+        'm_bitmap = Nothing
 
         Return
     End Sub
@@ -237,6 +248,11 @@ Class MainWindow
     Private Sub OnClosingWindow(sender As Object, e As System.ComponentModel.CancelEventArgs)
         If (m_tokenSource IsNot Nothing) Then
             e.Cancel = True
+        End If
+
+        If (m_histgram IsNot Nothing) Then
+            m_histgram.Close()
+            m_histgram = Nothing
         End If
 
         Return
@@ -359,6 +375,26 @@ Class MainWindow
         menuMain.IsEnabled = True
 
         m_tokenSource = Nothing
+
+        Return
+    End Sub
+
+    Private Sub OnClickBtnShowHistgram(sender As Object, e As RoutedEventArgs)
+        If (m_bitmap Is Nothing) Then
+            Return
+        End If
+
+        If (m_histgram IsNot Nothing) Then
+            m_histgram.Close()
+            m_histgram = Nothing
+            m_histgram = New Histgram()
+        End If
+
+        m_histgram.Bitmap = m_bitmap
+        m_histgram.WBitmap = SelectGetBitmap(m_strCurImgName)
+        m_histgram.DrawHistgram()
+        m_histgram.IsOpen = True
+        m_histgram.Show()
 
         Return
     End Sub

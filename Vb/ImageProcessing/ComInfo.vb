@@ -19,5 +19,6 @@
         Public Const IMG_NAME_EDGE_DETECTION As String = "EdgeDetection"
         Public Const IMG_NAME_GRAY_SCALE As String = "GrayScale"
         Public Const IMG_NAME_BINARIZATION As String = "Binarization"
+        Public Const IMG_NAME_GRAY_SCALE_2DIFF As String = "GrayScale 2Diff"
     End Class
 End Namespace

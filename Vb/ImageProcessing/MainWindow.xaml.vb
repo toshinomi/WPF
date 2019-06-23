@@ -48,6 +48,8 @@ Class MainWindow
                 m_imgProc = New GrayScale(m_bitmap)
             Case ComInfo.IMG_NAME_BINARIZATION
                 m_imgProc = New Binarization(m_bitmap)
+            Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
+                m_imgProc = New GrayScale2Diff(m_bitmap)
             Case Else
         End Select
 
@@ -67,6 +69,9 @@ Class MainWindow
             Case ComInfo.IMG_NAME_BINARIZATION
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
                 wBitmap = binarization.WriteableBitmap
+            Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
+                Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
+                wBitmap = gray2Diff.WriteableBitmap
             Case Else
         End Select
 
@@ -86,6 +91,9 @@ Class MainWindow
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
                 binarization.Thresh = _comImgInfo.ComBinarizationInfo.Thresh
                 bRst = binarization.GoImgProc(_token)
+            Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
+                Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
+                bRst = gray2Diff.GoImgProc(_token)
             Case Else
         End Select
 
@@ -267,6 +275,11 @@ Class MainWindow
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
                 If binarization IsNot Nothing Then
                     bitmap = binarization.WriteableBitmap
+                End If
+            Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
+                Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
+                If gray2Diff IsNot Nothing Then
+                    bitmap = gray2Diff.WriteableBitmap
                 End If
         End Select
 

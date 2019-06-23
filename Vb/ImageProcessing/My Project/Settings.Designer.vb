@@ -136,6 +136,30 @@ Partial Friend NotInheritable Class MySettings
             Me("ImgTypeBinarizationName") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+    Public Property ImgTypeGrayScale2DiffId() As Integer
+        Get
+            Return CType(Me("ImgTypeGrayScale2DiffId"),Integer)
+        End Get
+        Set
+            Me("ImgTypeGrayScale2DiffId") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("GrayScale 2Diff")>  _
+    Public Property ImgTypeGrayScale2DiffName() As String
+        Get
+            Return CType(Me("ImgTypeGrayScale2DiffName"),String)
+        End Get
+        Set
+            Me("ImgTypeGrayScale2DiffName") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

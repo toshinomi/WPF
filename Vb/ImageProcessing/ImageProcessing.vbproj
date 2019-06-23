@@ -77,6 +77,7 @@
     <Compile Include="ComOpenFileDialog.vb" />
     <Compile Include="ComSaveFileDialog.vb" />
     <Compile Include="GrayScale.vb" />
+    <Compile Include="GrayScale2Diff.vb" />
     <Compile Include="ImageProcessingType.vb" />
     <Compile Include="SettingImageProcessing.xaml.vb">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>

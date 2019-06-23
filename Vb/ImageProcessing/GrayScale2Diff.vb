@@ -2,15 +2,10 @@
 Imports System.Runtime.InteropServices.Marshal
 
 Namespace ImageProcessing
-    Public Class EdgeDetection : Inherits ComImgProc
-        Private Const m_nMaskSize As Integer = 3
+    Public Class GrayScale2Diff : Inherits ComImgProc
 
         Public Sub New(_bitmap As BitmapImage)
             MyBase.New(_bitmap)
-        End Sub
-
-        Protected Overrides Sub Finalize()
-            MyBase.Finalize()
         End Sub
 
         Public Overrides Function GoImgProc(_token As CancellationToken) As Boolean
@@ -49,7 +44,7 @@ Namespace ImageProcessing
                     Dim lCalB As Long = 0
                     Dim lCalG As Long = 0
                     Dim lCalR As Long = 0
-
+                    Dim dCalAve As Double = 0.0
                     Dim nIdxWidthMask As Integer
                     Dim nIdxHightMask As Integer
 
@@ -63,15 +58,20 @@ Namespace ImageProcessing
                                 Dim pAdr2 As IntPtr = Me.m_wBitmap.BackBuffer
                                 Dim nPos2 As Integer = (nIdxHeight + nIdxHightMask) * Me.m_wBitmap.BackBufferStride + (nIdxWidth + nIdxWidthMask) * 4
 
-                                lCalB += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.B) * nMask(nIdxWidthMask, nIdxHightMask)
-                                lCalG += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.G) * nMask(nIdxWidthMask, nIdxHightMask)
-                                lCalR += ReadByte(pAdr2, nPos2 + ComInfo.Pixel.R) * nMask(nIdxWidthMask, nIdxHightMask)
+                                lCalB = ReadByte(pAdr2, nPos2 + ComInfo.Pixel.B) * nMask(nIdxWidthMask, nIdxHightMask)
+                                lCalG = ReadByte(pAdr2, nPos2 + ComInfo.Pixel.G) * nMask(nIdxWidthMask, nIdxHightMask)
+                                lCalR = ReadByte(pAdr2, nPos2 + ComInfo.Pixel.R) * nMask(nIdxWidthMask, nIdxHightMask)
+
+                                Dim dcalGray As Double = (lCalB + lCalG + lCalR) / 3
+                                dCalAve = (dCalAve + dcalGray) / 2
                             End If
                         Next
                     Next
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.B, ComFunc.LongToByte(lCalB))
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.G, ComFunc.LongToByte(lCalG))
-                    WriteByte(pAdr, nPos + ComInfo.Pixel.R, ComFunc.LongToByte(lCalR))
+                    Dim nGrayScale As Byte = ComFunc.DoubleToByte(dCalAve)
+
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.B, nGrayScale)
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.G, nGrayScale)
+                    WriteByte(pAdr, nPos + ComInfo.Pixel.R, nGrayScale)
                 Next
             Next
             Me.m_wBitmap.AddDirtyRect(New Int32Rect(0, 0, nWidthSize, nHeightSize))

@@ -2,6 +2,7 @@
 Imports System.Runtime.InteropServices.Marshal
 Imports ImageProcessing.ImageProcessing
 Imports LiveCharts.Wpf
+Imports System.Text
 
 Public Class Histgram
     Private m_bitmap As BitmapImage
@@ -127,13 +128,8 @@ Public Class Histgram
         Next
     End Sub
 
-    Private Sub OnClickMenu(sender As Object, e As RoutedEventArgs)
-    End Sub
-
     Public Class GraphData
-
         Private m_seriesCollection As SeriesCollection
-
         Public Property seriesCollection() As SeriesCollection
             Set(value As SeriesCollection)
                 m_seriesCollection = value
@@ -143,4 +139,33 @@ Public Class Histgram
             End Get
         End Property
     End Class
+
+    Private Sub OnClickMenu(sender As Object, e As RoutedEventArgs)
+        Dim menuItem As MenuItem = sender
+        Dim strHeader As String = menuItem.Header.ToString()
+
+        Select Case (strHeader)
+            Case ComInfo.MENU_SAVE_FILE
+                SaveCsv()
+            Case Else
+        End Select
+    End Sub
+
+    Public Sub SaveCsv()
+        Dim saveDialog As ComSaveFileDialog = New ComSaveFileDialog()
+        saveDialog.Filter = "CSV|*.csv"
+        saveDialog.Title = "Save the csv file"
+        saveDialog.FileName = "default.csv"
+        If (saveDialog.ShowDialog() = True) Then
+            Dim strDelmiter As String = ","
+            Dim stringBuilder As StringBuilder = New StringBuilder()
+            For nIdx As Integer = 0 To (m_nHistgram.Length >> 1) - 1
+                stringBuilder.Append(nIdx).Append(strDelmiter)
+                stringBuilder.Append(m_nHistgram(0, nIdx)).Append(strDelmiter)
+                stringBuilder.Append(m_nHistgram(1, nIdx)).Append(strDelmiter)
+                stringBuilder.Append(Environment.NewLine)
+            Next
+            saveDialog.SreamWrite(stringBuilder.ToString())
+        End If
+    End Sub
 End Class

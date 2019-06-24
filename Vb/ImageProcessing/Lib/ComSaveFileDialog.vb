@@ -1,74 +1,76 @@
-﻿Imports Microsoft.Win32
+﻿Imports System.IO
+Imports System.Text
+Imports Microsoft.Win32
 
 Namespace ImageProcessing
     Public Class ComSaveFileDialog
-        Protected m_openFileDialog As SaveFileDialog
+        Protected m_saveFileDialog As SaveFileDialog
 
         Public Property FileName() As String
             Set(value As String)
-                m_openFileDialog.FileName = value
+                m_saveFileDialog.FileName = value
             End Set
             Get
-                Return m_openFileDialog.FileName
+                Return m_saveFileDialog.FileName
             End Get
         End Property
 
         Public Property InitialDirectory() As String
             Set(value As String)
-                m_openFileDialog.InitialDirectory = value
+                m_saveFileDialog.InitialDirectory = value
             End Set
             Get
-                Return m_openFileDialog.InitialDirectory
+                Return m_saveFileDialog.InitialDirectory
             End Get
         End Property
 
         Public Property Filter() As String
             Set(value As String)
-                m_openFileDialog.Filter = value
+                m_saveFileDialog.Filter = value
             End Set
             Get
-                Return m_openFileDialog.Filter
+                Return m_saveFileDialog.Filter
             End Get
         End Property
 
         Public Property FilterIndex() As Integer
             Set(value As Integer)
-                m_openFileDialog.FilterIndex = value
+                m_saveFileDialog.FilterIndex = value
             End Set
             Get
-                Return m_openFileDialog.FilterIndex
+                Return m_saveFileDialog.FilterIndex
             End Get
         End Property
 
         Public Property Title() As String
             Set(value As String)
-                m_openFileDialog.Title = value
+                m_saveFileDialog.Title = value
             End Set
             Get
-                Return m_openFileDialog.Title
+                Return m_saveFileDialog.Title
             End Get
         End Property
 
         Public Property CheckFileExists() As Boolean
             Set(value As Boolean)
-                m_openFileDialog.CheckFileExists = value
+                m_saveFileDialog.CheckFileExists = value
             End Set
             Get
-                Return m_openFileDialog.CheckFileExists
+                Return m_saveFileDialog.CheckFileExists
             End Get
         End Property
 
         Public Property CheckPathExists() As Boolean
             Set(value As Boolean)
-                m_openFileDialog.CheckPathExists = value
+                m_saveFileDialog.CheckPathExists = value
             End Set
             Get
-                Return m_openFileDialog.CheckPathExists
+                Return m_saveFileDialog.CheckPathExists
             End Get
         End Property
 
         Public Sub New()
-            m_openFileDialog = New SaveFileDialog()
+            m_saveFileDialog = New SaveFileDialog()
         End Sub
 
         Protected Overloads Sub Finalize()
@@ -78,11 +80,21 @@ Namespace ImageProcessing
         Public Function ShowDialog() As Boolean
             Dim bRst As Boolean = False
 
-            If (m_openFileDialog.ShowDialog() = True) Then
+            If (m_saveFileDialog.ShowDialog() = True) Then
                 bRst = True
             End If
 
             Return bRst
         End Function
+
+        Public Sub SreamWrite(_str As String)
+            Dim stream As Stream = m_saveFileDialog.OpenFile()
+            Dim streamWriter As StreamWriter = New StreamWriter(stream, Encoding.GetEncoding("UTF-8"))
+            streamWriter.Write(_str)
+            streamWriter.Close()
+            stream.Close()
+
+            Return
+        End Sub
     End Class
 End Namespace

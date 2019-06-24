@@ -14,6 +14,7 @@
 
         Public Const MENU_SETTING_IMAGE_PROCESSING As String = "Image Processing"
         Public Const MENU_FILE_END As String = "End(_X)"
+        Public Const MENU_SAVE_FILE As String = "Save Csv..."
         Public Const BTN_OK As String = "btnOk"
         Public Const BTN_CANCEL As String = "btnCancel"
         Public Const IMG_NAME_EDGE_DETECTION As String = "EdgeDetection"

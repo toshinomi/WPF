@@ -269,6 +269,7 @@ namespace ImageProcessing
             stopwatch.Start();
             btnStop.IsEnabled = true;
             btnSaveImage.IsEnabled = false;
+            btnShowHistgram.IsEnabled = false;
             bool bResult = await TaskWorkImageProcessing();
             if (bResult)
             {
@@ -293,6 +294,7 @@ namespace ImageProcessing
             }
             Dispatcher.Invoke(new Action(SetButtonEnable));
             menuMain.IsEnabled = true;
+            btnShowHistgram.IsEnabled = true;
 
             stopwatch = null;
             m_tokenSource = null;

@@ -181,6 +181,7 @@ Class MainWindow
         btnFileSelect.IsEnabled = True
         btnAllClear.IsEnabled = True
         btnStart.IsEnabled = False
+        btnSaveImage.IsEnabled = False
 
         If (m_histgram IsNot Nothing) Then
             m_histgram.Close()

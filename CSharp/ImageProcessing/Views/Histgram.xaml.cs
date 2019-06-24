@@ -62,7 +62,7 @@ namespace ImageProcessing
 
             var chartValue1 = new ChartValues<int>();
             var chartValue2 = new ChartValues<int>();
-            for (int nIdx = 0; nIdx < 256; nIdx++)
+            for (int nIdx = 0; nIdx < (m_nHistgram.Length >> 1); nIdx++)
             {
                 chartValue1.Add(m_nHistgram[0, nIdx]);
                 if (m_wbitmap == null)
@@ -174,7 +174,7 @@ namespace ImageProcessing
             {
                 String strDelmiter = ",";
                 StringBuilder stringBuilder = new StringBuilder();
-                for (int nIdx = 0; nIdx < 256; nIdx++)
+                for (int nIdx = 0; nIdx < (m_nHistgram.Length >> 1); nIdx++)
                 {
                     stringBuilder.Append(nIdx).Append(strDelmiter);
                     stringBuilder.Append(m_nHistgram[0, nIdx]).Append(strDelmiter);

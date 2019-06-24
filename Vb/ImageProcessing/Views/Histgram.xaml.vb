@@ -54,7 +54,7 @@ Public Class Histgram
 
         Dim chartValue1 = New ChartValues(Of Integer)()
         Dim chartValue2 = New ChartValues(Of Integer)()
-        For nIdx As Integer = 0 To 256 - 1 Step 1
+        For nIdx As Integer = 0 To (m_nHistgram.Length >> 1) - 1 Step 1
             chartValue1.Add(m_nHistgram(0, nIdx))
             If (m_wbitmap Is Nothing) Then
                 chartValue2.Add(0)

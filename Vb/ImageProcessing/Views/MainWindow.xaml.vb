@@ -205,6 +205,7 @@ Class MainWindow
         Stopwatch.Start()
         btnStop.IsEnabled = True
         btnSaveImage.IsEnabled = False
+        btnShowHistgram.IsEnabled = False
         Dim bResult As Boolean = Await TaskWorkImageProcessing()
         If (bResult) Then
             Dim bitmap As BitmapImage = New BitmapImage()
@@ -227,6 +228,7 @@ Class MainWindow
         End If
         Dispatcher.Invoke(New Action(AddressOf SetButtonEnable))
         menuMain.IsEnabled = True
+        btnShowHistgram.IsEnabled = True
 
         Stopwatch = Nothing
         m_tokenSource = Nothing

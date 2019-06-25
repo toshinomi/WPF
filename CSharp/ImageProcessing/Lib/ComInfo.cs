@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,5 +41,15 @@ namespace ImageProcessing
         public const string IMG_NAME_BINARIZATION = "Binarization";
         public const string IMG_NAME_GRAY_SCALE_2DIFF = "GrayScale 2Diff";
         public const string IMG_NAME_COLOR_REVERSAL = "ColorReversal";
+    }
+
+    public class GraphData
+    {
+        private SeriesCollection m_seriesCollection;
+        public SeriesCollection seriesCollection
+        {
+            set { m_seriesCollection = value; }
+            get { return m_seriesCollection; }
+        }
     }
 }

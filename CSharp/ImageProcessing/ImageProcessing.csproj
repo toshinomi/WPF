@@ -71,6 +71,7 @@
     <Compile Include="ImgProc\ColorReversal.cs" />
     <Compile Include="Lib\ComImgInfo.cs" />
     <Compile Include="Lib\ComImgProc.cs" />
+    <Compile Include="Lib\ComHistgramLiveCharts.cs" />
     <Compile Include="Lib\ComOpenFileDialog.cs" />
     <Compile Include="Lib\ComSaveFileDialog.cs" />
     <Compile Include="ImgProc\GrayScale.cs" />

@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="ImgProc\Binarization.cs" />
     <Compile Include="ImgProc\ColorReversal.cs" />
+    <Compile Include="Lib\ComCharts.cs" />
     <Compile Include="Lib\ComImgInfo.cs" />
     <Compile Include="Lib\ComImgProc.cs" />
     <Compile Include="Lib\ComHistgramLiveCharts.cs" />

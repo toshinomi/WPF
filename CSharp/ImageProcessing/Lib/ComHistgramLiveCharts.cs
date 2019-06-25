@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using OxyPlot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,11 @@ namespace ImageProcessing
             graphData.seriesCollection = seriesCollection;
 
             return graphData;
+        }
+
+        public override List<DataPoint> DrawHistgram2()
+        {
+            throw new NotImplementedException();
         }
     }
 }

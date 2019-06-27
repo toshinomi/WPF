@@ -32,7 +32,7 @@ namespace ImageProcessing
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
         private string m_strCurImgName;
-        private Histgram m_histgram;
+        private HistgramLiveCharts m_histgram;
 
         public MainWindow()
         {
@@ -203,7 +203,7 @@ namespace ImageProcessing
 
                 if (m_histgram == null)
                 {
-                    m_histgram = new Histgram();
+                    m_histgram = new HistgramLiveCharts();
                 }
 
                 m_histgram.Bitmap = m_bitmap;
@@ -521,7 +521,7 @@ namespace ImageProcessing
             {
                 m_histgram.Close();
                 m_histgram = null;
-                m_histgram = new Histgram();
+                m_histgram = new HistgramLiveCharts();
             }
 
             m_histgram.Bitmap = m_bitmap;

@@ -84,14 +84,14 @@
     <Compile Include="Lib\ComSaveFileDialog.cs" />
     <Compile Include="ImgProc\GrayScale.cs" />
     <Compile Include="ImgProc\GrayScale2Diff.cs" />
-    <Compile Include="Views\Histgram.xaml.cs">
-      <DependentUpon>Histgram.xaml</DependentUpon>
+    <Compile Include="Views\HistgramLiveCharts.xaml.cs">
+      <DependentUpon>HistgramLiveCharts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lib\ComImageProcessingType.cs" />
     <Compile Include="Views\SettingImageProcessing.xaml.cs">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Histgram.xaml">
+    <Page Include="Views\HistgramLiveCharts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,7 +23,7 @@ namespace ImageProcessing
     /// <summary>
     /// Histgram.xaml の相互作用ロジック
     /// </summary>
-    public partial class Histgram : Window
+    public partial class HistgramLiveCharts : Window
     {
         private ComHistgramLiveCharts m_histramgChart;
         private bool m_bIsOpen;
@@ -46,7 +46,7 @@ namespace ImageProcessing
             get { return m_bIsOpen; }
         }
 
-        public Histgram()
+        public HistgramLiveCharts()
         {
             InitializeComponent();
 

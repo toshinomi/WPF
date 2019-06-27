@@ -88,10 +88,17 @@
       <DependentUpon>HistgramLiveCharts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lib\ComImageProcessingType.cs" />
+    <Compile Include="Views\HistgramOxyPlot.xaml.cs">
+      <DependentUpon>HistgramOxyPlot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingImageProcessing.xaml.cs">
       <DependentUpon>SettingImageProcessing.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\HistgramLiveCharts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistgramOxyPlot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

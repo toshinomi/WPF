@@ -75,6 +75,5 @@
                 <MenuItem Header="Image Processing" Click="OnClickMenu"/>
             </MenuItem>
         </Menu>
-        <!--<Button Content="Button" Canvas.Left="190" Width="75" Click="Button_Click"/>-->
     </Canvas>
 </Window>

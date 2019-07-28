@@ -446,8 +446,15 @@ namespace ImageProcessing
                     WriteableBitmap bitmap = GetImage(m_strCurImgName);
                     if (bitmap != null)
                     {
-                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
-                        encoder.Save(stream);
+                        try
+                        {
+                            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                            encoder.Save(stream);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show(this, "Save Image File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }

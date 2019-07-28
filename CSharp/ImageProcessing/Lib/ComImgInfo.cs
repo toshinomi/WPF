@@ -12,6 +12,8 @@ namespace ImageProcessing
         private ComEdgeDetectionInfo m_edgeDetectoinInfo;
         private ComGrayScaleInfo m_grayScaleInfo;
         private ComBinarizationInfo m_binarizationInfo;
+        private ComGrayScale2DiffInfo m_grayScale2DiffInfo;
+        private ComColorReversalInfo m_colorReversalInfo;
 
         public string CurImgName
         {
@@ -37,11 +39,25 @@ namespace ImageProcessing
             get { return m_binarizationInfo; }
         }
 
+        public ComGrayScale2DiffInfo GrayScale2DiffInfo
+        {
+            set { m_grayScale2DiffInfo = value; }
+            get { return m_grayScale2DiffInfo; }
+        }
+
+        public ComColorReversalInfo ColorReversalInfo
+        {
+            set { m_colorReversalInfo = value; }
+            get { return m_colorReversalInfo; }
+        }
+
         public ComImgInfo()
         {
             m_edgeDetectoinInfo = new ComEdgeDetectionInfo();
             m_grayScaleInfo = new ComGrayScaleInfo();
             m_binarizationInfo = new ComBinarizationInfo();
+            m_grayScale2DiffInfo = new ComGrayScale2DiffInfo();
+            m_colorReversalInfo = new ComColorReversalInfo();
         }
 
         ~ComImgInfo()
@@ -85,6 +101,28 @@ namespace ImageProcessing
         }
 
         ~ComBinarizationInfo()
+        {
+        }
+    }
+
+    public class ComGrayScale2DiffInfo
+    {
+        public ComGrayScale2DiffInfo()
+        {
+        }
+
+        ~ComGrayScale2DiffInfo()
+        {
+        }
+    }
+
+    public class ComColorReversalInfo
+    {
+        public ComColorReversalInfo()
+        {
+        }
+
+        ~ComColorReversalInfo()
         {
         }
     }

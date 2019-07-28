@@ -74,15 +74,25 @@ namespace ImageProcessing
             return bRst;
         }
 
-        public void StreamWrite(string _str)
+        public bool StreamWrite(string _str)
         {
-            Stream stream = m_saveFileDialog.OpenFile();
+            Stream stream;
+            bool bRst = true;
+            try
+            {
+                stream = m_saveFileDialog.OpenFile();
+            }
+            catch (Exception)
+            {
+                bRst = true;
+                return bRst;
+            }
             StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("UTF-8"));
             streamWriter.Write(_str);
             streamWriter.Close();
             stream.Close();
 
-            return;
+            return bRst;
         }
     }
 }

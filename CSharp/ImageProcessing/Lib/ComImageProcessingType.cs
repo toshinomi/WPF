@@ -8,19 +8,19 @@ namespace ImageProcessing
 {
     class ComImageProcessingType : ICloneable
     {
-        private int m_Id;
-        private string m_Name;
+        private int m_nId;
+        private string m_strName;
 
         public int Id
         {
-            set { m_Id = value; }
-            get { return m_Id; }
+            set { m_nId = value; }
+            get { return m_nId; }
         }
 
         public string Name
         {
-            set { m_Name = value; }
-            get { return m_Name; }
+            set { m_strName = value; }
+            get { return m_strName; }
         }
 
         public ComImageProcessingType()
@@ -28,10 +28,10 @@ namespace ImageProcessing
 
         }
 
-        public ComImageProcessingType(int _Id, string _Nmae)
+        public ComImageProcessingType(int _nId, string _strNmae)
         {
-            m_Id = _Id;
-            m_Name = _Nmae;
+            m_nId = _nId;
+            m_strName = _strNmae;
         }
 
         ~ComImageProcessingType()

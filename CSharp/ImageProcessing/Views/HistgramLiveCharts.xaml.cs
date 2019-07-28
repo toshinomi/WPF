@@ -98,11 +98,15 @@ namespace ImageProcessing
                 for (int nIdx = 0; nIdx < (m_histramgChart.Histgram.Length >> 1); nIdx++)
                 {
                     stringBuilder.Append(nIdx).Append(strDelmiter);
-                    stringBuilder.Append(nHistgram[0, nIdx]).Append(strDelmiter);
-                    stringBuilder.Append(nHistgram[1, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.Original, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.After, nIdx]).Append(strDelmiter);
                     stringBuilder.Append(Environment.NewLine);
                 }
-                saveDialog.StreamWrite(stringBuilder.ToString());
+                if (!saveDialog.StreamWrite(stringBuilder.ToString()))
+                {
+                    MessageBox.Show(this, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
 
             return;

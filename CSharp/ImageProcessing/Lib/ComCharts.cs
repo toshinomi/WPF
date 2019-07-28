@@ -16,7 +16,7 @@ namespace ImageProcessing
 
         public ComCharts()
         {
-            m_nHistgram = new int[2, 256];
+            m_nHistgram = new int[(int)ComInfo.PictureType.MAX, ComInfo.RGB_MAX];
         }
 
         ~ComCharts()
@@ -45,14 +45,14 @@ namespace ImageProcessing
                         byte* pPixel = (byte*)wBitmap.BackBuffer + nIdxHeight * wBitmap.BackBufferStride + nIdxWidth * 4;
                         byte nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                        m_nHistgram[0, nGrayScale] += 1;
+                        m_nHistgram[(int)ComInfo.PictureType.Original, nGrayScale] += 1;
 
                         if (m_wbitmap != null)
                         {
                             pPixel = (byte*)m_wbitmap.BackBuffer + nIdxHeight * m_wbitmap.BackBufferStride + nIdxWidth * 4;
                             nGrayScale = (byte)((pPixel[(int)ComInfo.Pixel.B] + pPixel[(int)ComInfo.Pixel.G] + pPixel[(int)ComInfo.Pixel.R]) / 3);
 
-                            m_nHistgram[1, nGrayScale] += 1;
+                            m_nHistgram[(int)ComInfo.PictureType.After, nGrayScale] += 1;
                         }
                     }
                 }
@@ -63,8 +63,8 @@ namespace ImageProcessing
         {
             for (int nIdx = 0; nIdx < (m_nHistgram.Length >> 1); nIdx++)
             {
-                m_nHistgram[0, nIdx] = 0;
-                m_nHistgram[1, nIdx] = 0;
+                m_nHistgram[(int)ComInfo.PictureType.Original, nIdx] = 0;
+                m_nHistgram[(int)ComInfo.PictureType.After, nIdx] = 0;
             }
         }
     }

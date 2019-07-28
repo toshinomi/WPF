@@ -86,27 +86,9 @@ namespace ImageProcessing
 
         public void SaveCsv()
         {
-            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
-            saveDialog.Filter = "CSV|*.csv";
-            saveDialog.Title = "Save the csv file";
-            saveDialog.FileName = "default.csv";
-            if (saveDialog.ShowDialog() == true)
+            if (!m_histramgChart.SaveCsv())
             {
-                String strDelmiter = ",";
-                StringBuilder stringBuilder = new StringBuilder();
-                int[,] nHistgram = m_histramgChart.Histgram;
-                for (int nIdx = 0; nIdx < (m_histramgChart.Histgram.Length >> 1); nIdx++)
-                {
-                    stringBuilder.Append(nIdx).Append(strDelmiter);
-                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.Original, nIdx]).Append(strDelmiter);
-                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.After, nIdx]).Append(strDelmiter);
-                    stringBuilder.Append(Environment.NewLine);
-                }
-                if (!saveDialog.StreamWrite(stringBuilder.ToString()))
-                {
-                    MessageBox.Show(this, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                MessageBox.Show(this, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return;

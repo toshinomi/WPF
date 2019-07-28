@@ -32,7 +32,13 @@ namespace ImageProcessing
         private string m_strOpenFileName;
         private CancellationTokenSource m_tokenSource;
         private string m_strCurImgName;
+#if CHART_LIVE_CHART
         private HistgramLiveCharts m_histgram;
+#elif CHART_OXY_PLOT
+        private HistgramOxyPlot m_histgram;
+#else
+        private HistgramLiveCharts m_histgram;
+#endif
 
         public MainWindow()
         {
@@ -203,7 +209,13 @@ namespace ImageProcessing
 
                 if (m_histgram == null)
                 {
+#if CHART_LIVE_CHART
                     m_histgram = new HistgramLiveCharts();
+#elif CHART_OXY_PLOT
+                    m_histgram = new HistgramOxyPlot();
+#else
+                    m_histgram = new HistgramOxyPlot();
+#endif
                 }
 
                 m_histgram.Bitmap = m_bitmap;
@@ -528,7 +540,13 @@ namespace ImageProcessing
             {
                 m_histgram.Close();
                 m_histgram = null;
+#if CHART_LIVE_CHART
                 m_histgram = new HistgramLiveCharts();
+#elif CHART_OXY_PLOT
+                m_histgram = new HistgramOxyPlot();
+#else
+                m_histgram = new HistgramOxyPlot();
+#endif
             }
 
             m_histgram.Bitmap = m_bitmap;

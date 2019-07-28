@@ -49,14 +49,14 @@ namespace ImageProcessing
             var chartValue2 = new ChartValues<int>();
             for (int nIdx = 0; nIdx < (base.m_nHistgram.Length >> 1); nIdx++)
             {
-                chartValue1.Add(base.m_nHistgram[0, nIdx]);
+                chartValue1.Add(base.m_nHistgram[(int)ComInfo.PictureType.Original, nIdx]);
                 if (m_wbitmap == null)
                 {
                     chartValue2.Add(0);
                 }
                 else
                 {
-                    chartValue2.Add(base.m_nHistgram[1, nIdx]);
+                    chartValue2.Add(base.m_nHistgram[(int)ComInfo.PictureType.After, nIdx]);
                 }
             }
 
@@ -81,7 +81,7 @@ namespace ImageProcessing
             return graphData;
         }
 
-        public override List<DataPoint> DrawHistgram2()
+        public override PlotModel DrawHistgram2()
         {
             throw new NotImplementedException();
         }

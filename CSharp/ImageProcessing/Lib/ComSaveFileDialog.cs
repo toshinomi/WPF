@@ -84,7 +84,7 @@ namespace ImageProcessing
             }
             catch (Exception)
             {
-                bRst = true;
+                bRst = false;
                 return bRst;
             }
             StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("UTF-8"));

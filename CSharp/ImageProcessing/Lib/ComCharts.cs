@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ImageProcessing
@@ -24,7 +25,7 @@ namespace ImageProcessing
         }
 
         abstract public GraphData DrawHistgram();
-        abstract public List<DataPoint> DrawHistgram2();
+        abstract public PlotModel DrawHistgram2();
 
         public void CalHistgram()
         {
@@ -66,6 +67,34 @@ namespace ImageProcessing
                 m_nHistgram[(int)ComInfo.PictureType.Original, nIdx] = 0;
                 m_nHistgram[(int)ComInfo.PictureType.After, nIdx] = 0;
             }
+        }
+
+        public bool SaveCsv()
+        {
+            bool bRst = true;
+            ComSaveFileDialog saveDialog = new ComSaveFileDialog();
+            saveDialog.Filter = "CSV|*.csv";
+            saveDialog.Title = "Save the csv file";
+            saveDialog.FileName = "default.csv";
+            if (saveDialog.ShowDialog() == true)
+            {
+                String strDelmiter = ",";
+                StringBuilder stringBuilder = new StringBuilder();
+                int[,] nHistgram = m_nHistgram;
+                for (int nIdx = 0; nIdx < (m_nHistgram.Length >> 1); nIdx++)
+                {
+                    stringBuilder.Append(nIdx).Append(strDelmiter);
+                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.Original, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(nHistgram[(int)ComInfo.PictureType.After, nIdx]).Append(strDelmiter);
+                    stringBuilder.Append(Environment.NewLine);
+                }
+                if (!saveDialog.StreamWrite(stringBuilder.ToString()))
+                {
+                    bRst = false;
+                }
+            }
+
+            return bRst;
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImageProcessing"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="HistgramOxyPlot" Height="450" Width="800" Closing="OnClosingWindow">
+        Title="Histgram" Height="450" Width="800" Closing="OnClosingWindow">
     <Grid Background="LightSteelBlue">
         <oxy:PlotView x:Name="chart" Background="LightSteelBlue" Model="{Binding PModel}">
         </oxy:PlotView>

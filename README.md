@@ -11,5 +11,8 @@
 画像処理設定画面  
 ![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/SettingImageProcessing.png)
 
-ヒストグラム表示画面  
-![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/Histgram.png)
+ヒストグラム表示画面(LiveChart)  
+![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/HistgramLiveChart.png)
+
+ヒストグラム表示画面(OxyPlot)  
+![スクリーンショット](https://github.com/toshinomi/WPF_Sample/blob/master/HistgramOxyPlot.png)

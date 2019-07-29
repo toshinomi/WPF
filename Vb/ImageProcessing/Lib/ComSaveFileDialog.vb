@@ -87,14 +87,31 @@ Namespace ImageProcessing
             Return bRst
         End Function
 
-        Public Sub SreamWrite(_str As String)
-            Dim stream As Stream = m_saveFileDialog.OpenFile()
+        'Public Sub SreamWrite(_str As String)
+        '    Dim stream As Stream = m_saveFileDialog.OpenFile()
+        '    Dim streamWriter As StreamWriter = New StreamWriter(stream, Encoding.GetEncoding("UTF-8"))
+        '    streamWriter.Write(_str)
+        '    streamWriter.Close()
+        '    stream.Close()
+
+        '    Return
+        'End Sub
+
+        Public Function SreamWrite(_str As String)
+            Dim stream As Stream
+            Dim bRst As Boolean = True
+            Try
+                stream = m_saveFileDialog.OpenFile()
+            Catch ex As Exception
+                bRst = False
+                Return bRst
+            End Try
             Dim streamWriter As StreamWriter = New StreamWriter(stream, Encoding.GetEncoding("UTF-8"))
             streamWriter.Write(_str)
             streamWriter.Close()
             stream.Close()
 
-            Return
-        End Sub
+            Return bRst
+        End Function
     End Class
 End Namespace

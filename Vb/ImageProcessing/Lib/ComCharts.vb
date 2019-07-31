@@ -4,7 +4,7 @@ Imports System.Text
 
 Namespace ImageProcessing
     Public MustInherit Class ComCharts
-        Protected m_nHistgram(1, 255) As Integer
+        Protected m_nHistgram(ComInfo.PictureType.MAX - 1, ComInfo.RGB_MAX - 1) As Integer
         Protected m_bitmap As BitmapImage
         Protected m_wbitmap As WriteableBitmap
 

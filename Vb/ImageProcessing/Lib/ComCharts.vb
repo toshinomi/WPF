@@ -1,6 +1,6 @@
-﻿Imports OxyPlot
-Imports System.Runtime.InteropServices.Marshal
+﻿Imports System.Runtime.InteropServices.Marshal
 Imports System.Text
+Imports OxyPlot
 
 Namespace ImageProcessing
     Public MustInherit Class ComCharts

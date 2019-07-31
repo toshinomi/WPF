@@ -86,6 +86,7 @@
     <Compile Include="ImgProc\Binarization.vb" />
     <Compile Include="ImgProc\ColorReversal.vb" />
     <Compile Include="Lib\ComCharts.vb" />
+    <Compile Include="Lib\ComHistgramLiveCharts.vb" />
     <Compile Include="Lib\ComImgInfo.vb" />
     <Compile Include="Lib\ComImgProc.vb" />
     <Compile Include="Lib\ComOpenFileDialog.vb" />

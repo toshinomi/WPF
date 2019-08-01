@@ -45,7 +45,7 @@ Namespace ImageProcessing
             Dim chartValue1 = New ChartValues(Of Integer)
             Dim chartValue2 = New ChartValues(Of Integer)
 
-            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) Step 1
+            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) - 1 Step 1
                 chartValue1.Add(MyBase.m_nHistgram(ComInfo.PictureType.Original, nIdx))
                 If (m_wbitmap Is Nothing) Then
                     chartValue2.Add(0)

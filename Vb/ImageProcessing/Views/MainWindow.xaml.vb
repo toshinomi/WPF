@@ -9,7 +9,8 @@ Class MainWindow
     Private m_strOpenFileName As String
     Private m_tokenSource As CancellationTokenSource
     Private m_strCurImgName As String
-    Private m_histgram As Histgram
+    'Private m_histgram As Histgram
+    Private m_histgram As HistgramLiveCharts
 
     Public Sub New()
 
@@ -145,7 +146,8 @@ Class MainWindow
             textBoxTime.Text = ""
 
             If (m_histgram Is Nothing) Then
-                m_histgram = New Histgram()
+                'm_histgram = New Histgram()
+                m_histgram = New HistgramLiveCharts()
             End If
 
             m_histgram.Bitmap = m_bitmap
@@ -413,7 +415,8 @@ Class MainWindow
         If (m_histgram IsNot Nothing) Then
             m_histgram.Close()
             m_histgram = Nothing
-            m_histgram = New Histgram()
+            'm_histgram = New Histgram()
+            m_histgram = New HistgramLiveCharts()
         End If
 
         m_histgram.Bitmap = m_bitmap

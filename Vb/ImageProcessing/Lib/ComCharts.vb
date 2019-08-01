@@ -59,7 +59,7 @@ Namespace ImageProcessing
         End Sub
 
         Public Sub InitHistgram()
-            For nIdx As Integer = 0 To (m_nHistgram.Length >> 1) Step 1
+            For nIdx As Integer = 0 To (m_nHistgram.Length >> 1) - 1 Step 1
                 m_nHistgram(ComInfo.PictureType.Original, nIdx) = 0
                 m_nHistgram(ComInfo.PictureType.After, nIdx) = 0
             Next

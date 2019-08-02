@@ -1,0 +1,19 @@
+﻿<Window x:Class="ImageProcessing.HistgramOxyPlot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageProcessing"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="Histgram" Height="450" Width="800" Closing="OnClosingWindow">
+    <Grid Background="LightSteelBlue">
+        <oxy:PlotView x:Name="chart" Background="LightSteelBlue" Model="{Binding PModel}">
+        </oxy:PlotView>
+    </Grid>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Save Csv..." Click="OnClickMenu"/>
+        </ContextMenu>
+    </Window.ContextMenu>
+</Window>

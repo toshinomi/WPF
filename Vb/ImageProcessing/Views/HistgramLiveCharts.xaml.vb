@@ -5,24 +5,24 @@ Imports LiveCharts.Wpf
 Imports System.Text
 
 Public Class HistgramLiveCharts
-    Private m_histramgChart As ComHistgramLiveCharts
+    Private m_histgramChart As ComHistgramLiveCharts
     Private m_bIsOpen As Boolean
 
     Public Property Bitmap() As BitmapImage
         Set(value As BitmapImage)
-            m_histramgChart.Bitmap = value
+            m_histgramChart.Bitmap = value
         End Set
         Get
-            Return m_histramgChart.Bitmap
+            Return m_histgramChart.Bitmap
         End Get
     End Property
 
     Public Property WBitmap() As WriteableBitmap
         Set(value As WriteableBitmap)
-            m_histramgChart.WBitmap = value
+            m_histgramChart.WBitmap = value
         End Set
         Get
-            Return m_histramgChart.WBitmap
+            Return m_histgramChart.WBitmap
         End Get
     End Property
 
@@ -41,12 +41,12 @@ Public Class HistgramLiveCharts
         InitializeComponent()
 
         ' InitializeComponent() 呼び出しの後で初期化を追加します。
-        m_histramgChart = New ComHistgramLiveCharts()
+        m_histgramChart = New ComHistgramLiveCharts()
 
     End Sub
 
     Public Sub DrawHistgram()
-        Me.DataContext = m_histramgChart.DrawHistgram()
+        Me.DataContext = m_histgramChart.DrawHistgram()
 
         Dim graphData As GraphData = New GraphData()
 
@@ -71,7 +71,7 @@ Public Class HistgramLiveCharts
     End Sub
 
     Public Sub SaveCsv()
-        If (m_histramgChart.SaveCsv() = False) Then
+        If (m_histgramChart.SaveCsv() = False) Then
             MessageBox.Show(Me, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
     End Sub

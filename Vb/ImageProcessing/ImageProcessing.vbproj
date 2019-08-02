@@ -36,6 +36,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>ImageProcessing.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+    <DefineConstants>CHART_OXY_PLOT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>

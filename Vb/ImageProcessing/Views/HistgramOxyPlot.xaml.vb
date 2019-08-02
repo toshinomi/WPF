@@ -1,5 +1,4 @@
 ﻿Imports System.Runtime.InteropServices.Marshal
-Imports ImageProcessing.ImageProcessing
 
 Namespace ImageProcessing
     Public Class HistgramOxyPlot
@@ -44,9 +43,11 @@ Namespace ImageProcessing
         End Sub
 
         Public Sub DrawHistgram()
-            Me.DataContext = m_histgramChart.DrawHistgram2()
-
-            Dim graphData As GraphData = New GraphData()
+            If (chart.Model IsNot Nothing) Then
+                chart.Model.Series.Clear()
+                chart.Model = Nothing
+            End If
+            chart.Model = m_histgramChart.DrawHistgram2()
 
             Return
         End Sub

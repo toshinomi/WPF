@@ -9,8 +9,13 @@ Class MainWindow
     Private m_strOpenFileName As String
     Private m_tokenSource As CancellationTokenSource
     Private m_strCurImgName As String
-    'Private m_histgram As Histgram
+#If CHART_LIVE_CHART Then
     Private m_histgram As HistgramLiveCharts
+#ElseIf CHART_OXY_PLOT Then
+    Private m_histgram As HistgramOxyPlot
+#Else
+    Private m_histgram As HistgramOxyPlot
+#End If
 
     Public Sub New()
 
@@ -146,8 +151,13 @@ Class MainWindow
             textBoxTime.Text = ""
 
             If (m_histgram Is Nothing) Then
-                'm_histgram = New Histgram()
+#If CHART_LIVE_CHART Then
                 m_histgram = New HistgramLiveCharts()
+#ElseIf CHART_OXY_PLOT Then
+                m_histgram = New HistgramOxyPlot()
+#Else
+                m_histgram = New HistgramOxyPlot()
+#End If
             End If
 
             m_histgram.Bitmap = m_bitmap
@@ -415,8 +425,13 @@ Class MainWindow
         If (m_histgram IsNot Nothing) Then
             m_histgram.Close()
             m_histgram = Nothing
-            'm_histgram = New Histgram()
+#If CHART_LIVE_CHART Then
             m_histgram = New HistgramLiveCharts()
+#ElseIf CHART_OXY_PLOT Then
+            m_histgram = New HistgramOxyPlot()
+#Else
+            m_histgram = New HistgramOxyPlot()
+#End If
         End If
 
         m_histgram.Bitmap = m_bitmap

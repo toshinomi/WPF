@@ -19,19 +19,19 @@ namespace ImageProcessing
     /// </summary>
     public partial class HistgramOxyPlot : Window
     {
-        private ComHistgramOxyPlot m_histramgChart;
+        private ComHistgramOxyPlot m_histgramChart;
         private bool m_bIsOpen;
 
         public BitmapImage Bitmap
         {
-            set { m_histramgChart.Bitmap = value; }
-            get { return m_histramgChart.Bitmap; }
+            set { m_histgramChart.Bitmap = value; }
+            get { return m_histgramChart.Bitmap; }
         }
 
         public WriteableBitmap WBitmap
         {
-            set { m_histramgChart.WBitmap = value; }
-            get { return m_histramgChart.WBitmap; }
+            set { m_histgramChart.WBitmap = value; }
+            get { return m_histgramChart.WBitmap; }
         }
 
         public bool IsOpen
@@ -44,7 +44,7 @@ namespace ImageProcessing
         {
             InitializeComponent();
 
-            m_histramgChart = new ComHistgramOxyPlot();
+            m_histgramChart = new ComHistgramOxyPlot();
         }
 
         public void DrawHistgram()
@@ -54,7 +54,7 @@ namespace ImageProcessing
                 chart.Model.Series.Clear();
                 chart.Model = null;
             }
-            chart.Model = m_histramgChart.DrawHistgram2();
+            chart.Model = m_histgramChart.DrawHistgram2();
 
             return;
         }
@@ -85,7 +85,7 @@ namespace ImageProcessing
 
         public void SaveCsv()
         {
-            if (!m_histramgChart.SaveCsv())
+            if (!m_histgramChart.SaveCsv())
             {
                 MessageBox.Show(this, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

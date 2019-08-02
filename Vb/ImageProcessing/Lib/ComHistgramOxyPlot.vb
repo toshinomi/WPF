@@ -57,7 +57,7 @@ Namespace ImageProcessing
 
             Dim dataList1 = New List(Of DataPoint)
 
-            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) Step 1
+            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) - 1 Step 1
                 Dim DataPoint = New DataPoint(nIdx, MyBase.m_nHistgram(ComInfo.PictureType.Original, nIdx))
                 dataList1.Add(DataPoint)
             Next
@@ -71,7 +71,7 @@ Namespace ImageProcessing
 
             Dim dataList2 = New List(Of DataPoint)
 
-            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) Step 1
+            For nIdx As Integer = 0 To (MyBase.m_nHistgram.Length >> 1) - 1 Step 1
                 Dim DataPoint = New DataPoint(nIdx, MyBase.m_nHistgram(ComInfo.PictureType.After, nIdx))
                 dataList2.Add(DataPoint)
             Next

@@ -25,19 +25,19 @@ namespace ImageProcessing
     /// </summary>
     public partial class HistgramLiveCharts : Window
     {
-        private ComHistgramLiveCharts m_histramgChart;
+        private ComHistgramLiveCharts m_histgramChart;
         private bool m_bIsOpen;
 
         public BitmapImage Bitmap
         {
-            set { m_histramgChart.Bitmap = value; }
-            get { return m_histramgChart.Bitmap; }
+            set { m_histgramChart.Bitmap = value; }
+            get { return m_histgramChart.Bitmap; }
         }
 
         public WriteableBitmap WBitmap
         {
-            set { m_histramgChart.WBitmap = value; }
-            get { return m_histramgChart.WBitmap; }
+            set { m_histgramChart.WBitmap = value; }
+            get { return m_histgramChart.WBitmap; }
         }
 
         public bool IsOpen
@@ -50,12 +50,12 @@ namespace ImageProcessing
         {
             InitializeComponent();
 
-            m_histramgChart = new ComHistgramLiveCharts();
+            m_histgramChart = new ComHistgramLiveCharts();
         }
 
         public void DrawHistgram()
         {
-            this.DataContext = m_histramgChart.DrawHistgram();
+            this.DataContext = m_histgramChart.DrawHistgram();
 
             return;
         }
@@ -86,7 +86,7 @@ namespace ImageProcessing
 
         public void SaveCsv()
         {
-            if (!m_histramgChart.SaveCsv())
+            if (!m_histgramChart.SaveCsv())
             {
                 MessageBox.Show(this, "Save CSV File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

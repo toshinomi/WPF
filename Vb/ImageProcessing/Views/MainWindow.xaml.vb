@@ -40,7 +40,7 @@ Class MainWindow
         canvasBinarization.IsEnabled = If(m_strCurImgName = ComInfo.IMG_NAME_BINARIZATION, True, False)
     End Sub
 
-    Protected Overloads Sub Finalize()
+    Protected Overrides Sub Finalize()
         MyBase.Finalize()
 
         m_bitmap = Nothing

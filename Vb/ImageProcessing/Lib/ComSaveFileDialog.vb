@@ -73,7 +73,7 @@ Namespace ImageProcessing
             m_saveFileDialog = New SaveFileDialog()
         End Sub
 
-        Protected Overloads Sub Finalize()
+        Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub
 

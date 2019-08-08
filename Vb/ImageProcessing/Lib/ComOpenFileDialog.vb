@@ -71,7 +71,7 @@ Namespace ImageProcessing
             m_openFileDialog = New OpenFileDialog()
         End Sub
 
-        Protected Overloads Sub Finalize()
+        Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub
 

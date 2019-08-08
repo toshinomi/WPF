@@ -4,6 +4,8 @@
         Private m_edgeDetectoinInfo As ComEdgeDetectionInfo
         Private m_grayScaleInfo As ComGrayScaleInfo
         Private m_binarizationInfo As ComBinarizationInfo
+        Private m_grayScale2DiffInfo As ComGrayScale2DiffInfo
+        Private m_colorReversalInfo As ComColorReversalInfo
 
         Public Property CurImgName() As String
             Get
@@ -41,24 +43,44 @@
             End Set
         End Property
 
+        Public Property ComGrayScale2DiffInfo() As ComGrayScale2DiffInfo
+            Get
+                Return m_grayScale2DiffInfo
+            End Get
+            Set(ByVal value As ComGrayScale2DiffInfo)
+                m_grayScale2DiffInfo = value
+            End Set
+        End Property
+
+        Public Property ComColorReversalInfo() As ComColorReversalInfo
+            Get
+                Return m_colorReversalInfo
+            End Get
+            Set(value As ComColorReversalInfo)
+                m_colorReversalInfo = value
+            End Set
+        End Property
+
         Public Sub New()
             m_edgeDetectoinInfo = New ComEdgeDetectionInfo()
             m_grayScaleInfo = New ComGrayScaleInfo()
             m_binarizationInfo = New ComBinarizationInfo()
+            m_grayScale2DiffInfo = New ComGrayScale2DiffInfo()
+            m_colorReversalInfo = New ComColorReversalInfo()
         End Sub
     End Class
 
     Public Class ComEdgeDetectionInfo
         Public Sub New()
         End Sub
-        Protected Overloads Sub Finalize()
+        Protected Overrides Sub Finalize()
         End Sub
     End Class
 
     Public Class ComGrayScaleInfo
         Public Sub New()
         End Sub
-        Protected Overloads Sub Finalize()
+        Protected Overrides Sub Finalize()
         End Sub
     End Class
 
@@ -76,7 +98,21 @@
 
         Public Sub New()
         End Sub
-        Protected Overloads Sub Finalize()
+        Protected Overrides Sub Finalize()
+        End Sub
+    End Class
+
+    Public Class ComGrayScale2DiffInfo
+        Public Sub New()
+        End Sub
+        Protected Overrides Sub Finalize()
+        End Sub
+    End Class
+
+    Public Class ComColorReversalInfo
+        Public Sub New()
+        End Sub
+        Protected Overrides Sub Finalize()
         End Sub
     End Class
 End Namespace

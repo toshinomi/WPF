@@ -54,7 +54,7 @@ namespace ImageProcessing
                 chart.Model.Series.Clear();
                 chart.Model = null;
             }
-            chart.Model = m_histgramChart.DrawHistgram2();
+            chart.Model = m_histgramChart.DrawHistgram();
 
             return;
         }

@@ -24,8 +24,8 @@ namespace ImageProcessing
         {
         }
 
-        abstract public GraphData DrawHistgram();
-        abstract public PlotModel DrawHistgram2();
+        //abstract public GraphData DrawHistgram();
+        //abstract public PlotModel DrawHistgram2();
 
         public void CalHistgram()
         {

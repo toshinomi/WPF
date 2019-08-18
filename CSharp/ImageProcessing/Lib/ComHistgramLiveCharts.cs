@@ -37,7 +37,7 @@ namespace ImageProcessing
         {
         }
 
-        public override GraphData DrawHistgram()
+        public GraphData DrawHistgram()
         {
             GraphData graphData = new GraphData();
 
@@ -79,11 +79,6 @@ namespace ImageProcessing
             graphData.seriesCollection = seriesCollection;
 
             return graphData;
-        }
-
-        public override PlotModel DrawHistgram2()
-        {
-            throw new NotImplementedException();
         }
     }
 }

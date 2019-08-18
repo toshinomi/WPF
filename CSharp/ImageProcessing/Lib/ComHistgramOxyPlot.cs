@@ -44,12 +44,7 @@ namespace ImageProcessing
         {
         }
 
-        public override GraphData DrawHistgram()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override PlotModel DrawHistgram2()
+        public  PlotModel DrawHistgram()
         {
             base.InitHistgram();
 

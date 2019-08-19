@@ -47,7 +47,7 @@ Namespace ImageProcessing
                 chart.Model.Series.Clear()
                 chart.Model = Nothing
             End If
-            chart.Model = m_histgramChart.DrawHistgram2()
+            chart.Model = m_histgramChart.DrawHistgram()
 
             Return
         End Sub

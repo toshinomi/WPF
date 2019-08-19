@@ -35,7 +35,7 @@ Namespace ImageProcessing
             MyBase.Finalize()
         End Sub
 
-        Public Overrides Function DrawHistgram() As GraphData
+        Public Function DrawHistgram() As GraphData
             Dim graphData = New GraphData()
 
             MyBase.InitHistgram()
@@ -74,10 +74,6 @@ Namespace ImageProcessing
 
             Return graphData
 
-        End Function
-
-        Public Overrides Function DrawHistgram2() As PlotModel
-            Throw New NotImplementedException()
         End Function
     End Class
 End Namespace

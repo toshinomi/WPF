@@ -46,11 +46,7 @@ Namespace ImageProcessing
             MyBase.Finalize()
         End Sub
 
-        Public Overrides Function DrawHistgram() As GraphData
-            Throw New NotImplementedException()
-        End Function
-
-        Public Overrides Function DrawHistgram2() As PlotModel
+        Public Function DrawHistgram() As PlotModel
             MyBase.InitHistgram()
 
             MyBase.CalHistgram()

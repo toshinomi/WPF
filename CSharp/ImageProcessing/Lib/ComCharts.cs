@@ -24,9 +24,6 @@ namespace ImageProcessing
         {
         }
 
-        //abstract public GraphData DrawHistgram();
-        //abstract public PlotModel DrawHistgram2();
-
         public void CalHistgram()
         {
             int nWidthSize = m_bitmap.PixelWidth;

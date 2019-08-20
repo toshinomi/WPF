@@ -15,9 +15,6 @@ Namespace ImageProcessing
             MyBase.Finalize()
         End Sub
 
-        'Public MustOverride Function DrawHistgram() As GraphData
-        'Public MustOverride Function DrawHistgram2() As PlotModel
-
         Public Sub CalHistgram()
             Dim nWidthSize As Integer = m_bitmap.PixelWidth
             Dim nHeightSize As Integer = m_bitmap.PixelHeight

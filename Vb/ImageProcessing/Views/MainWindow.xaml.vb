@@ -62,6 +62,7 @@ Class MainWindow
             Case ComInfo.IMG_NAME_COLOR_REVERSAL
                 m_imgProc = New ColorReversal(m_bitmap)
             Case Else
+                m_imgProc = Nothing
         End Select
 
         Return bRst
@@ -86,7 +87,6 @@ Class MainWindow
             Case ComInfo.IMG_NAME_COLOR_REVERSAL
                 Dim colorReversal As ColorReversal = DirectCast(m_imgProc, ColorReversal)
                 wBitmap = colorReversal.WriteableBitmap
-            Case Else
         End Select
 
         Return wBitmap
@@ -111,7 +111,6 @@ Class MainWindow
             Case ComInfo.IMG_NAME_COLOR_REVERSAL
                 Dim colorReversal As ColorReversal = DirectCast(m_imgProc, ColorReversal)
                 bRst = colorReversal.GoImgProc(_token)
-            Case Else
         End Select
 
         Return bRst

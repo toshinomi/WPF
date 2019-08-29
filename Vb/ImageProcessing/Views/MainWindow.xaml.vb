@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports System.Threading
-Imports ImageProcessing.ImageProcessing
 Imports Microsoft.Win32
 
 Class MainWindow
@@ -165,7 +164,7 @@ Class MainWindow
                 m_histgram.DrawHistgram()
             End If
         End If
-            Return
+        Return
     End Sub
 
     Public Sub LoadImage()

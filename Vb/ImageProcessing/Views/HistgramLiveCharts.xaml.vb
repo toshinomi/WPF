@@ -1,6 +1,5 @@
 ﻿Imports LiveCharts
 Imports System.Runtime.InteropServices.Marshal
-Imports ImageProcessing.ImageProcessing
 Imports LiveCharts.Wpf
 Imports System.Text
 

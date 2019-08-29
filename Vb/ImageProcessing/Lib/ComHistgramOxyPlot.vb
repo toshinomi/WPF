@@ -1,8 +1,7 @@
 ﻿Imports OxyPlot
 Imports OxyPlot.Series
 
-Namespace ImageProcessing
-    Public Class ComHistgramOxyPlot : Inherits ComCharts
+Public Class ComHistgramOxyPlot : Inherits ComCharts
         Private m_pModel As PlotModel
 
         Public Property PModel() As PlotModel
@@ -81,5 +80,4 @@ Namespace ImageProcessing
 
             Return m_pModel
         End Function
-    End Class
-End Namespace
+End Class

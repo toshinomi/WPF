@@ -4,126 +4,123 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing
+public class ComImgInfo
 {
-    public class ComImgInfo
+    private string m_strCurImgName;
+    private ComEdgeDetectionInfo m_edgeDetectoinInfo;
+    private ComGrayScaleInfo m_grayScaleInfo;
+    private ComBinarizationInfo m_binarizationInfo;
+    private ComGrayScale2DiffInfo m_grayScale2DiffInfo;
+    private ComColorReversalInfo m_colorReversalInfo;
+
+    public string CurImgName
     {
-        private string m_strCurImgName;
-        private ComEdgeDetectionInfo m_edgeDetectoinInfo;
-        private ComGrayScaleInfo m_grayScaleInfo;
-        private ComBinarizationInfo m_binarizationInfo;
-        private ComGrayScale2DiffInfo m_grayScale2DiffInfo;
-        private ComColorReversalInfo m_colorReversalInfo;
-
-        public string CurImgName
-        {
-            set { m_strCurImgName = value; }
-            get { return m_strCurImgName; }
-        }
-
-        public ComEdgeDetectionInfo EdgeDetectoinInfo
-        {
-            set { m_edgeDetectoinInfo = value; }
-            get { return m_edgeDetectoinInfo; }
-        }
-
-        public ComGrayScaleInfo GrayScaleInfo
-        {
-            set { m_grayScaleInfo = value; }
-            get { return m_grayScaleInfo; }
-        }
-
-        public ComBinarizationInfo BinarizationInfo
-        {
-            set { m_binarizationInfo = value; }
-            get { return m_binarizationInfo; }
-        }
-
-        public ComGrayScale2DiffInfo GrayScale2DiffInfo
-        {
-            set { m_grayScale2DiffInfo = value; }
-            get { return m_grayScale2DiffInfo; }
-        }
-
-        public ComColorReversalInfo ColorReversalInfo
-        {
-            set { m_colorReversalInfo = value; }
-            get { return m_colorReversalInfo; }
-        }
-
-        public ComImgInfo()
-        {
-            m_edgeDetectoinInfo = new ComEdgeDetectionInfo();
-            m_grayScaleInfo = new ComGrayScaleInfo();
-            m_binarizationInfo = new ComBinarizationInfo();
-            m_grayScale2DiffInfo = new ComGrayScale2DiffInfo();
-            m_colorReversalInfo = new ComColorReversalInfo();
-        }
-
-        ~ComImgInfo()
-        {
-        }
+        set { m_strCurImgName = value; }
+        get { return m_strCurImgName; }
     }
 
-    public class ComEdgeDetectionInfo
+    public ComEdgeDetectionInfo EdgeDetectoinInfo
     {
-        public ComEdgeDetectionInfo()
-        {
-        }
-
-        ~ComEdgeDetectionInfo()
-        {
-        }
+        set { m_edgeDetectoinInfo = value; }
+        get { return m_edgeDetectoinInfo; }
     }
 
-    public class ComGrayScaleInfo
+    public ComGrayScaleInfo GrayScaleInfo
     {
-        public ComGrayScaleInfo()
-        {
-        }
-
-        ~ComGrayScaleInfo()
-        {
-        }
+        set { m_grayScaleInfo = value; }
+        get { return m_grayScaleInfo; }
     }
 
-    public class ComBinarizationInfo
+    public ComBinarizationInfo BinarizationInfo
     {
-        private byte m_nThresh;
-        public byte Thresh
-        {
-            set { m_nThresh = value; }
-            get { return m_nThresh; }
-        }
-
-        public ComBinarizationInfo()
-        {
-        }
-
-        ~ComBinarizationInfo()
-        {
-        }
+        set { m_binarizationInfo = value; }
+        get { return m_binarizationInfo; }
     }
 
-    public class ComGrayScale2DiffInfo
+    public ComGrayScale2DiffInfo GrayScale2DiffInfo
     {
-        public ComGrayScale2DiffInfo()
-        {
-        }
-
-        ~ComGrayScale2DiffInfo()
-        {
-        }
+        set { m_grayScale2DiffInfo = value; }
+        get { return m_grayScale2DiffInfo; }
     }
 
-    public class ComColorReversalInfo
+    public ComColorReversalInfo ColorReversalInfo
     {
-        public ComColorReversalInfo()
-        {
-        }
+        set { m_colorReversalInfo = value; }
+        get { return m_colorReversalInfo; }
+    }
 
-        ~ComColorReversalInfo()
-        {
-        }
+    public ComImgInfo()
+    {
+        m_edgeDetectoinInfo = new ComEdgeDetectionInfo();
+        m_grayScaleInfo = new ComGrayScaleInfo();
+        m_binarizationInfo = new ComBinarizationInfo();
+        m_grayScale2DiffInfo = new ComGrayScale2DiffInfo();
+        m_colorReversalInfo = new ComColorReversalInfo();
+    }
+
+    ~ComImgInfo()
+    {
+    }
+}
+
+public class ComEdgeDetectionInfo
+{
+    public ComEdgeDetectionInfo()
+    {
+    }
+
+    ~ComEdgeDetectionInfo()
+    {
+    }
+}
+
+public class ComGrayScaleInfo
+{
+    public ComGrayScaleInfo()
+    {
+    }
+
+    ~ComGrayScaleInfo()
+    {
+    }
+}
+
+public class ComBinarizationInfo
+{
+    private byte m_nThresh;
+    public byte Thresh
+    {
+        set { m_nThresh = value; }
+        get { return m_nThresh; }
+    }
+
+    public ComBinarizationInfo()
+    {
+    }
+
+    ~ComBinarizationInfo()
+    {
+    }
+}
+
+public class ComGrayScale2DiffInfo
+{
+    public ComGrayScale2DiffInfo()
+    {
+    }
+
+    ~ComGrayScale2DiffInfo()
+    {
+    }
+}
+
+public class ComColorReversalInfo
+{
+    public ComColorReversalInfo()
+    {
+    }
+
+    ~ComColorReversalInfo()
+    {
     }
 }

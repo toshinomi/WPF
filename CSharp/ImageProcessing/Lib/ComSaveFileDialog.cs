@@ -6,93 +6,90 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing
+class ComSaveFileDialog
 {
-    class ComSaveFileDialog
+    protected SaveFileDialog m_saveFileDialog;
+
+    public String FileName
     {
-        protected SaveFileDialog m_saveFileDialog;
+        set { m_saveFileDialog.FileName = value; }
+        get { return m_saveFileDialog.FileName; }
+    }
+    public String InitialDirectory
+    {
+        set { m_saveFileDialog.InitialDirectory = value; }
+        get { return m_saveFileDialog.InitialDirectory; }
+    }
 
-        public String FileName
+    public String Filter
+    {
+        set { m_saveFileDialog.Filter = value; }
+        get { return m_saveFileDialog.Filter; }
+    }
+
+    public int FilterIndex
+    {
+        set { m_saveFileDialog.FilterIndex = value; }
+        get { return m_saveFileDialog.FilterIndex; }
+    }
+
+    public String Title
+    {
+        set { m_saveFileDialog.Title = value; }
+        get { return m_saveFileDialog.Title; }
+    }
+
+    public bool CheckFileExists
+    {
+        set { m_saveFileDialog.CheckFileExists = value; }
+        get { return m_saveFileDialog.CheckFileExists; }
+    }
+
+    public bool CheckPathExists
+    {
+        set { m_saveFileDialog.CheckPathExists = value; }
+        get { return m_saveFileDialog.CheckPathExists; }
+    }
+
+    public ComSaveFileDialog() : base()
+    {
+        m_saveFileDialog = new SaveFileDialog();
+    }
+
+    ~ComSaveFileDialog()
+    {
+    }
+
+    public bool ShowDialog()
+    {
+        bool bRst = false;
+
+        if (m_saveFileDialog.ShowDialog() == true)
         {
-            set { m_saveFileDialog.FileName = value; }
-            get { return m_saveFileDialog.FileName; }
+            bRst = true;
         }
-        public String InitialDirectory
+
+        return bRst;
+    }
+
+    public bool StreamWrite(string _str)
+    {
+        Stream stream;
+        bool bRst = true;
+        try
         {
-            set { m_saveFileDialog.InitialDirectory = value; }
-            get { return m_saveFileDialog.InitialDirectory; }
+            stream = m_saveFileDialog.OpenFile();
         }
-
-        public String Filter
+        catch (Exception)
         {
-            set { m_saveFileDialog.Filter = value; }
-            get { return m_saveFileDialog.Filter; }
-        }
-
-        public int FilterIndex
-        {
-            set { m_saveFileDialog.FilterIndex = value; }
-            get { return m_saveFileDialog.FilterIndex; }
-        }
-
-        public String Title
-        {
-            set { m_saveFileDialog.Title = value; }
-            get { return m_saveFileDialog.Title; }
-        }
-
-        public bool CheckFileExists
-        {
-            set { m_saveFileDialog.CheckFileExists = value; }
-            get { return m_saveFileDialog.CheckFileExists; }
-        }
-
-        public bool CheckPathExists
-        {
-            set { m_saveFileDialog.CheckPathExists = value; }
-            get { return m_saveFileDialog.CheckPathExists; }
-        }
-
-        public ComSaveFileDialog() : base()
-        {
-            m_saveFileDialog = new SaveFileDialog();
-        }
-
-        ~ComSaveFileDialog()
-        {
-        }
-
-        public bool ShowDialog()
-        {
-            bool bRst = false;
-
-            if (m_saveFileDialog.ShowDialog() == true)
-            {
-                bRst = true;
-            }
-
+            bRst = false;
             return bRst;
         }
+        StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("UTF-8"));
+        streamWriter.Write(_str);
+        streamWriter.Close();
+        stream.Close();
 
-        public bool StreamWrite(string _str)
-        {
-            Stream stream;
-            bool bRst = true;
-            try
-            {
-                stream = m_saveFileDialog.OpenFile();
-            }
-            catch (Exception)
-            {
-                bRst = false;
-                return bRst;
-            }
-            StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("UTF-8"));
-            streamWriter.Write(_str);
-            streamWriter.Close();
-            stream.Close();
-
-            return bRst;
-        }
+        return bRst;
     }
 }

@@ -4,43 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing
+class ComImageProcessingType : ICloneable
 {
-    class ComImageProcessingType : ICloneable
+    private int m_nId;
+    private string m_strName;
+
+    public int Id
     {
-        private int m_nId;
-        private string m_strName;
+        set { m_nId = value; }
+        get { return m_nId; }
+    }
 
-        public int Id
-        {
-            set { m_nId = value; }
-            get { return m_nId; }
-        }
+    public string Name
+    {
+        set { m_strName = value; }
+        get { return m_strName; }
+    }
 
-        public string Name
-        {
-            set { m_strName = value; }
-            get { return m_strName; }
-        }
+    public ComImageProcessingType()
+    {
 
-        public ComImageProcessingType()
-        {
+    }
 
-        }
+    public ComImageProcessingType(int _nId, string _strNmae)
+    {
+        m_nId = _nId;
+        m_strName = _strNmae;
+    }
 
-        public ComImageProcessingType(int _nId, string _strNmae)
-        {
-            m_nId = _nId;
-            m_strName = _strNmae;
-        }
+    ~ComImageProcessingType()
+    {
+    }
 
-        ~ComImageProcessingType()
-        {
-        }
-
-        public object Clone()
-        {
-            return (ComImageProcessingType)MemberwiseClone();
-        }
+    public object Clone()
+    {
+        return (ComImageProcessingType)MemberwiseClone();
     }
 }

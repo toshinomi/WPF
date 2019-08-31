@@ -42,6 +42,11 @@ Public Class Binarization : Inherits ComImgProc
         Dim nIdxHeight As Integer
 
         For nIdxHeight = 0 To nHeightSize - 1 Step 1
+            If (_token.IsCancellationRequested = True) Then
+                bRst = False
+                Exit For
+            End If
+
             For nIdxWidth = 0 To nWidthSize - 1 Step 1
                 If (_token.IsCancellationRequested = True) Then
                     bRst = False

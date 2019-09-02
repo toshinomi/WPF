@@ -1,6 +1,4 @@
 ﻿Public Class SettingImageProcessing
-    Private m_items As List(Of ComImageProcessingType)
-
     Public Sub New()
 
         ' この呼び出しはデザイナーで必要です。
@@ -13,15 +11,15 @@
     End Sub
 
     Public Sub LoadParam()
-        m_items = New List(Of ComImageProcessingType)
-        m_items.Add(New ComImageProcessingType(My.Settings.ImgTypeEdgeId, My.Settings.ImgTypeEdgeName))
-        m_items.Add(New ComImageProcessingType(My.Settings.ImgTypeGrayScaleId, My.Settings.ImgTypeGrayScaleName))
-        m_items.Add(New ComImageProcessingType(My.Settings.ImgTypeBinarizationId, My.Settings.ImgTypeBinarizationName))
-        m_items.Add(New ComImageProcessingType(My.Settings.ImgTypeGrayScale2DiffId, My.Settings.ImgTypeGrayScale2DiffName))
-        m_items.Add(New ComImageProcessingType(My.Settings.ImgTypeColorReversalId, My.Settings.ImgTypeColorReversalName))
+        Dim items As List(Of ComImageProcessingType) = New List(Of ComImageProcessingType)
+        items.Add(New ComImageProcessingType(My.Settings.ImgTypeEdgeId, My.Settings.ImgTypeEdgeName))
+        items.Add(New ComImageProcessingType(My.Settings.ImgTypeGrayScaleId, My.Settings.ImgTypeGrayScaleName))
+        items.Add(New ComImageProcessingType(My.Settings.ImgTypeBinarizationId, My.Settings.ImgTypeBinarizationName))
+        items.Add(New ComImageProcessingType(My.Settings.ImgTypeGrayScale2DiffId, My.Settings.ImgTypeGrayScale2DiffName))
+        items.Add(New ComImageProcessingType(My.Settings.ImgTypeColorReversalId, My.Settings.ImgTypeColorReversalName))
 
-        cmbBoxImageProcessingType.ItemsSource = m_items
-        cmbBoxImageProcessingType.SelectedIndex = m_items.Find(Function(x) x.Name = My.Settings.ImgTypeSelectName)?.Id - 1
+        cmbBoxImageProcessingType.ItemsSource = items
+        cmbBoxImageProcessingType.SelectedIndex = items.Find(Function(x) x.Name = My.Settings.ImgTypeSelectName)?.Id - 1
 
         Return
     End Sub

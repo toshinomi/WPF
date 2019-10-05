@@ -37,7 +37,7 @@ namespace ImageProcessing
 #elif CHART_OXY_PLOT
         private HistgramOxyPlot m_histgram;
 #else
-        private HistgramLiveCharts m_histgram;
+        private HistgramOxyPlot m_histgram;
 #endif
 
         public MainWindow()

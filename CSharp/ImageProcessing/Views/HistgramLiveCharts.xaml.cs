@@ -53,6 +53,9 @@ namespace ImageProcessing
             m_histgramChart = new ComHistgramLiveCharts();
         }
 
+        /// <summary>
+        /// グラフの描画
+        /// </summary>
         public void DrawHistgram()
         {
             this.DataContext = m_histgramChart.DrawHistgram();
@@ -60,6 +63,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// Windowのクローズ処理
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キャンセルイベントのデータ</param>
         private void OnClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_bIsOpen = false;
@@ -67,6 +75,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// メニューのクリック
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickMenu(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
@@ -84,6 +97,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// CSVファイル保存
+        /// </summary>
         public void SaveCsv()
         {
             if (!m_histgramChart.SaveCsv())

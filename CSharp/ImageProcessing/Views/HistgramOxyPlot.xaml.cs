@@ -22,24 +22,36 @@ namespace ImageProcessing
         private ComHistgramOxyPlot m_histgramChart;
         private bool m_bIsOpen;
 
+        /// <summary>
+        /// ビットマップ
+        /// </summary>
         public BitmapImage Bitmap
         {
             set { m_histgramChart.Bitmap = value; }
             get { return m_histgramChart.Bitmap; }
         }
 
+        /// <summary>
+        /// Writeableなビットマップ
+        /// </summary>
         public WriteableBitmap WBitmap
         {
             set { m_histgramChart.WBitmap = value; }
             get { return m_histgramChart.WBitmap; }
         }
 
+        /// <summary>
+        /// Windowのオープン状態
+        /// </summary>
         public bool IsOpen
         {
             set { m_bIsOpen = value; }
             get { return m_bIsOpen; }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public HistgramOxyPlot()
         {
             InitializeComponent();
@@ -47,6 +59,9 @@ namespace ImageProcessing
             m_histgramChart = new ComHistgramOxyPlot();
         }
 
+        /// <summary>
+        /// グラフの描画
+        /// </summary>
         public void DrawHistgram()
         {
             if (chart.Model != null)
@@ -59,6 +74,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// Windowのクローズ処理
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キャンセルイベントのデータ</param>
         private void OnClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_bIsOpen = false;
@@ -66,6 +86,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// メニューのクリック
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickMenu(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
@@ -83,6 +108,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// CSVファイル保存
+        /// </summary>
         public void SaveCsv()
         {
             if (!m_histgramChart.SaveCsv())

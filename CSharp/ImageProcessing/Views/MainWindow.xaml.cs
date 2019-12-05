@@ -40,6 +40,9 @@ namespace ImageProcessing
         private HistgramOxyPlot m_histgram;
 #endif
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -60,6 +63,9 @@ namespace ImageProcessing
             canvasBinarization.IsEnabled = m_strCurImgName == ComInfo.IMG_NAME_BINARIZATION ? true : false;
         }
 
+        /// <summary>
+        /// デスクトラクタ
+        /// </summary>
         ~MainWindow()
         {
             m_bitmap = null;
@@ -67,10 +73,12 @@ namespace ImageProcessing
             m_imgProc = null;
         }
 
-        public bool SelectLoadImage(string _strImgName)
+        /// <summary>
+        /// 対象の画像処理オブジェクトにイメージをロードする
+        /// </summary>
+        /// <param name="_strImgName">画像処理オブジェクトの名称</param>
+        public void SelectLoadImage(string _strImgName)
         {
-            bool bRst = true;
-
             if (m_imgProc != null)
             {
                 m_imgProc = null;
@@ -97,9 +105,14 @@ namespace ImageProcessing
                     break;
             }
 
-            return bRst;
+            return;
         }
 
+        /// <summary>
+        /// 対象の画像処理オブジェクトからWriteableBitmapを取得する
+        /// </summary>
+        /// <param name="_strImgName">画像処理オブジェクトの名称</param>
+        /// <returns>Writeableなビットマップ</returns>
         public WriteableBitmap SelectGetBitmap(string _strImgName)
         {
             WriteableBitmap wBitmap = null;
@@ -133,6 +146,11 @@ namespace ImageProcessing
             return wBitmap;
         }
 
+        /// <summary>
+        /// 対象の画像処理オブジェクトを実行する
+        /// </summary>
+        /// <param name="_strImgName">画像処理オブジェクトの名称</param>
+        /// <returns>画像処理の実行結果 成功/失敗</returns>
         public bool SelectGoImgProc(ComImgInfo _comImgInfo, CancellationToken _token)
         {
             bool bRst = true;
@@ -167,6 +185,9 @@ namespace ImageProcessing
             return bRst;
         }
 
+        /// <summary>
+        /// ボタンのEnableを制御する
+        /// </summary>
         public void SetButtonEnable()
         {
             btnFileSelect.IsEnabled = true;
@@ -177,6 +198,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 時間を表示するテキストボックスに時間を設定する
+        /// </summary>
         public void SetTextTime(long _lTime)
         {
             textBoxTime.Text = _lTime.ToString();
@@ -184,6 +208,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// ファイル選択ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnFileSelect(object sender, RoutedEventArgs e)
         {
             ComOpenFileDialog openFileDlg = new ComOpenFileDialog();
@@ -228,6 +257,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// イメージのロード処理
+        /// </summary>
         public void LoadImage()
         {
             m_bitmap = new BitmapImage();
@@ -241,6 +273,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// オールクリアボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnAllClear(object sender, RoutedEventArgs e)
         {
             pictureBoxOriginal.Source = null;
@@ -264,6 +301,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// スタートボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private async void OnClickBtnStart(object sender, RoutedEventArgs e)
         {
             pictureBoxAfter.Source = null;
@@ -314,6 +356,10 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 画像処理実行用のタスク
+        /// </summary>
+        /// <returns>画像処理の実行結果 成功/失敗</returns>
         public async Task<bool> TaskWorkImageProcessing()
         {
             m_tokenSource = new CancellationTokenSource();
@@ -327,6 +373,11 @@ namespace ImageProcessing
             return bRst;
         }
 
+        /// <summary>
+        /// ストップボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnStop(object sender, RoutedEventArgs e)
         {
             if (m_tokenSource != null)
@@ -337,6 +388,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// Windowsのクローズイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キャンセルイベントのデータ</param>
         private void OnClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (m_tokenSource != null)
@@ -353,6 +409,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// メニューのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickMenu(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
@@ -373,6 +434,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 設定画面の処理
+        /// </summary>
         public void ShowSettingImageProcessing()
         {
             SettingImageProcessing win = new SettingImageProcessing();
@@ -397,6 +461,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 画像処理のオブジェクトからイメージの取得
+        /// </summary>
+        /// <param name="_strImgName">画像処理の名称</param>
+        /// <returns>Writeableなビットマップ</returns>
         public WriteableBitmap GetImage(string _strImgName)
         {
             WriteableBitmap bitmap = null;
@@ -444,6 +513,11 @@ namespace ImageProcessing
             return bitmap;
         }
 
+        /// <summary>
+        /// イメージの保存ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
         {
             ComSaveFileDialog saveDialog = new ComSaveFileDialog();
@@ -474,6 +548,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 2値化の閾値のスライダのマウスアップイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">マウスボタンイベントのデータ</param>
         private void OnSliderPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             if (pictureBoxAfter.Source != null)
@@ -482,6 +561,11 @@ namespace ImageProcessing
             }
         }
 
+        /// <summary>
+        /// 2値化の閾値のスライダのキーアップイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キーボードイベントのデータ</param>
         private void OnSliderPreviewKeyUp(object sender, KeyboardEventArgs e)
         {
             if (pictureBoxAfter.Source != null)
@@ -490,6 +574,9 @@ namespace ImageProcessing
             }
         }
 
+        /// <summary>
+        /// 2値化のスライダを調整したときの処理
+        /// </summary>
         private async void ParamAjust()
         {
             pictureBoxAfter.Source = null;
@@ -529,6 +616,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// ヒスとブラム表示ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnShowHistgram(object sender, RoutedEventArgs e)
         {
             if (m_bitmap == null)

@@ -19,6 +19,9 @@ namespace ImageProcessing
     /// </summary>
     public partial class SettingImageProcessing : Window
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public SettingImageProcessing()
         {
             InitializeComponent();
@@ -26,10 +29,16 @@ namespace ImageProcessing
             LoadParam();
         }
 
+        /// <summary>
+        /// デスクトラクタ
+        /// </summary>
         ~SettingImageProcessing()
         {
         }
 
+        /// <summary>
+        /// 設定の読込
+        /// </summary>
         public void LoadParam()
         {
             List<ComImageProcessingType> items = new List<ComImageProcessingType>();
@@ -45,6 +54,9 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// 設定の保存
+        /// </summary>
         public void SaveParam()
         {
             ComImageProcessingType imgProcType = (ComImageProcessingType)cmbBoxImageProcessingType.SelectedItem;
@@ -54,6 +66,11 @@ namespace ImageProcessing
             return;
         }
 
+        /// <summary>
+        /// OKボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickOk(object sender, RoutedEventArgs e)
         {
             SaveParam();
@@ -61,6 +78,11 @@ namespace ImageProcessing
             Close();
         }
 
+        /// <summary>
+        /// Cancelボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickCancel(object sender, RoutedEventArgs e)
         {
             Close();

@@ -28,24 +28,36 @@ namespace ImageProcessing
         private ComHistgramLiveCharts m_histgramChart;
         private bool m_bIsOpen;
 
+        /// <summary>
+        /// ビットマップ
+        /// </summary>
         public BitmapImage Bitmap
         {
             set { m_histgramChart.Bitmap = value; }
             get { return m_histgramChart.Bitmap; }
         }
 
+        /// <summary>
+        /// Writeableなビットマップ
+        /// </summary>
         public WriteableBitmap WBitmap
         {
             set { m_histgramChart.WBitmap = value; }
             get { return m_histgramChart.WBitmap; }
         }
 
+        /// <summary>
+        /// Windowのオープン状態
+        /// </summary>
         public bool IsOpen
         {
             set { m_bIsOpen = value; }
             get { return m_bIsOpen; }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public HistgramLiveCharts()
         {
             InitializeComponent();

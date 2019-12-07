@@ -8,6 +8,10 @@ Public MustInherit Class ComImgProc
         m_bitmap = _bitmap
     End Sub
 
+    Public Overridable Sub Init()
+        m_bitmap = Nothing
+    End Sub
+
     Public Property Bitmap() As BitmapImage
         Get
             Return m_bitmap

@@ -1,17 +1,39 @@
 ﻿Imports System.Threading
 Imports System.Runtime.InteropServices.Marshal
 
+''' <summary>
+''' エッジ検出のロジック
+''' </summary>
 Public Class EdgeDetection : Inherits ComImgProc
     Private Const m_nMaskSize As Integer = 3
 
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
+    ''' <param name="_bitmap">ビットマップ</param>
     Public Sub New(_bitmap As BitmapImage)
         MyBase.New(_bitmap)
     End Sub
 
+    ''' <summary>
+    ''' デスクトラクタ
+    ''' </summary>
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
     End Sub
 
+    ''' <summary>
+    ''' 初期化
+    ''' </summary>
+    Public Overrides Sub Init()
+        MyBase.Init()
+    End Sub
+
+    ''' <summary>
+    ''' エッジ検出の実行
+    ''' </summary>
+    ''' <param name="_token">キャンセルトークン</param>
+    ''' <returns>実行結果 成功/失敗</returns>
     Public Overrides Function GoImgProc(_token As CancellationToken) As Boolean
         Dim bRst As Boolean = True
 

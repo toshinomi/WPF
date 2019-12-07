@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageProcessing.csproj", "{6D847EDC-D252-4B61-B805-3A6D4E17B21E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTImageProcessing", "..\UTImageProcessing\UTImageProcessing.csproj", "{784088D8-80C1-4F64-B8F0-C6B9B0C56028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6D847EDC-D252-4B61-B805-3A6D4E17B21E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D847EDC-D252-4B61-B805-3A6D4E17B21E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D847EDC-D252-4B61-B805-3A6D4E17B21E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784088D8-80C1-4F64-B8F0-C6B9B0C56028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784088D8-80C1-4F64-B8F0-C6B9B0C56028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784088D8-80C1-4F64-B8F0-C6B9B0C56028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784088D8-80C1-4F64-B8F0-C6B9B0C56028}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

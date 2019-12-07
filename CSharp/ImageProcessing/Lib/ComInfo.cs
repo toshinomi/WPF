@@ -75,6 +75,10 @@ public class ComInfo
 public class GraphData
 {
     private SeriesCollection m_seriesCollection;
+
+    /// <summary>
+    /// シリーズコレクション
+    /// </summary>
     public SeriesCollection seriesCollection
     {
         set { m_seriesCollection = value; }

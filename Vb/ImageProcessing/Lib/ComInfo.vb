@@ -3,7 +3,13 @@ Imports System.Runtime.InteropServices.Marshal
 Imports LiveCharts.Wpf
 Imports System.Text
 
+''' <summary>
+''' 共通情報のロジック
+''' </summary>
 Public Class ComInfo
+    ''' <summary>
+    ''' Pixelの列挙
+    ''' </summary>
     Public Enum Pixel
         B = 0
         G
@@ -11,6 +17,9 @@ Public Class ComInfo
         A
     End Enum
 
+    ''' <summary>
+    ''' 画像処理のタイプの列挙
+    ''' </summary>
     Public Enum ImgType
         EdgeDetection = 0
         GrayScale
@@ -20,12 +29,18 @@ Public Class ComInfo
         MAX
     End Enum
 
+    ''' <summary>
+    ''' 画像のタイプの列挙
+    ''' </summary>
     Public Enum ImgDataType
         Jpg = 0
         Png
         MAX
     End Enum
 
+    ''' <summary>
+    ''' 画像の状態の列挙
+    ''' </summary>
     Public Enum PictureType
         Original = 0
         After
@@ -46,8 +61,15 @@ Public Class ComInfo
     Public Const IMG_NAME_COLOR_REVERSAL = "ColorReversal"
 End Class
 
+''' <summary>
+''' グラフデータのロジック
+''' </summary>
 Public Class GraphData
     Private m_seriesCollection As SeriesCollection
+
+    ''' <summary>
+    ''' シリーズコレクション
+    ''' </summary>
     Public Property seriesCollection() As SeriesCollection
         Get
             Return m_seriesCollection

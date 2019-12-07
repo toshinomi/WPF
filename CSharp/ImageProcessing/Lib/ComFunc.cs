@@ -37,23 +37,23 @@ public class ComFunc
     /// <summary>
     /// long型のデータからbyte型のデータへの変換
     /// </summary>
-    /// <param name="_dValue">long型のデータ</param>
+    /// <param name="_lValue">long型のデータ</param>
     /// <returns>byte型のデータ</returns>
-    static public byte LongToByte(long _nValue)
+    static public byte LongToByte(long _lValue)
     {
         byte nCnvValue = 0;
 
-        if (_nValue > 255)
+        if (_lValue > 255)
         {
             nCnvValue = 255;
         }
-        else if (_nValue < 0)
+        else if (_lValue < 0)
         {
             nCnvValue = 0;
         }
         else
         {
-            nCnvValue = (byte)_nValue;
+            nCnvValue = (byte)_lValue;
         }
 
         return nCnvValue;

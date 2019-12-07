@@ -2,13 +2,22 @@
 Imports LiveCharts.Wpf
 Imports OxyPlot
 
+''' <summary>
+''' ライブチャートのヒストグラム表示のロジック
+''' </summary>
 Public Class ComHistgramLiveCharts : Inherits ComCharts
+    ''' <summary>
+    ''' ヒストグラム用の2次元配列データ　配列の1次元：オリジナルのデータ、配列の2次元：画像処理後のデータ
+    ''' </summary>
     Public ReadOnly Property Histgram() As Integer(,)
         Get
             Return MyBase.m_nHistgram
         End Get
     End Property
 
+    ''' <summary>
+    ''' ビットマップ
+    ''' </summary>
     Public Property Bitmap() As BitmapImage
         Set(value As BitmapImage)
             MyBase.m_bitmap = value
@@ -18,6 +27,9 @@ Public Class ComHistgramLiveCharts : Inherits ComCharts
         End Get
     End Property
 
+    ''' <summary>
+    ''' Writeableなビットマップ
+    ''' </summary>
     Public Property WBitmap() As WriteableBitmap
         Set(value As WriteableBitmap)
             MyBase.m_wbitmap = value
@@ -27,13 +39,23 @@ Public Class ComHistgramLiveCharts : Inherits ComCharts
         End Get
     End Property
 
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
     Public Sub New()
     End Sub
 
+    ''' <summary>
+    ''' デスクトラクタ
+    ''' </summary>
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
     End Sub
 
+    ''' <summary>
+    ''' ヒストグラムの描画データ処理
+    ''' </summary>
+    ''' <returns>ヒストグラムのデータ</returns>
     Public Function DrawHistgram() As GraphData
         Dim graphData = New GraphData()
 

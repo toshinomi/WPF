@@ -44,8 +44,8 @@ Public Class EdgeDetection : Inherits ComImgProc
             {1, 1, 1}
         }
 
-        Dim nWidthSize As Integer = Me.m_bitmap.Width
-        Dim nHeightSize As Integer = Me.m_bitmap.Height
+        Dim nWidthSize As Integer = Me.m_bitmap.PixelWidth
+        Dim nHeightSize As Integer = Me.m_bitmap.PixelHeight
         Dim nMasksize As Integer = nMask.GetLength(0)
 
         Me.m_wBitmap = New WriteableBitmap(Me.m_bitmap)

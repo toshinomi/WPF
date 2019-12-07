@@ -35,8 +35,8 @@ Public Class GrayScale : Inherits ComImgProc
     Public Overrides Function GoImgProc(_token As CancellationToken) As Boolean
         Dim bRst As Boolean = True
 
-        Dim nWidthSize As Integer = Me.m_bitmap.Width
-        Dim nHeightSize As Integer = Me.m_bitmap.Height
+        Dim nWidthSize As Integer = Me.m_bitmap.PixelWidth
+        Dim nHeightSize As Integer = Me.m_bitmap.PixelHeight
 
         Me.m_wBitmap = New WriteableBitmap(Me.m_bitmap)
         Me.m_wBitmap.Lock()

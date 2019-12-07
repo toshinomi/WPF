@@ -17,6 +17,13 @@ Public Class SettingImageProcessing
     End Sub
 
     ''' <summary>
+    ''' デスクトラクタ
+    ''' </summary>
+    Protected Overrides Sub Finalize()
+        MyBase.Finalize()
+    End Sub
+
+    ''' <summary>
     ''' 設定の読込
     ''' </summary>
     Public Sub LoadParam()

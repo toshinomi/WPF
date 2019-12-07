@@ -7,21 +7,39 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
+/// <summary>
+/// 色反転のロジック
+/// </summary>
 class ColorReversal : ComImgProc
 {
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// /// <param name="_bitmap">ビットマップ</param>
     public ColorReversal(BitmapImage _bitmap) : base(_bitmap)
     {
     }
 
+    /// <summary>
+    /// デスクトラクタ
+    /// </summary>
     ~ColorReversal()
     {
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
     public override void Init()
     {
         base.Init();
     }
 
+    /// <summary>
+    /// 色反転の実行
+    /// </summary>
+    /// <param name="_token">キャンセルトークン</param>
+    /// <returns>実行結果 成功/失敗</returns>
     public override bool GoImgProc(CancellationToken _token)
     {
         bool bRst = true;

@@ -7,21 +7,39 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
+/// <summary>
+/// グレースケール2次微分のロジック
+/// </summary>
 class GrayScale2Diff : ComImgProc
 {
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// /// <param name="_bitmap">ビットマップ</param>
     public GrayScale2Diff(BitmapImage _bitmap) : base(_bitmap)
     {
     }
 
+    /// <summary>
+    /// デスクトラクタ
+    /// </summary>
     ~GrayScale2Diff()
     {
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
     public override void Init()
     {
         base.Init();
     }
 
+    /// <summary>
+    /// グレースケール2次微分の実行
+    /// </summary>
+    /// <param name="_token">キャンセルトークン</param>
+    /// <returns>実行結果 成功/失敗</returns>
     public override bool GoImgProc(CancellationToken _token)
     {
         bool bRst = true;

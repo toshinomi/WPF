@@ -5,8 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// 共通情報のロジック
+/// </summary>
 public class ComInfo
 {
+    /// <summary>
+    /// Pixelの列挙
+    /// </summary>
     public enum Pixel
     {
         B = 0,
@@ -16,6 +22,9 @@ public class ComInfo
         MAX,
     };
 
+    /// <summary>
+    /// 画像処理のタイプの列挙
+    /// </summary>
     public enum ImgType
     {
         EdgeDetection = 0,
@@ -26,6 +35,9 @@ public class ComInfo
         MAX,
     }
 
+    /// <summary>
+    /// 画像のタイプの列挙
+    /// </summary>
     public enum ImgDataType
     {
         Jpg = 0,
@@ -33,6 +45,9 @@ public class ComInfo
         MAX,
     }
 
+    /// <summary>
+    /// 画像の状態の列挙
+    /// </summary>
     public enum PictureType
     {
         Original = 0,
@@ -54,6 +69,9 @@ public class ComInfo
     public const string IMG_NAME_COLOR_REVERSAL = "ColorReversal";
 }
 
+/// <summary>
+/// グラフデータのロジック
+/// </summary>
 public class GraphData
 {
     private SeriesCollection m_seriesCollection;

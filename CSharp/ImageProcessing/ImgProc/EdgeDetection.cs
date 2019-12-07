@@ -16,7 +16,7 @@ public class EdgeDetection : ComImgProc
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// /// <param name="_bitmap">ビットマップ</param>
+    /// <param name="_bitmap">ビットマップ</param>
     public EdgeDetection(BitmapImage _bitmap) : base(_bitmap)
     {
     }

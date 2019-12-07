@@ -15,7 +15,7 @@ class GrayScale2Diff : ComImgProc
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// /// <param name="_bitmap">ビットマップ</param>
+    /// <param name="_bitmap">ビットマップ</param>
     public GrayScale2Diff(BitmapImage _bitmap) : base(_bitmap)
     {
     }

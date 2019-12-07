@@ -26,7 +26,7 @@ class Binarization : ComImgProc
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// /// <param name="_bitmap">ビットマップ</param>
+    /// <param name="_bitmap">ビットマップ</param>
     public Binarization(BitmapImage _bitmap) : base(_bitmap)
     {
         m_nThresh = 0;

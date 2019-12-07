@@ -7,21 +7,33 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
+/// <summary>
+/// チャートのロジック
+/// </summary>
 abstract class ComCharts
 {
     protected int[,] m_nHistgram;
     protected BitmapImage m_bitmap;
     protected WriteableBitmap m_wbitmap;
 
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
     public ComCharts()
     {
         m_nHistgram = new int[(int)ComInfo.PictureType.MAX, ComInfo.RGB_MAX];
     }
 
+    /// <summary>
+    /// デスクトラクタ
+    /// </summary>
     ~ComCharts()
     {
     }
 
+    /// <summary>
+    /// イメージからヒストグラム用のデータ算出
+    /// </summary>
     public void CalHistgram()
     {
         int nWidthSize = m_bitmap.PixelWidth;
@@ -55,6 +67,9 @@ abstract class ComCharts
         }
     }
 
+    /// <summary>
+    /// ヒストグラム用のデータ初期化
+    /// </summary>
     public void InitHistgram()
     {
         for (int nIdx = 0; nIdx < (m_nHistgram.Length >> 1); nIdx++)
@@ -64,6 +79,10 @@ abstract class ComCharts
         }
     }
 
+    /// <summary>
+    /// ヒストグラム用のデータCSV保存
+    /// </summary>
+    /// <returns>CSV保存の結果 成功/失敗</returns>
     public bool SaveCsv()
     {
         bool bRst = true;

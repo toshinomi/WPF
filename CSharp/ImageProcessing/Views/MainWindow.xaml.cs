@@ -149,7 +149,8 @@ namespace ImageProcessing
         /// <summary>
         /// 対象の画像処理オブジェクトを実行する
         /// </summary>
-        /// <param name="_strImgName">画像処理オブジェクトの名称</param>
+        /// <param name="_comImgInfo">画像処理の設定</param>
+        /// <param name="_token">キャンセルトークン</param>
         /// <returns>画像処理の実行結果 成功/失敗</returns>
         public bool SelectGoImgProc(ComImgInfo _comImgInfo, CancellationToken _token)
         {

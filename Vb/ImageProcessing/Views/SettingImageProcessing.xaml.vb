@@ -1,4 +1,10 @@
-﻿Public Class SettingImageProcessing
+﻿''' <summary>
+''' SettingWindow.xaml の相互作用ロジック
+''' </summary>
+Public Class SettingImageProcessing
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
     Public Sub New()
 
         ' この呼び出しはデザイナーで必要です。
@@ -10,6 +16,9 @@
 
     End Sub
 
+    ''' <summary>
+    ''' 設定の読込
+    ''' </summary>
     Public Sub LoadParam()
         Dim items As List(Of ComImageProcessingType) = New List(Of ComImageProcessingType)
         items.Add(New ComImageProcessingType(My.Settings.ImgTypeEdgeId, My.Settings.ImgTypeEdgeName))
@@ -24,6 +33,9 @@
         Return
     End Sub
 
+    ''' <summary>
+    ''' 設定の保存
+    ''' </summary>
     Public Sub SaveParam()
         Dim imgProcType As ComImageProcessingType = cmbBoxImageProcessingType.SelectedItem
         My.Settings.ImgTypeSelectName = imgProcType.Name
@@ -32,12 +44,22 @@
         Return
     End Sub
 
+    ''' <summary>
+    ''' OKボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickOk(sender As Object, e As RoutedEventArgs) Handles btnOk.Click
         SaveParam()
         DialogResult = True
         Close()
     End Sub
 
+    ''' <summary>
+    ''' Cancelボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickCancel(sender As Object, e As RoutedEventArgs) Handles btnCancel.Click
         Close()
     End Sub

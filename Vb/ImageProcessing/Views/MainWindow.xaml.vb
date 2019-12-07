@@ -2,6 +2,9 @@
 Imports System.Threading
 Imports Microsoft.Win32
 
+''' <summary>
+''' MainWindow.xaml の相互作用ロジック
+''' </summary>
 Class MainWindow
     Private m_bitmap As BitmapImage
     Private m_imgProc As Object
@@ -16,6 +19,9 @@ Class MainWindow
     Private m_histgram As HistgramOxyPlot
 #End If
 
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
     Public Sub New()
 
         ' この呼び出しはデザイナーで必要です。
@@ -39,6 +45,9 @@ Class MainWindow
         canvasBinarization.IsEnabled = If(m_strCurImgName = ComInfo.IMG_NAME_BINARIZATION, True, False)
     End Sub
 
+    ''' <summary>
+    ''' デスクトラクタ
+    ''' </summary>
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
 
@@ -47,8 +56,11 @@ Class MainWindow
         m_imgProc = Nothing
     End Sub
 
-    Public Function SelectLoadImage(_strImgName As String) As Boolean
-        Dim bRst As Boolean = True
+    ''' <summary>
+    ''' 対象の画像処理オブジェクトにイメージをロードする
+    ''' </summary>
+    ''' <param name="_strImgName">画像処理オブジェクトの名称</param>
+    Public Sub SelectLoadImage(_strImgName As String)
         Select Case _strImgName
             Case ComInfo.IMG_NAME_EDGE_DETECTION
                 m_imgProc = New EdgeDetection(m_bitmap)
@@ -64,9 +76,14 @@ Class MainWindow
                 m_imgProc = Nothing
         End Select
 
-        Return bRst
-    End Function
+        Return
+    End Sub
 
+    ''' <summary>
+    ''' 対象の画像処理オブジェクトからWriteableBitmapを取得する
+    ''' </summary>
+    ''' <param name="_strImgName">画像処理オブジェクトの名称</param>
+    ''' <returns>Writeableなビットマップ</returns>
     Public Function SelectGetBitmap(_strImgName As String) As WriteableBitmap
         Dim wBitmap As WriteableBitmap = Nothing
 
@@ -91,6 +108,12 @@ Class MainWindow
         Return wBitmap
     End Function
 
+    ''' <summary>
+    ''' 対象の画像処理オブジェクトを実行する
+    ''' </summary>
+    ''' <param name="_comImgInfo">画像処理の設定</param>
+    ''' <param name="_token">キャンセルトークン</param>
+    ''' <returns>画像処理の実行結果 成功/失敗</returns>
     Public Function SelectGoImgProc(_comImgInfo As ComImgInfo, _token As CancellationToken) As Boolean
         Dim bRst As Boolean = True
         Select Case _comImgInfo.CurImgName
@@ -115,6 +138,9 @@ Class MainWindow
         Return bRst
     End Function
 
+    ''' <summary>
+    ''' ボタンのEnableを制御する
+    ''' </summary>
     Public Sub SetButtonEnable()
         btnFileSelect.IsEnabled = True
         btnAllClear.IsEnabled = True
@@ -124,12 +150,20 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' 時間を表示するテキストボックスに時間を設定する
+    ''' </summary>
     Public Sub SetTextTime(ByVal _lTime As Long)
         textBoxTime.Text = _lTime.ToString()
 
         Return
     End Sub
 
+    ''' <summary>
+    ''' ファイル選択ボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickBtnFileSelect(sender As Object, e As RoutedEventArgs)
         Dim openFileDlg As ComOpenFileDialog = New ComOpenFileDialog()
         openFileDlg.Filter = "JPG|*.jpg|PNG|*.png"
@@ -167,6 +201,9 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' イメージのロード処理
+    ''' </summary>
     Public Sub LoadImage()
         m_bitmap = New BitmapImage()
         m_bitmap.BeginInit()
@@ -179,6 +216,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' オールクリアボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickBtnAllClear(sender As Object, e As RoutedEventArgs)
         pictureBoxOriginal.Source = Nothing
         pictureBoxAfter.Source = Nothing
@@ -200,6 +242,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' スタートボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Async Sub OnClickBtnStart(sender As Object, e As RoutedEventArgs)
         pictureBoxAfter.Source = Nothing
 
@@ -247,6 +294,10 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' 画像処理実行用のタスク
+    ''' </summary>
+    ''' <returns>画像処理の実行結果 成功/失敗</returns>
     Public Async Function TaskWorkImageProcessing() As Task(Of Boolean)
         m_tokenSource = New CancellationTokenSource()
         Dim token As CancellationToken = m_tokenSource.Token
@@ -259,6 +310,11 @@ Class MainWindow
         Return bRst
     End Function
 
+    ''' <summary>
+    ''' ストップボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickBtnStop(sender As Object, e As RoutedEventArgs)
         If (m_tokenSource IsNot Nothing) Then
             m_tokenSource.Cancel()
@@ -267,6 +323,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' Windowsのクローズイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">キャンセルイベントのデータ</param>
     Private Sub OnClosingWindow(sender As Object, e As System.ComponentModel.CancelEventArgs)
         If (m_tokenSource IsNot Nothing) Then
             e.Cancel = True
@@ -280,6 +341,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' メニューのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickMenu(sender As Object, e As RoutedEventArgs)
         Dim menuItem As MenuItem = sender
         Dim strHeader As String = menuItem.Header.ToString()
@@ -293,6 +359,9 @@ Class MainWindow
         End Select
     End Sub
 
+    ''' <summary>
+    ''' 設定画面の処理
+    ''' </summary>
     Public Sub ShowSettingImageProcessing()
         Dim win As SettingImageProcessing = New SettingImageProcessing()
         Dim DialogResult As Boolean? = win.ShowDialog()
@@ -316,6 +385,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' 画像処理のオブジェクトからイメージの取得
+    ''' </summary>
+    ''' <param name="_strImgName">画像処理の名称</param>
+    ''' <returns>Writeableなビットマップ</returns>
     Public Function GetImage(_strImgName As String) As WriteableBitmap
         Dim bitmap As WriteableBitmap = Nothing
         Select Case _strImgName
@@ -349,6 +423,11 @@ Class MainWindow
         Return bitmap
     End Function
 
+    ''' <summary>
+    ''' イメージの保存ボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickBtnSaveImage(sender As Object, e As RoutedEventArgs)
         Dim saveDialog As ComSaveFileDialog = New ComSaveFileDialog()
         saveDialog.Filter = "PNG|*.png"
@@ -367,18 +446,31 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' 2値化の閾値のスライダのマウスアップイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">マウスボタンイベントのデータ</param>
     Private Sub OnSliderPreviewMouseUp(sender As Object, e As MouseButtonEventArgs)
         If (pictureBoxAfter.Source IsNot Nothing) Then
             ParamAjust()
         End If
     End Sub
 
+    ''' <summary>
+    ''' 2値化の閾値のスライダのキーアップイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">キーボードイベントのデータ</param>
     Private Sub OnSliderPreviewKeyUp(sender As Object, e As KeyboardEventArgs)
         If (pictureBoxAfter.Source IsNot Nothing) Then
             ParamAjust()
         End If
     End Sub
 
+    ''' <summary>
+    ''' 2値化のスライダを調整したときの処理
+    ''' </summary>
     Private Async Sub ParamAjust()
         pictureBoxAfter.Source = Nothing
 
@@ -415,6 +507,11 @@ Class MainWindow
         Return
     End Sub
 
+    ''' <summary>
+    ''' ヒスとブラム表示ボタンのクリックイベント
+    ''' </summary>
+    ''' <param name="sender">オブジェクト</param>
+    ''' <param name="e">ルーティングイベントのデータ</param>
     Private Sub OnClickBtnShowHistgram(sender As Object, e As RoutedEventArgs)
         If (m_bitmap Is Nothing) Then
             Return

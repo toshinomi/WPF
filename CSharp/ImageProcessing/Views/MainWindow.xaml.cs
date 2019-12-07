@@ -618,7 +618,7 @@ namespace ImageProcessing
         }
 
         /// <summary>
-        /// ヒスとブラム表示ボタンのクリックイベント
+        /// ヒストグラム表示ボタンのクリックイベント
         /// </summary>
         /// <param name="sender">オブジェクト</param>
         /// <param name="e">ルーティングイベントのデータ</param>

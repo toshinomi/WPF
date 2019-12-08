@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 public class ComImgInfo
 {
     private string m_strCurImgName;
-    private ComEdgeDetectionInfo m_edgeDetectoinInfo;
-    private ComGrayScaleInfo m_grayScaleInfo;
-    private ComBinarizationInfo m_binarizationInfo;
-    private ComGrayScale2DiffInfo m_grayScale2DiffInfo;
-    private ComColorReversalInfo m_colorReversalInfo;
+    private EdgeDetectionInfo m_edgeDetectoinInfo;
+    private GrayScaleInfo m_grayScaleInfo;
+    private BinarizationInfo m_binarizationInfo;
+    private GrayScale2DiffInfo m_grayScale2DiffInfo;
+    private ColorReversalInfo m_colorReversalInfo;
 
     /// <summary>
     /// 現在の画像処理の名称
@@ -28,7 +28,7 @@ public class ComImgInfo
     /// <summary>
     /// エッジ検出の設定
     /// </summary>
-    public ComEdgeDetectionInfo EdgeDetectoinInfo
+    public EdgeDetectionInfo EdgeDetectoinInfo
     {
         set { m_edgeDetectoinInfo = value; }
         get { return m_edgeDetectoinInfo; }
@@ -37,7 +37,7 @@ public class ComImgInfo
     /// <summary>
     /// グレースケールの設定
     /// </summary>
-    public ComGrayScaleInfo GrayScaleInfo
+    public GrayScaleInfo GrayScaleInfo
     {
         set { m_grayScaleInfo = value; }
         get { return m_grayScaleInfo; }
@@ -46,7 +46,7 @@ public class ComImgInfo
     /// <summary>
     /// 2値化の設定
     /// </summary>
-    public ComBinarizationInfo BinarizationInfo
+    public BinarizationInfo BinarizationInfo
     {
         set { m_binarizationInfo = value; }
         get { return m_binarizationInfo; }
@@ -55,7 +55,7 @@ public class ComImgInfo
     /// <summary>
     /// グレースケール2次微分の設定
     /// </summary>
-    public ComGrayScale2DiffInfo GrayScale2DiffInfo
+    public GrayScale2DiffInfo GrayScale2DiffInfo
     {
         set { m_grayScale2DiffInfo = value; }
         get { return m_grayScale2DiffInfo; }
@@ -64,7 +64,7 @@ public class ComImgInfo
     /// <summary>
     /// 色反転の設定
     /// </summary>
-    public ComColorReversalInfo ColorReversalInfo
+    public ColorReversalInfo ColorReversalInfo
     {
         set { m_colorReversalInfo = value; }
         get { return m_colorReversalInfo; }
@@ -75,11 +75,11 @@ public class ComImgInfo
     /// </summary>
     public ComImgInfo()
     {
-        m_edgeDetectoinInfo = new ComEdgeDetectionInfo();
-        m_grayScaleInfo = new ComGrayScaleInfo();
-        m_binarizationInfo = new ComBinarizationInfo();
-        m_grayScale2DiffInfo = new ComGrayScale2DiffInfo();
-        m_colorReversalInfo = new ComColorReversalInfo();
+        m_edgeDetectoinInfo = new EdgeDetectionInfo();
+        m_grayScaleInfo = new GrayScaleInfo();
+        m_binarizationInfo = new BinarizationInfo();
+        m_grayScale2DiffInfo = new GrayScale2DiffInfo();
+        m_colorReversalInfo = new ColorReversalInfo();
     }
 
     /// <summary>
@@ -93,19 +93,19 @@ public class ComImgInfo
 /// <summary>
 /// エッジ検出の設定管理のロジック
 /// </summary>
-public class ComEdgeDetectionInfo
+public class EdgeDetectionInfo
 {
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ComEdgeDetectionInfo()
+    public EdgeDetectionInfo()
     {
     }
 
     /// <summary>
     /// デスクトラクタ
     /// </summary>
-    ~ComEdgeDetectionInfo()
+    ~EdgeDetectionInfo()
     {
     }
 }
@@ -113,19 +113,19 @@ public class ComEdgeDetectionInfo
 /// <summary>
 /// グレースケールの設定管理のロジック
 /// </summary>
-public class ComGrayScaleInfo
+public class GrayScaleInfo
 {
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ComGrayScaleInfo()
+    public GrayScaleInfo()
     {
     }
 
     /// <summary>
     /// デスクトラクタ
     /// </summary>
-    ~ComGrayScaleInfo()
+    ~GrayScaleInfo()
     {
     }
 }
@@ -133,7 +133,7 @@ public class ComGrayScaleInfo
 /// <summary>
 /// 2値化の設定管理のロジック
 /// </summary>
-public class ComBinarizationInfo
+public class BinarizationInfo
 {
     private byte m_nThresh;
 
@@ -149,14 +149,14 @@ public class ComBinarizationInfo
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ComBinarizationInfo()
+    public BinarizationInfo()
     {
     }
 
     /// <summary>
     /// デスクトラクタ
     /// </summary>
-    ~ComBinarizationInfo()
+    ~BinarizationInfo()
     {
     }
 }
@@ -164,19 +164,19 @@ public class ComBinarizationInfo
 /// <summary>
 /// グレースケール2次微分の設定管理のロジック
 /// </summary>
-public class ComGrayScale2DiffInfo
+public class GrayScale2DiffInfo
 {
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ComGrayScale2DiffInfo()
+    public GrayScale2DiffInfo()
     {
     }
 
     /// <summary>
     /// デスクトラクタ
     /// </summary>
-    ~ComGrayScale2DiffInfo()
+    ~GrayScale2DiffInfo()
     {
     }
 }
@@ -184,19 +184,19 @@ public class ComGrayScale2DiffInfo
 /// <summary>
 /// 色反転の設定管理のロジック
 /// </summary>
-public class ComColorReversalInfo
+public class ColorReversalInfo
 {
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ComColorReversalInfo()
+    public ColorReversalInfo()
     {
     }
 
     /// <summary>
     /// デスクトラクタ
     /// </summary>
-    ~ComColorReversalInfo()
+    ~ColorReversalInfo()
     {
     }
 }

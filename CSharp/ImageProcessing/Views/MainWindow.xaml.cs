@@ -366,7 +366,7 @@ namespace ImageProcessing
             m_tokenSource = new CancellationTokenSource();
             CancellationToken token = m_tokenSource.Token;
             ComImgInfo imgInfo = new ComImgInfo();
-            ComBinarizationInfo binarizationInfo = new ComBinarizationInfo();
+            BinarizationInfo binarizationInfo = new BinarizationInfo();
             binarizationInfo.Thresh = (byte)sliderThresh.Value;
             imgInfo.CurImgName = m_strCurImgName;
             imgInfo.BinarizationInfo = binarizationInfo;

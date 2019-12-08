@@ -470,7 +470,7 @@ namespace ImageProcessing
         public WriteableBitmap GetImage(string _strImgName)
         {
             WriteableBitmap bitmap = null;
-            switch (m_strCurImgName)
+            switch (_strImgName)
             {
                 case ComInfo.IMG_NAME_EDGE_DETECTION:
                     EdgeDetection edge = (EdgeDetection)m_imgProc;

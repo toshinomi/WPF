@@ -324,7 +324,7 @@ Class MainWindow
     End Sub
 
     ''' <summary>
-    ''' Windowsのクローズイベント
+    ''' Windowのクローズイベント
     ''' </summary>
     ''' <param name="sender">オブジェクト</param>
     ''' <param name="e">キャンセルイベントのデータ</param>

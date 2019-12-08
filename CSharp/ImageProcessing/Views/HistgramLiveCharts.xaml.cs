@@ -21,7 +21,7 @@ using System.Windows.Threading;
 namespace ImageProcessing
 {
     /// <summary>
-    /// Histgram.xaml の相互作用ロジック
+    /// HistgramLiveCharts.xaml の相互作用ロジック
     /// </summary>
     public partial class HistgramLiveCharts : Window
     {

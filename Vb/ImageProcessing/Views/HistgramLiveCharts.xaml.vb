@@ -4,7 +4,7 @@ Imports LiveCharts.Wpf
 Imports System.Text
 
 ''' <summary>
-''' Histgram.xaml の相互作用ロジック
+''' HistgramLiveCharts.xaml の相互作用ロジック
 ''' </summary>
 Public Class HistgramLiveCharts
     Private m_histgramChart As ComHistgramLiveCharts

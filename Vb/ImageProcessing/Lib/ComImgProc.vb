@@ -27,6 +27,7 @@ Public MustInherit Class ComImgProc
     ''' </summary>
     Public Overridable Sub Init()
         m_bitmap = Nothing
+        m_wBitmap = Nothing
     End Sub
 
     ''' <summary>

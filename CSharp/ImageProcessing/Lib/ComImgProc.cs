@@ -38,6 +38,7 @@ abstract public class ComImgProc
     virtual public void Init()
     {
         m_bitmap = null;
+        m_wBitmap = null;
     }
 
     /// <summary>

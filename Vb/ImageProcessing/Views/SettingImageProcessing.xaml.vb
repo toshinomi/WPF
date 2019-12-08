@@ -1,5 +1,5 @@
 ﻿''' <summary>
-''' SettingWindow.xaml の相互作用ロジック
+''' SettingImageProcessing.xaml の相互作用ロジック
 ''' </summary>
 Public Class SettingImageProcessing
     ''' <summary>

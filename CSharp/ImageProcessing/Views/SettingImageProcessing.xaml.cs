@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace ImageProcessing
 {
     /// <summary>
-    /// SettingWindow.xaml の相互作用ロジック
+    /// SettingImageProcessing.xaml の相互作用ロジック
     /// </summary>
     public partial class SettingImageProcessing : Window
     {

@@ -390,7 +390,7 @@ namespace ImageProcessing
         }
 
         /// <summary>
-        /// Windowsのクローズイベント
+        /// Windowのクローズイベント
         /// </summary>
         /// <param name="sender">オブジェクト</param>
         /// <param name="e">キャンセルイベントのデータ</param>

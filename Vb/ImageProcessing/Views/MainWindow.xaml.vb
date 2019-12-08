@@ -125,7 +125,7 @@ Class MainWindow
                 bRst = gray.GoImgProc(_token)
             Case ComInfo.IMG_NAME_BINARIZATION
                 Dim binarization As Binarization = DirectCast(m_imgProc, Binarization)
-                binarization.Thresh = _comImgInfo.ComBinarizationInfo.Thresh
+                binarization.Thresh = _comImgInfo.BinarizationInfo.Thresh
                 bRst = binarization.GoImgProc(_token)
             Case ComInfo.IMG_NAME_GRAY_SCALE_2DIFF
                 Dim gray2Diff As GrayScale2Diff = DirectCast(m_imgProc, GrayScale2Diff)
@@ -302,10 +302,10 @@ Class MainWindow
         m_tokenSource = New CancellationTokenSource()
         Dim token As CancellationToken = m_tokenSource.Token
         Dim imgInfo As ComImgInfo = New ComImgInfo()
-        Dim binarizationInfo As ComBinarizationInfo = New ComBinarizationInfo()
+        Dim binarizationInfo As BinarizationInfo = New BinarizationInfo()
         binarizationInfo.Thresh = CByte(sliderThresh.Value)
         imgInfo.CurImgName = m_strCurImgName
-        imgInfo.ComBinarizationInfo = binarizationInfo
+        imgInfo.BinarizationInfo = binarizationInfo
         Dim bRst = Await Task.Run(Function() SelectGoImgProc(imgInfo, token))
         Return bRst
     End Function

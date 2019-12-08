@@ -3,11 +3,11 @@
 ''' </summary>
 Public Class ComImgInfo
     Private m_strCurImgName As String
-    Private m_edgeDetectoinInfo As ComEdgeDetectionInfo
-    Private m_grayScaleInfo As ComGrayScaleInfo
-    Private m_binarizationInfo As ComBinarizationInfo
-    Private m_grayScale2DiffInfo As ComGrayScale2DiffInfo
-    Private m_colorReversalInfo As ComColorReversalInfo
+    Private m_edgeDetectoinInfo As EdgeDetectionInfo
+    Private m_grayScaleInfo As GrayScaleInfo
+    Private m_binarizationInfo As BinarizationInfo
+    Private m_grayScale2DiffInfo As GrayScale2DiffInfo
+    Private m_colorReversalInfo As ColorReversalInfo
 
     ''' <summary>
     ''' 現在の画像処理の名称
@@ -24,11 +24,11 @@ Public Class ComImgInfo
     ''' <summary>
     ''' エッジ検出の設定
     ''' </summary>
-    Public Property ComEdgeDetectionInfo() As ComEdgeDetectionInfo
+    Public Property EdgeDetectionInfo() As EdgeDetectionInfo
         Get
             Return m_edgeDetectoinInfo
         End Get
-        Set(ByVal value As ComEdgeDetectionInfo)
+        Set(ByVal value As EdgeDetectionInfo)
             m_edgeDetectoinInfo = value
         End Set
     End Property
@@ -36,11 +36,11 @@ Public Class ComImgInfo
     ''' <summary>
     ''' グレースケールの設定
     ''' </summary>
-    Public Property ComGrayScaleInfo() As ComGrayScaleInfo
+    Public Property GrayScaleInfo() As GrayScaleInfo
         Get
             Return m_grayScaleInfo
         End Get
-        Set(ByVal value As ComGrayScaleInfo)
+        Set(ByVal value As GrayScaleInfo)
             m_grayScaleInfo = value
         End Set
     End Property
@@ -48,11 +48,11 @@ Public Class ComImgInfo
     ''' <summary>
     ''' 2値化の設定
     ''' </summary>
-    Public Property ComBinarizationInfo() As ComBinarizationInfo
+    Public Property BinarizationInfo() As BinarizationInfo
         Get
             Return m_binarizationInfo
         End Get
-        Set(ByVal value As ComBinarizationInfo)
+        Set(ByVal value As BinarizationInfo)
             m_binarizationInfo = value
         End Set
     End Property
@@ -60,11 +60,11 @@ Public Class ComImgInfo
     ''' <summary>
     ''' グレースケール2次微分の設定
     ''' </summary>
-    Public Property ComGrayScale2DiffInfo() As ComGrayScale2DiffInfo
+    Public Property GrayScale2DiffInfo() As GrayScale2DiffInfo
         Get
             Return m_grayScale2DiffInfo
         End Get
-        Set(ByVal value As ComGrayScale2DiffInfo)
+        Set(ByVal value As GrayScale2DiffInfo)
             m_grayScale2DiffInfo = value
         End Set
     End Property
@@ -72,11 +72,11 @@ Public Class ComImgInfo
     ''' <summary>
     ''' 色反転の設定
     ''' </summary>
-    Public Property ComColorReversalInfo() As ComColorReversalInfo
+    Public Property ColorReversalInfo() As ColorReversalInfo
         Get
             Return m_colorReversalInfo
         End Get
-        Set(value As ComColorReversalInfo)
+        Set(value As ColorReversalInfo)
             m_colorReversalInfo = value
         End Set
     End Property
@@ -85,11 +85,11 @@ Public Class ComImgInfo
     ''' コンストラクタ
     ''' </summary>
     Public Sub New()
-        m_edgeDetectoinInfo = New ComEdgeDetectionInfo()
-        m_grayScaleInfo = New ComGrayScaleInfo()
-        m_binarizationInfo = New ComBinarizationInfo()
-        m_grayScale2DiffInfo = New ComGrayScale2DiffInfo()
-        m_colorReversalInfo = New ComColorReversalInfo()
+        m_edgeDetectoinInfo = New EdgeDetectionInfo()
+        m_grayScaleInfo = New GrayScaleInfo()
+        m_binarizationInfo = New BinarizationInfo()
+        m_grayScale2DiffInfo = New GrayScale2DiffInfo()
+        m_colorReversalInfo = New ColorReversalInfo()
     End Sub
 
     ''' <summary>
@@ -103,7 +103,7 @@ End Class
 ''' <summary>
 ''' エッジ検出の設定管理のロジック
 ''' </summary>
-Public Class ComEdgeDetectionInfo
+Public Class EdgeDetectionInfo
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
@@ -120,7 +120,7 @@ End Class
 ''' <summary>
 ''' グレースケールの設定管理のロジック
 ''' </summary>
-Public Class ComGrayScaleInfo
+Public Class GrayScaleInfo
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
@@ -137,7 +137,7 @@ End Class
 ''' <summary>
 ''' 2値化の設定管理のロジック
 ''' </summary>
-Public Class ComBinarizationInfo
+Public Class BinarizationInfo
     Private m_nThresh As Byte
 
     ''' <summary>
@@ -168,7 +168,7 @@ End Class
 ''' <summary>
 ''' グレースケール2次微分の設定管理のロジック
 ''' </summary>
-Public Class ComGrayScale2DiffInfo
+Public Class GrayScale2DiffInfo
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
@@ -185,7 +185,7 @@ End Class
 ''' <summary>
 ''' 色反転の設定管理のロジック
 ''' </summary>
-Public Class ComColorReversalInfo
+Public Class ColorReversalInfo
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
